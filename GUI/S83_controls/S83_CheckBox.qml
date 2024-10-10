@@ -49,7 +49,7 @@ T.CheckBox {
                              implicitIndicatorHeight + topPadding + bottomPadding)
 
     property string text_color:     "white"
-    property string color_point:    "chocolate"
+    property string color_point:    current_theme.color_ctrl_main_color
     property string color_disable:  "#494949"
 
     spacing: 8

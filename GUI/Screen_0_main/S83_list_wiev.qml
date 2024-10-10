@@ -18,14 +18,14 @@ ListView {
         target: my_app
         function onSig_set_index_0(arg_index)
                 {
-                console.log("in: Курсор: " + arg_index)
+                //console.log("in: Курсор: " + arg_index)
                 current_index = arg_index
                 listViewFile.positionViewAtIndex(arg_index, ListView.Visible)
                 //listViewFile.currentIndex = arg_index
                 }
         function onSig_set_index_1(arg_index)
                 {
-                console.log("in: Курсор в центр списка: " + arg_index)
+                //console.log("in: Курсор в центр списка: " + arg_index)
                 current_index = arg_index
                 listViewFile.positionViewAtIndex(arg_index, ListView.Center)
                 //listViewFile.currentIndex = arg_index

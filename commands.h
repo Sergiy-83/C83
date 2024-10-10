@@ -47,7 +47,7 @@ enum CMD_MAIN
     CMD_CP_AS_SP,            //Текущий каталог как стартовый
     CMD_OPEN_ONLY_KB,       //Открыть (от клавиатуры)
     CMD_INFO_SPACE,          //Информация о HDD
-    CMD_INFO_MEM,
+    CMD_INFO_2,
     CMD_SEEK_F,             //Позиционирование вперед
     CMD_SEEK_B,             //Позиционирование назад
     CMD_AC83_UPDATE

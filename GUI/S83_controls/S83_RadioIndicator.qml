@@ -41,9 +41,9 @@ import QtQuick.Controls.Material.impl
 
 Rectangle {
     id:             indicator
-    property string color_disable: "gray"
-    property string color_enable:  "white"
-    property string color_point:  "chocolate"
+    property string color_disable:  "gray"
+    property string color_enable:   "white"
+    property string color_point:    "white"
 
     implicitWidth:  20
     implicitHeight: 20

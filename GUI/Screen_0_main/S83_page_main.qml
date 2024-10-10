@@ -8,7 +8,7 @@ import "../Drawer"
 
 Page
     {
-
+    property bool volreg_esno: true
     Item
         {
         id: orient
@@ -18,52 +18,63 @@ Page
             console.log("Изменилась ориентация: " + value)
             if (value) //Пейзаж
                 {
-                cl_main_controls.visible    = false
-                ctrl_time.anchors.bottom    = cl_main_controls.bottom
-
-                rect_bk_ctrl.anchors.right  = rect_buttons_2.left
-                rect_bk_ctrl.height         = ctrl_time.height + 5
-
                 rect_buttons_2.visible      = true
-                rect_buttons_2.anchors.top  = parent.top
 
-                listView.anchors.right      = rect_buttons_2.left
 
-                topBar.anchors.right        = rect_buttons_2.left
+                    listView.anchors.right          = rect_buttons_2.left
+                    topBar.anchors.right            = rect_buttons_2.left
+                    rect_bk_main_ctrl.anchors.right = rect_buttons_2.left
                 }
             else //Портрет
                 {
-                cl_main_controls.visible    = true
 
-                ctrl_time.anchors.bottom    = cl_main_controls.top
-
-                rect_bk_ctrl.anchors.right  = parent.right
-                rect_bk_ctrl.height         = cl_main_controls.height + ctrl_time.height + 5
-
-                listView.anchors.right      = parent.right
                 rect_buttons_2.visible      = false
 
-                topBar.anchors.right        = parent.right
+                    listView.anchors.right          = parent.right
+                    topBar.anchors.right            = parent.right
+                    rect_bk_main_ctrl.anchors.right = parent.right
                 }
             }
         }
 
     //Фон
-    background: Rectangle
-        {
-        anchors.fill:   parent
-        color:          "black"
-        }
-
+//    background: Rectangle
+ //       {
+ //       anchors.fill:   parent
+ //       color:          "black"
+ //       }
+    background:
+        Image
+            {
+            id: bk_image
+            source: current_theme.bk_image
+            fillMode: Image.PreserveAspectCrop
+            }
     //Сверху///////////////////////////////////////////////////////////////////
     S83_TopBar
         {
-        id: topBar
+        id:             topBar
         anchors.left:   parent.left
         anchors.right:  parent.right
         anchors.top:    parent.top
         x:  0
         y:  0
+        z:  +5
+        MouseArea
+            {
+            anchors.fill:   parent
+            anchors.rightMargin: 80
+
+            onClicked:
+                {
+
+                }
+
+            onDoubleClicked:
+                {
+                stack_view.push(page_lan)
+                }
+            }
         }
 
     //Список файлов////////////////////////////////////////////////////////////
@@ -76,7 +87,7 @@ Page
         anchors.left:   parent.left
         anchors.right:  parent.right
         anchors.top:    topBar.bottom
-        anchors.bottom: rect_bk_ctrl.top
+        anchors.bottom: rect_bk_main_ctrl.top
 
         Image
             {
@@ -87,8 +98,6 @@ Page
             anchors.right:          parent.right
             anchors.bottom:         parent.bottom
             anchors.rightMargin:    2
-
-
 
 
 
@@ -122,10 +131,8 @@ Page
         visible:        !state_conected
 
         color:          "#aa000000"
-        anchors.top:    topBar.bottom
-        anchors.bottom: parent.bottom
-        anchors.left:   parent.left
-        anchors.right:  parent.right
+        anchors.fill:   parent
+
         z:+1
         MouseArea { anchors.fill: parent }
         }
@@ -141,17 +148,18 @@ Page
         anchors.bottom: parent.bottom
         }
 
-
-    //Кнопки для пейзажной ориентации
+    property real rect_opacity:   0.5
+    //Кнопки 2 - для пейзажной ориентации
     Rectangle
         {
         id:                     rect_buttons_2
         height:                 100
-        width:                  parent.width * 0.1
+        width:                  parent.height / 6 + 20
         radius:                 5
         z:                      +1
 
-        anchors.top:            topBar.bottom
+        //anchors.top:            topBar.bottom
+        anchors.top:            parent.top
         anchors.bottom:         parent.bottom
         anchors.right:          parent.right
 
@@ -160,7 +168,7 @@ Page
         anchors.bottomMargin:   5
         visible:                false
 
-        color:                  current_theme.color_ctrl_background
+        color:                  tools.colorWithOpacity(current_theme.color_ctrl_background,rect_opacity)
 
         S83_ctrl_sec_buttons_layout
             {
@@ -178,85 +186,73 @@ Page
             }
         }
 
-    //управление для портретной ор.
+    //управление плеером для портретной ор.
     Rectangle
+        {
+        id:     rect_bk_main_ctrl
+        radius: 5
+        z:      -1
+
+        color:                  tools.colorWithOpacity(current_theme.color_ctrl_background,rect_opacity)
+        height:                 lay_main_ctrl.height + 5
+        width:                  150
+
+        anchors.left:           parent.left
+        anchors.right:          parent.right
+        anchors.bottom:         parent.bottom
+
+        anchors.rightMargin:    5
+        anchors.leftMargin:     5
+        anchors.topMargin:      5
+        anchors.bottomMargin:   5
+
+
+
+        ColumnLayout
+            {
+            id:              lay_main_ctrl
+            anchors.left:    parent.left
+            anchors.right:   parent.right
+            anchors.bottom:  parent.bottom
+            anchors.bottomMargin:    0
+            clip:            true
+            spacing:         0
+
+            //Перемотка
+            S83_ctrl_time
                 {
-                id:             rect_bk_ctrl
-                radius:         5
-                z:              -1
-
-                color:          current_theme.color_ctrl_background
-                height:         cl_main_controls.height + ctrl_time.height + 5
-
-                anchors.bottom: parent.bottom
-                anchors.left:   parent.left
-                anchors.right:  parent.right
-
-                anchors.rightMargin:    5
-                anchors.leftMargin:     5
-                anchors.topMargin:      5
-                anchors.bottomMargin:   5
-
-                //Перемотка
-                S83_ctrl_time
-                    {
-                    id: ctrl_time
-                    //Layout.alignment: Qt.AlignBottom
-                    //Layout.fillWidth: true
-
-
-                    anchors.bottom: cl_main_controls.top
-                    anchors.left:   parent.left
-                    anchors.right:  parent.right
-
-                    onMoved_end:
-                        {
-                        //console.log("slider_value - " + slider_value)
-                        }
-                    }
-
-                ColumnLayout
-                           {
-                           id:              cl_main_controls
-                           anchors.left:    parent.left
-                           anchors.right:   parent.right
-                           anchors.bottom:  parent.bottom
-                           anchors.bottomMargin:    3
-
-
-                           clip:            true
-
-                           spacing:         0
-
-
-
-
-                           //Кнопки
-                           S83_ctrl_main_buttons_layout
-                               {
-                               id: ctrl_btn
-                               Layout.alignment: Qt.AlignBottom
-                               }
-
-                           //Регулятор громкости
-                           S83_ctrl_volume
-                               {
-                               id: ctrl_vol
-                               Layout.alignment: Qt.AlignBottom
-                               Layout.fillWidth: true
-                               }
-
-                           }
+                id: ctrl_time
+                Layout.alignment: Qt.AlignBottom
+                Layout.fillWidth: true
                 }
+            //Кнопки
+            S83_ctrl_main_buttons_layout
+                {
+                id:                  ctrl_btn
+                visible:             !rect_buttons_2.visible
+                Layout.alignment:    Qt.AlignBottom
+                }
+            //Регулятор громкости
+            S83_ctrl_volume
+                {
+                id: ctrl_vol
+                visible: volreg_esno && !rect_buttons_2.visible
+                Layout.alignment: Qt.AlignBottom
+                Layout.fillWidth: true
+                }
+            }
+        }
 
     ///////////////////////////////////////////////////////////////////
     S83_BusyIndicator
         {
         id:                 bus_ind
         anchors.centerIn:   listView
+        z:  +5
         running:            !state_conected
         }
 
+    //Анимированная иконка - кнопка открытия бокового меню
     S83_hamburger_icon
         {
         id: hamburger_icon
@@ -264,7 +260,7 @@ Page
         anchors.right:          topBar.right
         anchors.verticalCenter: topBar.verticalCenter
         anchors.rightMargin:     3
-
+        z:  +10
         //anchors.verticalCenterOffset: 3
         onIconClicked:
             {
@@ -323,9 +319,9 @@ Page
             function onSig_vreg_id(arg_vreg_id,arg_vreg_name)
                 {
                 if (arg_vreg_id) //если регулятор громкости есть
-                   ctrl_vol.visible = true
+                   volreg_esno = true
                 else
-                   ctrl_vol.visible = false
+                   volreg_esno = false
                 }
             }
 

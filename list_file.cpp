@@ -73,11 +73,11 @@ void List_file_Model::clear_list(void)
     endResetModel();
     }
 
-void List_file_Model::test_fun(int arg_index)
-    {
+//void List_file_Model::test_fun(int arg_index)
+   // {
     //Item_list_file &tmp = (Item_list_file&)m_list_current->at(arg_index);
     //LOGGING<<"-----------eee------------";
     //tmp.m_nFile = "11111";
     //endResetModel();
     //endMoveColumns();
-    }
+  //  }

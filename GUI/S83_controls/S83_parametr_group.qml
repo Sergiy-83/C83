@@ -20,7 +20,8 @@ Rectangle
             anchors.horizontalCenter: parent.horizontalCenter
 
             text:       "Имя группы параметров"
-            color:      "chocolate"
+            color:          Qt.lighter(current_theme.color_ctrl_main_color, 1.35)
+            font.weight:    Font.Bold
             font.pixelSize: 18
             }
 

@@ -116,14 +116,15 @@ T.Button {
           //  elevation: control.Material.elevation
           //  }
 
-        Ripple {
+        Ripple
+            {
             clipRadius: 2
-            width: parent.width
-            height: parent.height
-            pressed: control.pressed
-            anchor: control
-            active: control.down || control.visualFocus || control.hovered
-            color: control.flat && control.highlighted ? control.Material.highlightedRippleColor : control.Material.rippleColor
+            width:      parent.width
+            height:     parent.height
+            pressed:    control.pressed
+            anchor:     control
+            active:     control.down || control.visualFocus || control.hovered
+            color:      control.flat && control.highlighted ? control.Material.highlightedRippleColor : control.Material.rippleColor
+            }
         }
     }
-}

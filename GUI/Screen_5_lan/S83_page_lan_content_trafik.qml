@@ -13,83 +13,64 @@ ColumnLayout
     S83_parametr_classic
         {
         id:             par_con_state
-
         Layout.fillWidth: true
         text_label:     "Состояние:"
-        color_label:    "white"
-
         text_value:     "отключено"
-        color_value:    "white"
-
         }
-
     S83_parametr_classic
         {
         id:                 par_byte_send
         text_label:         "Байт отправлено:"
-        color_label:        "white"
         Layout.fillWidth:   true
         text_value:         "-"
-        color_value:        "yellow"
         }
-
     S83_parametr_classic
         {
         id:                 par_byte_rcv
         Layout.fillWidth:   true
         text_label:         "Байт принято:"
-        color_label:        "white"
-
         text_value:         "-"
-        color_value:        "yellow"
         }
-
     S83_parametr_classic
-    {
+        {
         id:                 par_disconnect_count
         Layout.fillWidth:   true
         text_label:         "Умышленно разорвано (раз):"
-        color_label:        "white"
-
         text_value:         "-"
-        color_value:        "yellow"
-
-    }
+        }
     S83_parametr_classic
-    {
+        {
         id:                 par_clients_count
         Layout.fillWidth:   true
         text_label:         "Клиентов подключено:"
-        color_label:        "white"
-
         text_value:         "-"
-        color_value:        "yellow"
+        }
 
-    }
     Connections
         {
         target: my_app
 
-    function onSig_connected()
-        {
-        par_con_state.text_value =     "подключено"
-        par_con_state.color_value =    "green"
+        function onSig_connected(arg_ip)
+            {
+            par_con_state.text_label    = "Подключено к:"
+            par_con_state.text_value    = arg_ip
+            par_con_state.value_warning = false
+            }
 
-        }
+        function onSig_connecting_start(arg_ip)
+            {
+            par_con_state.text_label    = "Подключение к:"
+            par_con_state.text_value    = arg_ip
+            par_con_state.value_warning = true
+            }
 
-    function onSig_connecting_start()
-        {
-        par_con_state.text_value =     "подключение"
-        par_con_state.color_value =    current_theme.color_ctrl_parametr_value_selected
-
-        }
-
-    function onSig_disconnected()
-        {
-        par_con_state.text_value=     "отключено"
-        par_con_state.color_value=    "white"
-        }
-      }
+        function onSig_disconnected()
+            {
+            par_con_state.text_label    = "Состояние:"
+            par_con_state.text_value=     "отключено"
+            par_con_state.value_warning = true
+            }
+          }
 
     //Таймер обновления некоторых значений
     Timer

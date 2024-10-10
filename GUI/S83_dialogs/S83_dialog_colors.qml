@@ -20,7 +20,7 @@ S83_dialog_ok_cancel
 
     onCurrent_colorChanged:
         {
-        console.log("out: Изменился цвет curent_color: " + current_color)
+        //console.log("out: Изменился цвет curent_color: " + current_color)
         sl_red.value    = 100 * current_color.r
         sl_green.value  = 100 * current_color.g
         sl_blue.value   = 100 * current_color.b
@@ -46,13 +46,13 @@ S83_dialog_ok_cancel
 
 
         S83_slider_and_parametrs
-        {
+            {
             id:                     sl_red
             parametr_name:          "Красный"
             parametr_name_2:        " "
             color_slider:           "red"
-            parametr_name_color_2:  "gray"
-            parametr_value_color_2: "transparent"
+            parametr_name_2_color:  "gray"
+            parametr_value_2_color: "transparent"
             parametr_value_suffix:  " %"
             parametr_value_suffix_2:" %"
 
@@ -64,23 +64,28 @@ S83_dialog_ok_cancel
 
             Layout.fillWidth:       true
 
-            onSlider_moved:
+            function event_moved()
+                {
+                set_value_top(value)
+                }
+            function event_moved_5()
                 {
                 current_color = Qt.rgba(sl_red.value/100, sl_green.value/100, sl_blue.value/100, 1)
                 }
-            onSlider_moved_finish:
+            function event_moved_end()
                 {
                 current_color = Qt.rgba(sl_red.value/100, sl_green.value/100, sl_blue.value/100, 1)
                 }
-        }
+            }
+
         S83_slider_and_parametrs
-        {
+            {
             id:                     sl_green
             parametr_name:          "Зеленый"
             parametr_name_2:        " "
             color_slider:           "green"
-            parametr_name_color_2:  "gray"
-            parametr_value_color_2: "transparent"
+            parametr_name_2_color:  "gray"
+            parametr_value_2_color: "transparent"
             parametr_value_suffix:  " %"
             parametr_value_suffix_2:" %"
             to:                     100
@@ -91,24 +96,28 @@ S83_dialog_ok_cancel
 
             Layout.fillWidth:       true
 
-            onSlider_moved:
+            function event_moved()
+                {
+                set_value_top(value)
+                }
+            function event_moved_5()
                 {
                 current_color = Qt.rgba(sl_red.value/100, sl_green.value/100, sl_blue.value/100, 1)
                 }
-            onSlider_moved_finish:
+            function event_moved_end()
                 {
                 current_color = Qt.rgba(sl_red.value/100, sl_green.value/100, sl_blue.value/100, 1)
                 }
-        }
+            }
 
         S83_slider_and_parametrs
-        {
+            {
             id:                     sl_blue
             parametr_name:          "Синий"
             parametr_name_2:        " "
             color_slider:           "blue"
-            parametr_name_color_2:  "gray"
-            parametr_value_color_2: "transparent"
+            parametr_name_2_color:  "gray"
+            parametr_value_2_color: "transparent"
             parametr_value_suffix:  " %"
             parametr_value_suffix_2:" %"
             to: 100
@@ -118,15 +127,22 @@ S83_dialog_ok_cancel
             Layout.bottomMargin:    5
 
             Layout.fillWidth:       true
-            onSlider_moved:
+
+            function event_moved()
+                {
+                set_value_top(value)
+                }
+
+            function event_moved_5()
                 {
                 current_color = Qt.rgba(sl_red.value/100, sl_green.value/100, sl_blue.value/100, 1)
                 }
-            onSlider_moved_finish:
+
+            function event_moved_end()
                 {
                 current_color = Qt.rgba(sl_red.value/100, sl_green.value/100, sl_blue.value/100, 1)
                 }
-        }
+            }
     }
 
 

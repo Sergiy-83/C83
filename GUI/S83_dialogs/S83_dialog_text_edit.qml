@@ -84,6 +84,11 @@ S83_dialog_ok
     ColumnLayout
         {
         spacing: 0
+        Item
+            {
+            height: 2
+            //Layout.fillWidth: true //Чтоб размер растягивался
+            }
         RowLayout
             {
 
@@ -98,7 +103,7 @@ S83_dialog_ok
                 width: 20
                 padding:0
                 btn_color:          current_theme.color_ctrl_main_color
-                text:               "\u2190"
+                text:               ""//"\u2190"
                 Layout.fillWidth:   true //Чтоб размер растягивался
 
                 Layout.preferredWidth: 80
@@ -107,7 +112,8 @@ S83_dialog_ok
                     textEdit.cursorPosition = textEdit.cursorPosition - 1
                     textEdit.cursorVisible = true
                     }
-
+                icon.color:     "transparent"
+                icon.source:    "qrc:/Icon/for_buttons/cursor_left.svg";
                 }
 
             S83_Button
@@ -147,7 +153,7 @@ S83_dialog_ok
                 {
                 width: 30
                 btn_color:          current_theme.color_ctrl_main_color
-                text:               "\u2192"
+                text:               ""//"\u2192"
                 Layout.fillWidth:   true //Чтоб размер растягивался
 
                 Layout.preferredWidth: 80
@@ -156,6 +162,8 @@ S83_dialog_ok
                     textEdit.cursorPosition = textEdit.cursorPosition + 1
                     textEdit.cursorVisible = true
                     }
+                icon.color:     "transparent"
+                icon.source:    "qrc:/Icon/for_buttons/cursor_rigth.svg";
                 }
 
             Item
@@ -167,7 +175,7 @@ S83_dialog_ok
 
         RowLayout
         {
-
+        Layout.topMargin: -5
         Item
             {
             width: 20
@@ -212,5 +220,10 @@ S83_dialog_ok
 
         }
 
+        Item
+            {
+            height: 2
+            //Layout.fillWidth: true //Чтоб размер растягивался
+            }
     }
 }

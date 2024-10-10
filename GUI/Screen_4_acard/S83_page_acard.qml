@@ -16,9 +16,14 @@ S83_page_opt
             anchors.left:   parent.left
             anchors.right:  parent.right
             anchors.top:    parent.top
-            height:         785 //Проверить прокруткой страницы
+           // height:         785 //Проверить прокруткой страницы
             clip:           true
             spacing:        0
+
+            property real   curren_frec:        0
+            property int    curren_ch_count:    0
+            property string curren_fmt:         " "
+
 
             S83_parametr_group
                     {
@@ -48,25 +53,19 @@ S83_page_opt
                     }
 
             S83_parametr_group
-                    {
-                    id:             group_support_modes
-                    name_group:     "Передискретизация и режимы"
+                {
+                id:             group_support_modes
+                name_group:     "Состояние аудиовыхода"
 
-                    Layout.alignment: Qt.AlignBottom
-                    Layout.fillWidth: true
+                Layout.alignment: Qt.AlignBottom
+                Layout.fillWidth: true
 
-                    content_component:
-                    ColumnLayout
+                content_component:
+                ColumnLayout
                     {
-                        //item
-                        //anchors.left:   parent.left
-                        //anchors.right:  parent.right
-                        //height: 190
                     spacing: 0
 
-                    property real   curren_frec:        0
-                    property int    curren_ch_count:    0
-                    property string curren_fmt:         " "
+
 
                     S83_parametr_classic
                         {
@@ -119,567 +118,525 @@ S83_page_opt
                         Layout.fillWidth:   true
                         change_padding:     5
                         text_label:         "Версия ALSA:"
-                        color_label:        "white"
-
                         text_value:         "-"
-                        color_value:        "yellow"
+
                         Layout.leftMargin:  5
                         Layout.rightMargin: 5
                         Layout.bottomMargin: 3
                         }
 
-                    Rectangle
-                        {
-                        color:              "transparent"
-                        Layout.fillWidth:   true
-                        Layout.alignment:   Qt.AlignBottom
-
-                        height:             155
-
-                    RowLayout
+                    Connections
                             {
-                            anchors.left:   parent.left
-                            anchors.right:  parent.right
-                            anchors.top:    parent.top
+                            target:     my_app
 
-                            anchors.leftMargin:     15
-                            anchors.rightMargin:    15
-                            anchors.topMargin:      0
+                            //Выбор аудиовыхода
+                            function onSig_select_aout(arg_name)
+                                {
+                                par_current_aout.text_value = arg_name
+                                }
 
-                            height:                 150
-                            spacing:                0
+                            //ALSA Каналов сечас
+                            function onSig_aout_ch_count(arg_value1,arg_value2,arg_value3)
+                                {
+                                curren_ch_count = arg_value1 //Текущее количество каналов
 
-                            Connections
-                                    {
-                                    target:     my_app
-                                    property string avaliable_color: "white"//current_theme.color_ctrl_parametr_value
 
-                                    //ALSA Каналов сечас
-                                    function onSig_aout_ch_count(arg_value1,arg_value2,arg_value3)
+                                if (arg_value2 !== 0 && arg_value3 !== 0)
+                                    if (arg_value2 === arg_value3)
+                                        par_каналов_доступно.text_value = arg_value2
+                                    else
+                                        par_каналов_доступно.text_value = arg_value2 + ".." + arg_value3
+                                else
+                                    par_каналов_доступно.text_value = "-"
+
+
+
+                                }
+
+                            //ALSA версия
+                            function onSig_aout_info(arg_version)
+                                {
+                                par_alsa_version.text_value = arg_version
+                                }
+
+                            }
+                    }
+             } //группа параметров
+
+            S83_parametr_group
+                    {
+                    id:             group_resample
+                    name_group:     "Формат принудительно"
+
+                    Layout.alignment: Qt.AlignBottom
+                    Layout.fillWidth: true
+
+                    content_component:
+
+
+                        Rectangle
+                            {
+                            color:              "transparent"
+                            Layout.fillWidth:   true
+                            Layout.alignment:   Qt.AlignBottom
+
+                            height:             155
+
+                        RowLayout
+                                {
+                                anchors.left:   parent.left
+                                anchors.right:  parent.right
+                                anchors.top:    parent.top
+
+                                anchors.leftMargin:     15
+                                anchors.rightMargin:    15
+                                anchors.topMargin:      0
+
+                                height:                 150
+                                spacing:                0
+
+                                Connections
                                         {
-                                        curren_ch_count = arg_value1 //Текущее количество каналов
-
-
-                                        if (arg_value2 !== 0 && arg_value3 !== 0)
-                                            if (arg_value2 === arg_value3)
-                                                par_каналов_доступно.text_value = arg_value2
-                                            else
-                                                par_каналов_доступно.text_value = arg_value2 + ".." + arg_value3
-                                        else
-                                            par_каналов_доступно.text_value = "-"
+                                        target:     my_app
+                                        //property string avaliable_color: "white"//current_theme.color_ctrl_parametr_value
 
 
 
-                                        }
-
-                                    //Выбор аудиовыхода
-                                    function onSig_select_aout(arg_name)
-                                        {
-                                        par_current_aout.text_value = arg_name
-                                        }
-
-                                    //Доступный формат сэмпла
-                                    function onSig_aout_fmt_avaliable(arg_fmt,arg_value)
-                                        {
-                                        console.log("in: Дост. формат семпла аудиовыхода: " + arg_fmt + " значение: " + arg_value)
-                                        switch (arg_fmt)
+                                        //Доступный формат сэмпла
+                                        function onSig_aout_fmt_avaliable(arg_fmt,arg_value)
                                             {
-                                            case "U8":  fmt_u8.enabled  = arg_value
-                                                break
-                                            case "S16": fmt_s16.enabled = arg_value
-                                                break
-                                            case "S32": fmt_s32.enabled = arg_value
-                                                break
-                                            case "F32": fmt_f32.enabled = arg_value
-                                                break
-                                            case "F64": fmt_f64.enabled = arg_value
-                                                break
-                                            default:;
+                                            //console.log("in: Дост. формат семпла аудиовыхода: " + arg_fmt + " значение: " + arg_value)
+                                            switch (arg_fmt)
+                                                {
+                                                case "U8":  fmt_u8.enabled  = arg_value
+                                                    break
+                                                case "S16": fmt_s16.enabled = arg_value
+                                                    break
+                                                case "S32": fmt_s32.enabled = arg_value
+                                                    break
+                                                case "F32": fmt_f32.enabled = arg_value
+                                                    break
+                                                case "F64": fmt_f64.enabled = arg_value
+                                                    break
+                                                default:;
+                                                }
                                             }
-                                        }
 
-                                    //Текущий формат
-                                    function onSig_aout_fmt_current(arg_value)
-                                        {
-                                        console.log("in: Текущий формат семпла аудиовыхода: " + arg_value)
-
-                                        fmt_u8.color  = avaliable_color
-                                        fmt_s16.color = avaliable_color
-                                        fmt_s32.color = avaliable_color
-                                        fmt_f32.color = avaliable_color
-                                        fmt_f64.color = avaliable_color
-
-                                        curren_fmt = arg_value
-
-                                        switch (arg_value)
+                                        //Текущий формат
+                                        function onSig_aout_fmt_current(arg_value)
                                             {
-                                            case "U8":  fmt_u8.color  = current_theme.color_ctrl_parametr_value_selected
-                                                break
-                                            case "S16": fmt_s16.color = current_theme.color_ctrl_parametr_value_selected
-                                                break
-                                            case "S32": fmt_s32.color = current_theme.color_ctrl_parametr_value_selected
-                                                break
-                                            case "F32": fmt_f32.color = current_theme.color_ctrl_parametr_value_selected
-                                                break
-                                            case "F64": fmt_f64.color = current_theme.color_ctrl_parametr_value_selected
-                                                break
-
-                                            case "U8P":  fmt_u8.color  = current_theme.color_ctrl_parametr_value_selected
-                                                break
-                                            case "S16P": fmt_s16.color = current_theme.color_ctrl_parametr_value_selected
-                                                break
-                                            case "S32P": fmt_s32.color = current_theme.color_ctrl_parametr_value_selected
-                                                break
-                                            case "F32P": fmt_f32.color = current_theme.color_ctrl_parametr_value_selected
-                                                break
-                                            case "F64P": fmt_f64.color = current_theme.color_ctrl_parametr_value_selected
-                                                break
-                                            default:;
+                                            //console.log("in: Текущий формат семпла аудиовыхода: " + arg_value)
+                                            curren_fmt = arg_value
                                             }
-                                        }
 
-                                    //Доступная частота
-                                    function onSig_aout_freq_avaliable(arg_freq,arg_value)
-                                        {
-                                        console.log("in: Дост. частота аудиовыхода: " + arg_freq + " значение: " + arg_value)
-                                        switch (arg_freq)
+                                        //Доступная частота
+                                        function onSig_aout_freq_avaliable(arg_freq,arg_value)
                                             {
-                                            case 44100: freq_44.enabled = arg_value
-                                                break
-                                            case 88200: freq_88.enabled = arg_value
-                                                break
-                                            case 176400: freq_176.enabled = arg_value
-                                                break
-                                            case 352800: freq_352.enabled = arg_value
-                                                break
+                                            //console.log("in: Дост. частота аудиовыхода: " + arg_freq + " значение: " + arg_value)
+                                            switch (arg_freq)
+                                                {
+                                                case 44100: freq_44.enabled = arg_value
+                                                    break
+                                                case 88200: freq_88.enabled = arg_value
+                                                    break
+                                                case 176400: freq_176.enabled = arg_value
+                                                    break
+                                                case 352800: freq_352.enabled = arg_value
+                                                    break
 
-                                            case 48000: freq_48.enabled = arg_value
-                                                break
-                                            case 96000: freq_96.enabled = arg_value
-                                                break
-                                            case 192000: freq_192.enabled = arg_value
-                                                break
-                                            case 384000: freq_384.enabled = arg_value
-                                                break
+                                                case 48000: freq_48.enabled = arg_value
+                                                    break
+                                                case 96000: freq_96.enabled = arg_value
+                                                    break
+                                                case 192000: freq_192.enabled = arg_value
+                                                    break
+                                                case 384000: freq_384.enabled = arg_value
+                                                    break
 
-                                            default:;
+                                                default:;
+                                                }
                                             }
-                                        }
 
-                                    //ALSA версия
-                                    function onSig_aout_info(arg_version)
-                                        {
-                                        par_alsa_version.text_value = arg_version
-                                        }
 
-                                    function onSig_aout_freq_current(arg_value)
-                                        {
-                                        console.log("in: Текущая частота аудиовыхода: " + arg_value )
-                                        freq_44.color   = avaliable_color
-                                        freq_88.color   = avaliable_color
-                                        freq_176.color  = avaliable_color
-                                        freq_352.color  = avaliable_color
-                                        freq_48.color   = avaliable_color
-                                        freq_96.color   = avaliable_color
-                                        freq_192.color  = avaliable_color
-                                        freq_384.color  = avaliable_color
-
-                                        curren_frec = arg_value / 1000
-
-                                        switch (arg_value)
+                                        //Текущая частота аудиовыхода
+                                        function onSig_aout_freq_current(arg_value)
                                             {
-                                            case 44100: freq_44.color = current_theme.color_ctrl_parametr_value_selected
-                                                break
-                                            case 88200: freq_88.color = current_theme.color_ctrl_parametr_value_selected
-                                                break
-                                            case 176400: freq_176.color = current_theme.color_ctrl_parametr_value_selected
-                                                break
-                                            case 352800: freq_352.color = current_theme.color_ctrl_parametr_value_selected
-                                                break
-
-                                            case 48000: freq_48.color = current_theme.color_ctrl_parametr_value_selected
-                                                break
-                                            case 96000: freq_96.color = current_theme.color_ctrl_parametr_value_selected
-                                                break
-                                            case 192000: freq_192.color = current_theme.color_ctrl_parametr_value_selected
-                                                break
-                                            case 384000: freq_384.color = current_theme.color_ctrl_parametr_value_selected
-                                                break
-
-                                            default:;
+                                            //console.log("in: Текущая частота аудиовыхода: " + arg_value )
+                                            curren_frec = arg_value / 1000
                                             }
-                                        }
 
-                                    function reset_freq_radiobutton()
-                                        {
-                                        freq_44.checked  = false
-                                        freq_88.checked  = false
-                                        freq_176.checked = false
-                                        freq_352.checked = false
-
-                                        freq_48.checked  = false
-                                        freq_96.checked  = false
-                                        freq_192.checked = false
-                                        freq_384.checked = false
-                                        }
-
-                                    function reset_fmt_radiobutton()
-                                        {
-                                        fmt_u8.checked  = false
-                                        fmt_s16.checked = false
-                                        fmt_s32.checked = false
-                                        fmt_f32.checked = false
-                                        fmt_f64.checked = false
-                                        }
-
-                                    function onSig_change_freq(arg_value)
-                                        {
-                                        console.log("in: Включена передискретизация: " + arg_value)
-                                        reset_freq_radiobutton()
-                                        switch (arg_value)
+                                        function reset_freq_radiobutton()
                                             {
-                                            case 44100: freq_44.checked     = true
-                                                      //  frec_no_resample.checked = false
+                                            freq_44.checked  = false
+                                            freq_88.checked  = false
+                                            freq_176.checked = false
+                                            freq_352.checked = false
+
+                                            freq_48.checked  = false
+                                            freq_96.checked  = false
+                                            freq_192.checked = false
+                                            freq_384.checked = false
+                                            }
+
+                                        function reset_fmt_radiobutton()
+                                            {
+                                            fmt_u8.checked  = false
+                                            fmt_s16.checked = false
+                                            fmt_s32.checked = false
+                                            fmt_f32.checked = false
+                                            fmt_f64.checked = false
+                                            }
+
+                                        function onSig_change_freq(arg_value)
+                                            {
+                                            console.log("in: Включена передискретизация: " + arg_value)
+                                            reset_freq_radiobutton()
+                                            switch (arg_value)
+                                                {
+                                                case 44100: freq_44.checked     = true
+                                                          //  frec_no_resample.checked = false
+                                                            break
+                                                case 88200: freq_88.checked     = true
+                                                          //  frec_no_resample.checked = false
+                                                            break
+                                                case 176400:freq_176.checked   = true
+                                                          //  frec_no_resample.checked = false
+                                                            break
+                                                case 352800:freq_352.checked   = true
+                                                           // frec_no_resample.checked = false
+                                                            break
+
+                                                case 48000: freq_48.checked     = true
+                                                           // frec_no_resample.checked = false
+                                                            break
+                                                case 96000: freq_96.checked     = true
+                                                           // frec_no_resample.checked = false
+                                                            break
+                                                case 192000:freq_192.checked   = true
+                                                          //  frec_no_resample.checked = false
+                                                            break
+                                                case 384000:freq_384.checked   = true
+                                                          //  frec_no_resample.checked = false
+                                                            break
+
+                                                default:
+                                                }
+                                            }
+                                        function onSig_change_fmt(arg_value)
+                                            {
+                                            console.log("in: Включено изменение формата сэмпла: " + arg_value)
+                                            reset_fmt_radiobutton()
+                                            switch (arg_value)
+                                                {
+
+                                                case 0: fmt_u8.checked    = true
+                                                        //frec_no_resample.checked = false
                                                         break
-                                            case 88200: freq_88.checked     = true
-                                                      //  frec_no_resample.checked = false
+                                                case 1: fmt_s16.checked   = true
+                                                       // frec_no_resample.checked = false
                                                         break
-                                            case 176400:freq_176.checked   = true
-                                                      //  frec_no_resample.checked = false
-                                                        break
-                                            case 352800:freq_352.checked   = true
+                                                case 2: fmt_s32.checked   = true
                                                        // frec_no_resample.checked = false
                                                         break
 
-                                            case 48000: freq_48.checked     = true
+                                                case 3: fmt_f32.checked   = true
                                                        // frec_no_resample.checked = false
                                                         break
-                                            case 96000: freq_96.checked     = true
+                                                case 4: fmt_f64.checked   = true
                                                        // frec_no_resample.checked = false
                                                         break
-                                            case 192000:freq_192.checked   = true
-                                                      //  frec_no_resample.checked = false
-                                                        break
-                                            case 384000:freq_384.checked   = true
-                                                      //  frec_no_resample.checked = false
-                                                        break
 
-                                            default:
+                                                default:
+                                                }
                                             }
-                                        }
-                                    function onSig_change_fmt(arg_value)
-                                        {
-                                        console.log("in: Включено изменение формата сэмпла: " + arg_value)
-                                        reset_fmt_radiobutton()
-                                        switch (arg_value)
-                                            {
-
-                                            case 0: fmt_u8.checked    = true
-                                                    //frec_no_resample.checked = false
-                                                    break
-                                            case 1: fmt_s16.checked   = true
-                                                   // frec_no_resample.checked = false
-                                                    break
-                                            case 2: fmt_s32.checked   = true
-                                                   // frec_no_resample.checked = false
-                                                    break
-
-                                            case 3: fmt_f32.checked   = true
-                                                   // frec_no_resample.checked = false
-                                                    break
-                                            case 4: fmt_f64.checked   = true
-                                                   // frec_no_resample.checked = false
-                                                    break
-
-                                            default:
-                                            }
-                                        }
-
-                                    }
-
-                            ColumnLayout
-                                        {
-                                        S83_RadioButton
-                                           {
-                                           id:              freq_44
-                                           text:            "44.1 КГц"
-                                           font.pixelSize:  18
-                                           verticalPadding: 0
-                                           horizontalPadding: 0
-                                           color_disable:   current_theme.color_ctrl_disable
-
-                                           MouseArea
-                                               {
-                                               anchors.fill: parent
-                                               onClicked:
-                                                   {
-                                                   my_app.slot_change_freq(44100)
-                                                   console.log("out: Включить передискретизацию: " + freq_44.text)
-                                                   }
-                                               }
-
-                                           }
-
-                                        S83_RadioButton
-                                           {
-                                           id:              freq_88
-                                           text:            "88.2 КГц"
-                                           font.pixelSize:  18
-                                           color_disable:   current_theme.color_ctrl_disable
-                                           verticalPadding: 0
-                                           horizontalPadding: 0
-                                           MouseArea
-                                               {
-                                               anchors.fill: parent
-                                               onClicked:
-                                                   {
-                                                   my_app.slot_change_freq(88200)
-                                                   console.log("out: Включить передискретизацию: " + freq_88.text)
-                                                   }
-                                               }
-                                           }
-
-                                        S83_RadioButton
-                                           {
-                                           id:              freq_176
-                                           text:            "176.4 КГц"
-                                           font.pixelSize:  18
-                                           color_disable:   current_theme.color_ctrl_disable
-                                           verticalPadding: 0
-                                           horizontalPadding: 0
-                                           MouseArea
-                                               {
-                                               anchors.fill: parent
-                                               onClicked:
-                                                   {
-                                                   my_app.slot_change_freq(176400)
-                                                   console.log("out: Включить передискретизацию: " + freq_176.text)
-                                                   }
-                                               }
-                                           }
-                                        S83_RadioButton
-                                           {
-                                           id:              freq_352
-                                           text:            "352.8 КГц"
-                                           font.pixelSize:  18
-                                           color_disable:   current_theme.color_ctrl_disable
-                                           verticalPadding: 0
-                                           horizontalPadding: 0
-                                           MouseArea
-                                               {
-                                               anchors.fill: parent
-                                               onClicked:
-                                                   {
-                                                   my_app.slot_change_freq(352800)
-                                                   console.log("out: Включить передискретизацию: " + freq_352.text)
-                                                   }
-                                               }
-                                           }
-                                        S83_RadioButton
-                                           {
-                                           id:                  frec_no_resample
-                                           text:                "Как есть"
-                                           font.pixelSize:      18
-                                           verticalPadding:     0
-                                           horizontalPadding:   0
-                                           color_disable:       current_theme.color_ctrl_disable
-                                           enabled:             true
-                                           checked:             !freq_44.checked && !freq_88.checked && !freq_176.checked && !freq_352.checked &&         !freq_48.checked && !freq_96.checked && !freq_192.checked && !freq_384.checked &&          !fmt_u8.checked  && !fmt_s16.checked  && !fmt_s32.checked && !fmt_f32.checked  && !fmt_f64.checked
-                                           MouseArea
-                                               {
-                                               anchors.fill: parent
-                                               onClicked:
-                                                   {
-                                                   my_app.slot_change_freq(0)
-                                                   my_app.slot_change_fmt(-1)
-                                                   console.log("out: Отключить передискретизацию и изменение формата сэмпла.")
-                                                   }
-                                               }
-                                           }
-                                        }
-
-                            ColumnLayout
-                                        {
-
-                                        S83_RadioButton
-                                           {
-                                           id:              freq_48
-                                           text:            "48.0 КГц"
-                                           font.pixelSize:  18
-                                           color_disable:   current_theme.color_ctrl_disable
-                                           verticalPadding: 0
-                                           horizontalPadding: 0
-                                           MouseArea
-                                               {
-                                               anchors.fill: parent
-                                               onClicked:
-                                                   {
-                                                   my_app.slot_change_freq(48000)
-                                                   console.log("out: Включить передискретизацию: " + freq_48.text)
-                                                   }
-                                               }
-                                           }
-                                        S83_RadioButton
-                                           {
-                                           id:              freq_96
-                                           text:            "96.0 КГц"
-                                           font.pixelSize:   18
-                                           color_disable:   current_theme.color_ctrl_disable
-                                           verticalPadding: 0
-                                           horizontalPadding: 0
-                                           MouseArea
-                                               {
-                                               anchors.fill: parent
-                                               onClicked:
-                                                   {
-                                                   my_app.slot_change_freq(96000)
-                                                   console.log("out: Включить передискретизацию: " + freq_96.text)
-                                                   }
-                                               }
-                                           }
-                                        S83_RadioButton
-                                           {
-                                           id:              freq_192
-                                           text:            "192.0 КГц"
-                                           font.pixelSize:  18
-                                           color_disable:   current_theme.color_ctrl_disable
-                                           verticalPadding: 0
-                                           horizontalPadding: 0
-                                           MouseArea
-                                               {
-                                               anchors.fill: parent
-                                               onClicked:
-                                                   {
-                                                   my_app.slot_change_freq(192000)
-                                                   console.log("out: Включить передискретизацию: " + freq_192.text)
-                                                   }
-                                               }
-                                           }
-                                        S83_RadioButton
-                                           {
-                                           id:              freq_384
-                                           text:            "384.0 КГц"
-                                           font.pixelSize:  18
-                                           color_disable:   current_theme.color_ctrl_disable
-                                           verticalPadding: 0
-                                           horizontalPadding: 0
-                                           MouseArea
-                                               {
-                                               anchors.fill: parent
-                                               onClicked:
-                                                   {
-                                                   my_app.slot_change_freq(384000)
-                                                   console.log("out: Включить передискретизацию: " + freq_384.text)
-                                                   }
-                                               }
-                                           }
-                                        Text
-                                           {
-                                           text: " "
-                                           font.pixelSize:   18
-                                           }
 
                                         }
 
-                            ColumnLayout
-                                        {
+                                ColumnLayout
+                                            {
+                                            S83_RadioButton
+                                               {
+                                               id:              freq_44
+                                               text:            "44.1 КГц"
+                                               font.pixelSize:  18
+                                               verticalPadding: 0
+                                               horizontalPadding: 0
+                                               color_disable:   current_theme.color_ctrl_disable
 
-                                        S83_RadioButton
-                                            {
-                                                id:                 fmt_u8
-                                                text:               "U8"
-                                                font.pixelSize:     18
-                                                color_disable:      current_theme.color_ctrl_disable
-                                                verticalPadding:    0
-                                                horizontalPadding: 0
+                                               MouseArea
+                                                   {
+                                                   anchors.fill: parent
+                                                   onClicked:
+                                                       {
+                                                       my_app.slot_change_freq(44100)
+                                                       console.log("out: Включить передискретизацию: " + freq_44.text)
+                                                       }
+                                                   }
 
-                                                MouseArea
-                                                    {
-                                                    anchors.fill: parent
-                                                    onClicked:
-                                                        {
-                                                        my_app.slot_change_fmt(0)
-                                                        console.log("out: Изменить формат сэмпла на: " + fmt_u8.text)
-                                                        }
-                                                    }
-                                            }
-                                        S83_RadioButton
-                                            {
-                                                id:                 fmt_s16
-                                                text:               "S16"
-                                                font.pixelSize:     18
-                                                color_disable:      current_theme.color_ctrl_disable
-                                                verticalPadding:    0
-                                                horizontalPadding: 0
-                                                MouseArea
-                                                    {
-                                                    anchors.fill: parent
-                                                    onClicked:
-                                                        {
-                                                        my_app.slot_change_fmt(1)
-                                                        console.log("out: Изменить формат сэмпла на: " + fmt_s16.text)
-                                                        }
-                                                    }
-                                            }
-                                        S83_RadioButton
-                                            {
-                                                id:   fmt_s32
-                                                text: "S32"
-                                                font.pixelSize:   18
-                                                color_disable:   current_theme.color_ctrl_disable
-                                                verticalPadding: 0
-                                                horizontalPadding: 0
-                                                MouseArea
-                                                    {
-                                                    anchors.fill: parent
-                                                    onClicked:
-                                                        {
-                                                        my_app.slot_change_fmt(2)
-                                                        console.log("out: Изменить формат сэмпла на: " + fmt_s32.text)
-                                                        }
-                                                    }
-                                            }
-                                        S83_RadioButton
-                                            {
-                                                id:   fmt_f32
-                                                text: "F32"
-                                                font.pixelSize:   18
-                                                color_disable:   current_theme.color_ctrl_disable
-                                                verticalPadding: 0
-                                                horizontalPadding: 0
-                                                MouseArea
-                                                    {
-                                                    anchors.fill: parent
-                                                    onClicked:
-                                                        {
-                                                        my_app.slot_change_fmt(3)
-                                                        console.log("out: Изменить формат сэмпла на: " + fmt_f32.text)
-                                                        }
-                                                    }
-                                            }
-                                        S83_RadioButton
-                                            {
-                                                id:   fmt_f64
-                                                text: "F64"
-                                                font.pixelSize:   18
-                                                color_disable:   current_theme.color_ctrl_disable
-                                                verticalPadding: 0
-                                                horizontalPadding: 0
-                                                MouseArea
-                                                    {
-                                                    anchors.fill: parent
-                                                    onClicked:
-                                                        {
-                                                        my_app.slot_change_fmt(4)
-                                                        console.log("out: Изменить формат сэмпла на: " + fmt_f64.text)
-                                                        }
-                                                    }
-                                            }
-                                        }
+                                               }
 
-                        }}
-                    } //
-                    } //группа параметров
+                                            S83_RadioButton
+                                               {
+                                               id:              freq_88
+                                               text:            "88.2 КГц"
+                                               font.pixelSize:  18
+                                               color_disable:   current_theme.color_ctrl_disable
+                                               verticalPadding: 0
+                                               horizontalPadding: 0
+                                               MouseArea
+                                                   {
+                                                   anchors.fill: parent
+                                                   onClicked:
+                                                       {
+                                                       my_app.slot_change_freq(88200)
+                                                       console.log("out: Включить передискретизацию: " + freq_88.text)
+                                                       }
+                                                   }
+                                               }
+
+                                            S83_RadioButton
+                                               {
+                                               id:              freq_176
+                                               text:            "176.4 КГц"
+                                               font.pixelSize:  18
+                                               color_disable:   current_theme.color_ctrl_disable
+                                               verticalPadding: 0
+                                               horizontalPadding: 0
+                                               MouseArea
+                                                   {
+                                                   anchors.fill: parent
+                                                   onClicked:
+                                                       {
+                                                       my_app.slot_change_freq(176400)
+                                                       console.log("out: Включить передискретизацию: " + freq_176.text)
+                                                       }
+                                                   }
+                                               }
+                                            S83_RadioButton
+                                               {
+                                               id:              freq_352
+                                               text:            "352.8 КГц"
+                                               font.pixelSize:  18
+                                               color_disable:   current_theme.color_ctrl_disable
+                                               verticalPadding: 0
+                                               horizontalPadding: 0
+                                               MouseArea
+                                                   {
+                                                   anchors.fill: parent
+                                                   onClicked:
+                                                       {
+                                                       my_app.slot_change_freq(352800)
+                                                       console.log("out: Включить передискретизацию: " + freq_352.text)
+                                                       }
+                                                   }
+                                               }
+                                            S83_RadioButton
+                                               {
+                                               id:                  frec_no_resample
+                                               text:                "Как есть"
+                                               font.pixelSize:      18
+                                               verticalPadding:     0
+                                               horizontalPadding:   0
+                                               color_disable:       current_theme.color_ctrl_disable
+                                               enabled:             true
+                                               checked:             !freq_44.checked && !freq_88.checked && !freq_176.checked && !freq_352.checked &&         !freq_48.checked && !freq_96.checked && !freq_192.checked && !freq_384.checked &&          !fmt_u8.checked  && !fmt_s16.checked  && !fmt_s32.checked && !fmt_f32.checked  && !fmt_f64.checked
+                                               MouseArea
+                                                   {
+                                                   anchors.fill: parent
+                                                   onClicked:
+                                                       {
+                                                       my_app.slot_change_freq(0)
+                                                       my_app.slot_change_fmt(-1)
+                                                       console.log("out: Отключить передискретизацию и изменение формата сэмпла.")
+                                                       }
+                                                   }
+                                               }
+                                            }
+
+                                ColumnLayout
+                                            {
+
+                                            S83_RadioButton
+                                               {
+                                               id:              freq_48
+                                               text:            "48.0 КГц"
+                                               font.pixelSize:  18
+                                               color_disable:   current_theme.color_ctrl_disable
+                                               verticalPadding: 0
+                                               horizontalPadding: 0
+                                               MouseArea
+                                                   {
+                                                   anchors.fill: parent
+                                                   onClicked:
+                                                       {
+                                                       my_app.slot_change_freq(48000)
+                                                       console.log("out: Включить передискретизацию: " + freq_48.text)
+                                                       }
+                                                   }
+                                               }
+                                            S83_RadioButton
+                                               {
+                                               id:              freq_96
+                                               text:            "96.0 КГц"
+                                               font.pixelSize:   18
+                                               color_disable:   current_theme.color_ctrl_disable
+                                               verticalPadding: 0
+                                               horizontalPadding: 0
+                                               MouseArea
+                                                   {
+                                                   anchors.fill: parent
+                                                   onClicked:
+                                                       {
+                                                       my_app.slot_change_freq(96000)
+                                                       console.log("out: Включить передискретизацию: " + freq_96.text)
+                                                       }
+                                                   }
+                                               }
+                                            S83_RadioButton
+                                               {
+                                               id:              freq_192
+                                               text:            "192.0 КГц"
+                                               font.pixelSize:  18
+                                               color_disable:   current_theme.color_ctrl_disable
+                                               verticalPadding: 0
+                                               horizontalPadding: 0
+                                               MouseArea
+                                                   {
+                                                   anchors.fill: parent
+                                                   onClicked:
+                                                       {
+                                                       my_app.slot_change_freq(192000)
+                                                       console.log("out: Включить передискретизацию: " + freq_192.text)
+                                                       }
+                                                   }
+                                               }
+                                            S83_RadioButton
+                                               {
+                                               id:              freq_384
+                                               text:            "384.0 КГц"
+                                               font.pixelSize:  18
+                                               color_disable:   current_theme.color_ctrl_disable
+                                               verticalPadding: 0
+                                               horizontalPadding: 0
+                                               MouseArea
+                                                   {
+                                                   anchors.fill: parent
+                                                   onClicked:
+                                                       {
+                                                       my_app.slot_change_freq(384000)
+                                                       console.log("out: Включить передискретизацию: " + freq_384.text)
+                                                       }
+                                                   }
+                                               }
+                                            Text
+                                               {
+                                               text: " "
+                                               font.pixelSize:   18
+                                               }
+
+                                            }
+
+                                ColumnLayout
+                                            {
+
+                                            S83_RadioButton
+                                                {
+                                                    id:                 fmt_u8
+                                                    text:               "U8"
+                                                    font.pixelSize:     18
+                                                    color_disable:      current_theme.color_ctrl_disable
+                                                    verticalPadding:    0
+                                                    horizontalPadding: 0
+
+                                                    MouseArea
+                                                        {
+                                                        anchors.fill: parent
+                                                        onClicked:
+                                                            {
+                                                            my_app.slot_change_fmt(0)
+                                                            console.log("out: Изменить формат сэмпла на: " + fmt_u8.text)
+                                                            }
+                                                        }
+                                                }
+                                            S83_RadioButton
+                                                {
+                                                    id:                 fmt_s16
+                                                    text:               "S16"
+                                                    font.pixelSize:     18
+                                                    color_disable:      current_theme.color_ctrl_disable
+                                                    verticalPadding:    0
+                                                    horizontalPadding: 0
+                                                    MouseArea
+                                                        {
+                                                        anchors.fill: parent
+                                                        onClicked:
+                                                            {
+                                                            my_app.slot_change_fmt(1)
+                                                            console.log("out: Изменить формат сэмпла на: " + fmt_s16.text)
+                                                            }
+                                                        }
+                                                }
+                                            S83_RadioButton
+                                                {
+                                                    id:   fmt_s32
+                                                    text: "S32"
+                                                    font.pixelSize:   18
+                                                    color_disable:   current_theme.color_ctrl_disable
+                                                    verticalPadding: 0
+                                                    horizontalPadding: 0
+                                                    MouseArea
+                                                        {
+                                                        anchors.fill: parent
+                                                        onClicked:
+                                                            {
+                                                            my_app.slot_change_fmt(2)
+                                                            console.log("out: Изменить формат сэмпла на: " + fmt_s32.text)
+                                                            }
+                                                        }
+                                                }
+                                            S83_RadioButton
+                                                {
+                                                    id:   fmt_f32
+                                                    text: "F32"
+                                                    font.pixelSize:   18
+                                                    color_disable:   current_theme.color_ctrl_disable
+                                                    verticalPadding: 0
+                                                    horizontalPadding: 0
+                                                    MouseArea
+                                                        {
+                                                        anchors.fill: parent
+                                                        onClicked:
+                                                            {
+                                                            my_app.slot_change_fmt(3)
+                                                            console.log("out: Изменить формат сэмпла на: " + fmt_f32.text)
+                                                            }
+                                                        }
+                                                }
+                                            S83_RadioButton
+                                                {
+                                                    id:   fmt_f64
+                                                    text: "F64"
+                                                    font.pixelSize:   18
+                                                    color_disable:   current_theme.color_ctrl_disable
+                                                    verticalPadding: 0
+                                                    horizontalPadding: 0
+                                                    MouseArea
+                                                        {
+                                                        anchors.fill: parent
+                                                        onClicked:
+                                                            {
+                                                            my_app.slot_change_fmt(4)
+                                                            console.log("out: Изменить формат сэмпла на: " + fmt_f64.text)
+                                                            }
+                                                        }
+                                                }
+                                            }
+
+                                }
+                            }
+                    }
+
+
             S83_parametr_group
                 {
                  name_group:    "Опции ALSA"

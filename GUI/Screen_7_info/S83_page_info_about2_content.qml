@@ -18,145 +18,58 @@ S83_parametr_group
         spacing:        0
 
         S83_parametr_classic
-        {
-            id:             par_app_name
-
-            Layout.alignment: Qt.AlignBottom
-            Layout.fillWidth: true
-
-            change_padding: 5
-            text_label:     "Приложение:"
-            color_label:    "white"
-
-            text_value:     "-"
-            color_value:    "yellow"
-        }
-
+            {
+            id:                 par_app_name
+            Layout.alignment:   Qt.AlignBottom
+            Layout.fillWidth:   true
+            change_padding:     5
+            text_label:         "Приложение:"
+            text_value:         "-"
+            }
         S83_parametr_classic
-        {
-            id:             par_version
-
-            Layout.alignment: Qt.AlignBottom
-            Layout.fillWidth: true
-
-            change_padding: 5
-
-            text_label:     "Версия:"
-            color_label:    "white"
-
-            text_value:     "-"
-            color_value:    "yellow"
-
-        }
-
-
+            {
+            id:                 par_version
+            Layout.alignment:   Qt.AlignBottom
+            Layout.fillWidth:   true
+            change_padding:     5
+            text_label:         "Версия:"
+            text_value:         "-"
+            }
         S83_parametr_classic
-        {
-            id:             par_developer
-
-            Layout.alignment: Qt.AlignBottom
-            Layout.fillWidth: true
-
-            change_padding: 5
-
-            text_label:     "Файлы проекта:"
-            color_label:    "white"
-
-            text_value:     "    "
-            color_value:    "yellow"
-
-            Text
-                {
-                text:                   "На страницу"
-                color:                  "yellow"
-                font.pixelSize:         18
-                anchors.right:          parent.right
-                anchors.rightMargin:    7
-                anchors.verticalCenter: parent.verticalCenter
-                font.underline:         true
-                MouseArea
-                    {
-                    anchors.fill: parent
-                    onClicked:
-                        {
-                        Qt.openUrlExternally("https://cloud.mail.ru/public/AkD7/LU5GEWmy3")
-                        //var subject = "Тема письма"
-                        //var body = "Тест письма"
-                        //var email = "horoshevskiy_83@mail.ru"
-                        //var query = "mailto:" + email +"?subject="+encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
-                        //Qt.openUrlExternally(query)
-                        }
-
-                    }
-                }
-
-
-        }
-
-        S83_parametr_classic
-        {
+            {
             id:                 par_date
-
             Layout.alignment:   Qt.AlignBottom
             Layout.fillWidth:   true
-
             change_padding:     5
-
-            text_label:     "Дата сборки:"
-            color_label:    "white"
-
-            text_value:     "-"
-            color_value:    "yellow"
-
-        }
-
+            text_label:         "Дата сборки:"
+            text_value:         "-"
+            }
         S83_parametr_classic
-        {
+            {
             id:                 par_arch
-
             Layout.alignment:   Qt.AlignBottom
             Layout.fillWidth:   true
-
             change_padding:     5
-
-            text_label:     "Архитектура CPU:"
-            color_label:    "white"
-
-            text_value:     "-"
-            color_value:    "yellow"
-
-        }
-
+            text_label:         "Архитектура CPU:"
+            text_value:         "-"
+            }
         S83_parametr_classic
             {
             id:                 par_full_size
-
             Layout.alignment:   Qt.AlignBottom
             Layout.fillWidth:   true
-
             change_padding:     5
-
-            text_label:     "Полный объем:"
-            color_label:    "white"
-
-            text_value:     "-"
-            color_value:    "yellow"
+            text_label:         "Полный объем:"
+            text_value:         "-"
             }
-
         S83_parametr_classic
             {
             id:                 par_free_size
-
             Layout.alignment:   Qt.AlignBottom
             Layout.fillWidth:   true
-
             change_padding:     5
-
-            text_label:     "Доступный объем:"
-            color_label:    "white"
-
-            text_value:     "-"
-            color_value:    "yellow"
+            text_label:         "Доступный объем:"
+            text_value:         "-"
             }
 
         Connections

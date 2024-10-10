@@ -17,7 +17,7 @@ S83_page_opt
             anchors.left:   parent.left
             anchors.right:  parent.right
             anchors.top:    parent.top
-
+            property bool flag_local_eq_checked: false
             clip:           true
             spacing:        0
 
@@ -59,6 +59,7 @@ S83_page_opt
                                 width:  24
                                 height: 24
                                 visible:  true
+
                                 anchors.centerIn: parent
                                 z: -1
                                 source: "qrc:/Icon/for_drawer/eq.svg";
@@ -274,13 +275,14 @@ S83_page_opt
                     font.pixelSize:     18
                     Layout.fillWidth:   true
 
-                    color: checked ? rl_eq.color_eq_global : "white"
+                    color:              checked ? current_theme.color_ctrl_main_color : "white"
                     color_point:        color
                     MouseArea
                         {
                         anchors.fill: parent
                         onClicked:
                             {
+
                             my_app.slot_eq(0,0)
                             }
                         }
@@ -293,37 +295,34 @@ S83_page_opt
                     Layout.alignment:   Qt.AlignBottom
                     font.pixelSize:     18
                     Layout.leftMargin:  10
-                    color:              checked ? rl_eq.color_eq_local : "white"
+                    color:              checked ? current_theme.color_ctrl_main_color : "white"
                     color_point:        color
                     MouseArea
                         {
                         anchors.fill: parent
                         onClicked:
                             {
+
                             my_app.slot_eq(1,0)
                             }
                         }
                     }
 
                 S83_parametr_classic
-                {
+                    {
                     id:                 par_eq_state
 
                     Layout.alignment:   Qt.AlignBottom
                     Layout.fillWidth:   true
                     Layout.leftMargin:  10
                     Layout.rightMargin: 10
-                    Layout.bottomMargin:   15
+                    Layout.bottomMargin:15
 
                     change_padding:     5
 
-                    text_label:     "Фильтр \"эквалайзер\":"
-                    color_label:    "white"
-
+                    text_label:     "Состояние фильтра \"Equalizer\":"
                     text_value:     "-"
-                    color_value:    "yellow"
-
-                }
+                    }
 
                 Connections
                     {
@@ -332,60 +331,17 @@ S83_page_opt
                     function onSig_eq_state(arg_eq_id,arg_sate)
                         {
 
-                        if (arg_eq_id === 0)
+                        if (arg_eq_id === 0) //Глобальный
                             {
                             rb_eq_global.checked = true
-
-                            band_31.color_slider            = rl_eq.color_eq_global
-                            band_31.color_slider_default    = rl_eq.color_eq_global
-                            band_62.color_slider           = rl_eq.color_eq_global
-                            band_62.color_slider_default   = rl_eq.color_eq_global
-                            band_125.color_slider           = rl_eq.color_eq_global
-                            band_125.color_slider_default    = rl_eq.color_eq_global
-                            band_250.color_slider            = rl_eq.color_eq_global
-                            band_250.color_slider_default    = rl_eq.color_eq_global
-                            band_500.color_slider            = rl_eq.color_eq_global
-                            band_500.color_slider_default   = rl_eq.color_eq_global
-                            band_1K.color_slider            = rl_eq.color_eq_global
-                            band_1K.color_slider_default    = rl_eq.color_eq_global
-                            band_2K.color_slider           = rl_eq.color_eq_global
-                            band_2K.color_slider_default   = rl_eq.color_eq_global
-                            band_4K.color_slider           = rl_eq.color_eq_global
-                            band_4K.color_slider_default    = rl_eq.color_eq_global
-                            band_8K.color_slider            = rl_eq.color_eq_global
-                            band_8K.color_slider_default    = rl_eq.color_eq_global
-                            band_16K.color_slider            = rl_eq.color_eq_global
-                            band_16K.color_slider_default   = rl_eq.color_eq_global
-
                             }
-                        if (arg_eq_id === 1)
+                        if (arg_eq_id === 1) //Локальный
                             {
                             rb_eq_local.checked = true
-
-                            band_31.color_slider            = rl_eq.color_eq_local
-                            band_31.color_slider_default    = rl_eq.color_eq_local
-                            band_62.color_slider           = rl_eq.color_eq_local
-                            band_62.color_slider_default   = rl_eq.color_eq_local
-                            band_125.color_slider           = rl_eq.color_eq_local
-                            band_125.color_slider_default    = rl_eq.color_eq_local
-                            band_250.color_slider            = rl_eq.color_eq_local
-                            band_250.color_slider_default    = rl_eq.color_eq_local
-                            band_500.color_slider            = rl_eq.color_eq_local
-                            band_500.color_slider_default   = rl_eq.color_eq_local
-                            band_1K.color_slider            = rl_eq.color_eq_local
-                            band_1K.color_slider_default    = rl_eq.color_eq_local
-                            band_2K.color_slider           = rl_eq.color_eq_local
-                            band_2K.color_slider_default   = rl_eq.color_eq_local
-                            band_4K.color_slider           = rl_eq.color_eq_local
-                            band_4K.color_slider_default    = rl_eq.color_eq_local
-                            band_8K.color_slider            = rl_eq.color_eq_local
-                            band_8K.color_slider_default    = rl_eq.color_eq_local
-                            band_16K.color_slider            = rl_eq.color_eq_local
-                            band_16K.color_slider_default   = rl_eq.color_eq_local
-
                             }
 
                         cb_eq_on_off.checked = arg_sate
+                        w_eq_local.visible = rb_eq_local.checked
                         }
                     function onSig_eq_band(arg_eq_id,arg_band,arg_value)
                         {
@@ -420,19 +376,27 @@ S83_page_opt
                         {
                         if (arg_value)
                             {
-                            par_eq_state.text_value = "включен"
-                            par_eq_state.color_value = current_theme.color_ctrl_parametr_value_selected
+                            par_eq_state.text_value = "on"
+                            par_eq_state.value_warning = true
                             }
                         else
                             {
-                            par_eq_state.text_value = "выключен"
-                            par_eq_state.color_value = current_theme.color_ctrl_parametr_value
+                            par_eq_state.text_value = "off"
+                            par_eq_state.value_warning = false
                             }
                         }
 
                     }
                 } //ColumnLayout
             } //pg
+
+        S83_warning
+            {
+            id:                 w_eq_local
+            Layout.fillWidth:   true
+            Layout.topMargin:   8
+            text:               "Выбран эквалайзер для конкретного плейлиста (каталога)"
+            }
         }
     }
 

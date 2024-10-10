@@ -2,6 +2,7 @@
 
 #include <QObject>
 #include <string>
+#include <QDateTime>
 
 #include "commands.h"
 
@@ -12,7 +13,20 @@
 #include "decoder.h"
 #include "client_tcp.h"
 
-
+struct ip_pop_struct
+    {
+    QString ip_string;
+    QString ip_node_name;
+    bool    ip_state;
+    qint64  connect_time;
+    void init (void)
+        {
+        ip_string    = "-";
+        ip_node_name = "-";
+        ip_state     = 0;
+        connect_time = 0;
+        }
+    };
 
 class appcore : public QObject, decoder
 {
@@ -34,7 +48,7 @@ public:
 
 public slots:
     //Эти функции дергает слой QML
-
+    void slot_start();
     void slot_ip_address_change(QString arg_ip);
 
     void slot_pre(void);
@@ -121,10 +135,13 @@ public slots:
     void slot_board_dac (int arg_id, int arg_2,  int arg_3, int arg_4);
     void slot_select_sw_item(int index);
     void slot_update    (int arg_mode);
+    void slot_set_theme (int arg_th);
 signals:
     void sig_status_label(QString arg_txt,QColor arg_color);
-    void sig_connected();
-    void sig_connecting_start();
+    void sig_connected(QString arg_ip);
+    void sig_set_th(int arg_th);
+    void sig_pop_ip(QString arg_txt, int arg_num_ip, int arg_ip_state,QString arg_nname );
+    void sig_connecting_start(QString arg_ip);
     void sig_disconnected();
     void sig_ipaddress(QString arg_ip);
     void sig_build_date(QString arg_date);
@@ -224,16 +241,21 @@ private slots:
     void slot_new_aout_list     (QList<Item_list_adev> *arg_new_list);
 
 private:
-    bool  command_parse(char *arg_cmd_text);
+    bool  command_parse (char *arg_cmd_text);
     int   command_execute(void);
     void  command_send_to_server(int arg_cmd,QString arg_qstr);
     void  command_send_to_server(cmd_format_t *arg_cmd);
-    void  send_string(char *arg_str);
+    void  send_string   (char *arg_str);
+
+
 
     void  write_settings_to_file    (void);
     void  read_settings_from_file   (void);
+    void  apply_pop_ip              (void);
+    void  event_connected   (QString arg_ip);
+    void  event_disconected (void);     //Произошел разрыв соединения
+    void  assign_node_name  (QString arg_name);
 
-    void  event_disconected         (void);     //Произошел разрыв соединения
     void  reset_parser              (void);     //Сбросить парсер (вызываем после дисконекта)
     List_file_Model*        m_list_file;        //Указатель на модель списка файлов
     List_adev_model*        m_list_aout;        //Указатель на модель списка аудиоустройств
@@ -246,9 +268,12 @@ private:
     QList<Item_list_alsa_vregch>    *m_temp_sw_list;            //указатель на принимаемый список SW элементов
 
     QString       ip_from_file;     //Прочтенный из файла
+    QDateTime     currentDateTime;
+    ip_pop_struct ip_pop[3];        //Популярные ip
     cmd_format_t  cmd_current;
     std::string   cmd_parts;
     client_tcp    client;           //Сетевой клиент - подключается к серверу и получает данные с помощью декодера пользователя
+    uint8_t       current_th;
     const uint8_t TAG_ARG_END = '\r';
     const uint8_t TAG_STR_END = '\0';
     const uint8_t TAG_CMD_END = '\n';

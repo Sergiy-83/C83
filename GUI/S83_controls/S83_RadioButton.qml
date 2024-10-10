@@ -43,7 +43,8 @@ T.RadioButton {
     id: control
     property string color:          "white"
     property string color_disable:  "gray"
-    property string color_point:    "chocolate"
+    property string color_point:    current_theme.color_ctrl_main_color
+    property bool value_warning: false
 
     implicitWidth:  Math.max(implicitBackgroundWidth + leftInset + rightInset, implicitContentWidth + leftPadding + rightPadding)
     implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset, implicitContentHeight + topPadding + bottomPadding, implicitIndicatorHeight + topPadding + bottomPadding)
@@ -51,6 +52,7 @@ T.RadioButton {
     spacing: 8
     padding: 8
     verticalPadding: padding + 6
+    font.weight:    value_warning ? Font.Bold : Font.Normal // Устанавливаем жирный шрифт
 
     indicator:
     S83_RadioIndicator
@@ -59,7 +61,6 @@ T.RadioButton {
         y: control.topPadding + (control.availableHeight - height) / 2
         color_disable:  control.color_disable
         color_point:    control.color_point
-       // color_enable:   control.color
         control:        control
         }
 
@@ -69,10 +70,10 @@ T.RadioButton {
         leftPadding: control.indicator && !control.mirrored ? control.indicator.width + control.spacing + 1 : 0
         rightPadding: control.indicator && control.mirrored ? control.indicator.width + control.spacing + 1 : 0
 
-        text: control.text
-        font: control.font
-        color: control.enabled ? control.color : control.color_disable
-        elide: Text.ElideRight
+        text:   control.text
+        font:   control.font
+        color:  control.enabled ? control.color : control.color_disable
+        elide:  Text.ElideRight
         verticalAlignment: Text.AlignVCenter
         }
 }

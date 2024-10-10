@@ -23,12 +23,12 @@ S83_Slider_01
     stepSize: 1
 
     orientation:  Qt.Vertical
-    color_slider: color_slider_default
+    color_slider: current_theme.color_ctrl_main_color
 
     property alias  band_name:  txt_1.text
     property alias  band_value: slider_eq.value
     property string band_unit:  " дБ"
-    property string  color_slider_default: current_theme.color_ctrl_main_color
+
     signal moved_finished()
 
     Text
@@ -57,12 +57,12 @@ S83_Slider_01
         {
         if (pressed === false)
             {
-            slider_eq.color_slider = color_slider_default
+
             moved_finished()
             }
         else
             {
-             slider_eq.color_slider = current_theme.color_ctrl_parametr_value_warning
+
             }
         }
 }

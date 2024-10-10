@@ -30,7 +30,7 @@ S83_parametr_group
             color_label:    "white"
 
             text_value:     "-"
-            color_value:    "yellow"
+
         }
 
         S83_parametr_classic
@@ -46,7 +46,7 @@ S83_parametr_group
             color_label:    "white"
 
             text_value:     "-"
-            color_value:    "yellow"
+
             }
 
 
@@ -64,7 +64,7 @@ S83_parametr_group
             color_label:    "white"
 
             text_value:     "-"
-            color_value:    "yellow"
+
 
             }
 
@@ -81,7 +81,7 @@ S83_parametr_group
             color_label:    "white"
 
             text_value:     "-"
-            color_value:    "yellow"
+
 
             }
 
@@ -98,7 +98,7 @@ S83_parametr_group
             color_label:    "white"
 
             text_value:     "-"
-            color_value:    "yellow"
+
             }
 
 
@@ -117,53 +117,61 @@ S83_parametr_group
                 par_swr1_state.text_value   = defice
                 par_swr2_state.text_value   = defice
                 par_svol_state.text_value   = defice
+
+                par_bp.value_warning            = false
+                par_eq_state.value_warning      = false
+                par_swr1_state.value_warning    = false
+                par_swr2_state.value_warning    = false
+                par_svol_state.value_warning    = false
                 }
 
+            property string str_off: "off"
+            property string str_on: "on"
             //Преобразование потока
             function onSig_convert_state(arg_bp, swr1_state, swr2_state, swvol )
                 {
                 if (arg_bp)
                     {
-                    par_bp.text_value = "нет"
-                    par_bp.color_value = current_theme.color_ctrl_parametr_value
+                    par_bp.text_value       = str_off
+                    par_bp.value_warning    = false
                     }
                 else
                     {
-                    par_bp.text_value = "да"
-                    par_bp.color_value = current_theme.color_ctrl_parametr_value_selected
+                    par_bp.text_value       = str_on
+                    par_bp.value_warning    = true
                     }
 
                 if (!swr1_state)
                     {
-                    par_swr1_state.text_value = "нет"
-                    par_swr1_state.color_value = current_theme.color_ctrl_parametr_value
+                    par_swr1_state.text_value       = str_off
+                    par_swr1_state.value_warning    = false
                     }
                 else
                     {
-                    par_swr1_state.text_value = "да"
-                    par_swr1_state.color_value = current_theme.color_ctrl_parametr_value_selected
+                    par_swr1_state.text_value       = str_on
+                    par_swr1_state.value_warning    = true
                     }
 
                 if (!swr2_state)
                     {
-                    par_swr2_state.text_value = "нет"
-                    par_swr2_state.color_value = current_theme.color_ctrl_parametr_value
+                    par_swr2_state.text_value       = str_off
+                    par_swr2_state.value_warning    = false
                     }
                 else
                     {
-                    par_swr2_state.text_value = "да"
-                    par_swr2_state.color_value = current_theme.color_ctrl_parametr_value_selected
+                    par_swr2_state.text_value       = str_on
+                    par_swr2_state.value_warning    = true
                     }
 
                 if (!swvol)
                     {
-                    par_svol_state.text_value = "нет"
-                    par_svol_state.color_value = current_theme.color_ctrl_parametr_value
+                    par_svol_state.text_value       = str_off
+                    par_svol_state.value_warning    = false
                     }
                 else
                     {
-                    par_svol_state.text_value = "да"
-                    par_svol_state.color_value = current_theme.color_ctrl_parametr_value_selected
+                    par_svol_state.text_value       = str_on
+                    par_svol_state.value_warning    = true
                     }
 
                 }
@@ -173,13 +181,13 @@ S83_parametr_group
                 {
                 if (arg_value)
                     {
-                    par_eq_state.text_value = "да"
-                    par_eq_state.color_value = current_theme.color_ctrl_parametr_value_selected
+                    par_eq_state.text_value     = str_on
+                    par_eq_state.value_warning  = true
                     }
                 else
                     {
-                    par_eq_state.text_value = "нет"
-                    par_eq_state.color_value = current_theme.color_ctrl_parametr_value
+                    par_eq_state.text_value     = str_off
+                    par_eq_state.value_warning  = false
                     }
                 }
 

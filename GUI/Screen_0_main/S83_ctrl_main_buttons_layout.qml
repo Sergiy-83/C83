@@ -17,15 +17,12 @@ RowLayout
     S83_Button
         {
         id: button_pre
-        x: 0
-        y: 0
 
         btn_color: current_theme.color_ctrl_main_color
-        //text: qsTr("PRE")
         Layout.fillWidth: true //Чтоб размер растягивался
         onClicked:
             {
-            console.log("out: Нажата кнопка PRE")
+            //console.log("out: Нажата кнопка PRE")
             my_app.slot_pre()
             }
         icon.width:     icon_size
@@ -37,13 +34,10 @@ RowLayout
     S83_Button
         {
         id: button_stop
-        x: 0
-        y: 0
-       // text: qsTr("STOP")
         Layout.fillWidth: true
         btn_color: current_theme.color_ctrl_main_color
         onClicked:  {
-                    console.log("out: Нажата кнопка STOP")
+                    //console.log("out: Нажата кнопка STOP")
                     my_app.slot_stop()
                     }
         icon.width: icon_size
@@ -55,13 +49,10 @@ RowLayout
     S83_Button
         {
         id: button_pause
-        x: 0
-        y: 0
-       // text: qsTr("PAUSE")
         Layout.fillWidth: true
         btn_color: current_theme.color_ctrl_main_color
         onClicked:  {
-                    console.log("out: Нажата кнопка PAUSE")
+                    //console.log("out: Нажата кнопка PAUSE")
                     my_app.slot_pause_resume()
                     }
         icon.width: icon_size
@@ -73,14 +64,11 @@ RowLayout
     S83_Button
         {
         id: button_play
-        x: 0
-        y: 0
         height: 50
-       // text: qsTr("PLAY")
         Layout.fillWidth: true
         btn_color: current_theme.color_ctrl_main_color
         onClicked:  {
-                    console.log("out: Нажата кнопка PLAY")
+                    //console.log("out: Нажата кнопка PLAY")
                     my_app.slot_open()
                     }
         icon.width: icon_size
@@ -92,13 +80,10 @@ RowLayout
     S83_Button
         {
         id: button_next
-        x: 0
-        y: 0
-       // text:               qsTr("NEXT")
         btn_color:          current_theme.color_ctrl_main_color
         Layout.fillWidth:   true
         onClicked:  {
-                    console.log("out: Нажата кнопка NEXT")
+                    //console.log("out: Нажата кнопка NEXT")
                     my_app.slot_next()
                     }
         icon.width: icon_size

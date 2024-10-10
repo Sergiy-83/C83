@@ -540,6 +540,237 @@ S83_page_opt
                 }
 
 
+            S83_parametr_group
+                {
+                id:                 pg_colors_ui
+                name_group:         "Цветовая тема интерфейса"
+
+                Layout.alignment:   Qt.AlignBottom
+                Layout.fillWidth:   true
+
+                property bool  flag_btn_block: false
+
+                content_component:
+                ColumnLayout
+                        {
+                        id:     cl_colors
+                        spacing: 0
+                        Layout.alignment: Qt.AlignHCenter|Qt.AlignTop
+                        property int left_margins: 5
+
+
+
+                        S83_RadioButton
+                           {
+                           id:                  rb_dd
+                           text:                "Камень счастья"
+                           font.pixelSize:      18
+                           color_disable:       current_theme.color_ctrl_disable
+                           color_point:         current_theme.color_ctrl_main_color
+                           verticalPadding:     8
+                           horizontalPadding:   10
+                           Layout.leftMargin:   left_margins
+
+                           function th_dd()
+                               {
+                               rb_dd.checked = true
+                               current_theme.color_ctrl_main_color = "#3c8080" //"#3d08fb"
+                               current_theme.icon_play  = "qrc:/Icon/for_file/play/play_gray.svg"
+                               current_theme.icon_pause = "qrc:/Icon/for_file/pause/pause_gray.svg"
+                               current_theme.bk_image   = "qrc:/Icon/for_page/bk_rain.jpg"
+                               }
+
+                           MouseArea
+                               {
+                               anchors.fill: parent
+                               onClicked:
+                                   {
+                                   rb_dd.th_dd()
+                                   my_app.slot_set_theme(0)
+                                   }
+                               }
+                           }
+
+                        S83_RadioButton
+                           {
+                           id:              rb_red
+                           text:            "Красный салон"
+                           font.pixelSize:  18
+                           color_disable:   current_theme.color_ctrl_disable
+                           color_point:     current_theme.color_ctrl_main_color
+                           verticalPadding: 8
+                           horizontalPadding: 10
+                           Layout.leftMargin: left_margins
+
+                           function th_red()
+                                {
+                                rb_red.checked = true
+                                current_theme.color_ctrl_main_color ="#cc0000"
+                                current_theme.icon_play  = "qrc:/Icon/for_file/play/play_red.svg"
+                                current_theme.icon_pause = "qrc:/Icon/for_file/pause/pause_red.svg"
+                                current_theme.bk_image   = "qrc:/Icon/for_page/bk_red.jpg"
+                                }
+
+                           MouseArea
+                               {
+                               anchors.fill: parent
+                               onClicked:
+                                   {
+                                   rb_red.th_red()
+                                   my_app.slot_set_theme(1)
+                                   }
+                               }
+                           }
+
+                        S83_RadioButton
+                           {
+                           id:              rb_green
+                           text:            "Зеленый"
+                           font.pixelSize:  18
+                           color_disable:   current_theme.color_ctrl_disable
+                           color_point:     current_theme.color_ctrl_main_color
+                           verticalPadding: 8
+                           horizontalPadding: 10
+                           Layout.leftMargin: left_margins
+
+                           function th_green()
+                               {
+                               rb_green.checked = true
+                               current_theme.color_ctrl_main_color ="#009933" //"#339999"
+                               current_theme.icon_play  = "qrc:/Icon/for_file/play/play_green.svg"
+                               current_theme.icon_pause = "qrc:/Icon/for_file/pause/pause_green.svg"
+                               current_theme.bk_image   = "qrc:/Icon/for_page/bk_green.jpg"
+                               }
+                           MouseArea
+                               {
+                               anchors.fill: parent
+                               onClicked:
+                                   {
+                                   rb_green.th_green()
+                                   my_app.slot_set_theme(2)
+                                   }
+                               }
+                           }
+
+                        S83_RadioButton
+                           {
+                           id:                  rb_blue
+                           text:                "Голубая бездна"
+                           font.pixelSize:      18
+                           color_disable:       current_theme.color_ctrl_disable
+                           color_point:         current_theme.color_ctrl_main_color
+                           verticalPadding:     8
+                           horizontalPadding:   10
+                           Layout.leftMargin:   left_margins
+
+                           function th_blue ()
+                                {
+                                rb_blue.checked = true
+                                current_theme.color_ctrl_main_color = "#3366ff"//"#3d08fb"
+                                current_theme.icon_play  = "qrc:/Icon/for_file/play/play_blue.svg"
+                                current_theme.icon_pause = "qrc:/Icon/for_file/pause/pause_blue.svg"
+                                current_theme.bk_image   = "qrc:/Icon/for_page/bk_blue.jpg"
+                                }
+
+                           MouseArea
+                               {
+                               anchors.fill: parent
+                               onClicked:
+                                   {
+                                   rb_blue.th_blue()
+                                   my_app.slot_set_theme(3)
+                                   }
+                               }
+                           }
+
+                        S83_RadioButton
+                           {
+                           id:                  rb_himikat
+                           text:                "Неизвестная субстанция"
+                           font.pixelSize:      18
+                           color_disable:       current_theme.color_ctrl_disable
+                           color_point:         current_theme.color_ctrl_main_color
+                           verticalPadding:     8
+                           horizontalPadding:   10
+                           Layout.leftMargin:   left_margins
+
+                           function th_himikat()
+                                {
+                                rb_himikat.checked = true
+                                current_theme.color_ctrl_main_color = "#666600"//"#3d08fb"
+                                current_theme.icon_play  = "qrc:/Icon/for_file/play/play_military.svg"
+                                current_theme.icon_pause = "qrc:/Icon/for_file/pause/pause_military.svg"
+                                current_theme.bk_image   = "qrc:/Icon/for_page/bk_h2o.jpg"
+                                }
+
+                           MouseArea
+                               {
+                               anchors.fill: parent
+                               onClicked:
+                                   {
+                                   parent.th_himikat()
+                                   my_app.slot_set_theme(4)
+                                   }
+                               }
+                           }
+
+                        S83_RadioButton
+                           {
+                           id:                  rb_orange
+                           text:                "Хэллоуин"
+                           font.pixelSize:      18
+                           color_disable:       current_theme.color_ctrl_disable
+                           color_point:         current_theme.color_ctrl_main_color
+                           verticalPadding:     8
+                           horizontalPadding:   10
+                           Layout.leftMargin:   left_margins
+
+                           function th_orange()
+                                {
+                                   rb_orange.checked = true
+                                   current_theme.color_ctrl_main_color = "chocolate"
+                                   current_theme.icon_play  = "qrc:/Icon/for_file/play/play_orang.svg"
+                                   current_theme.icon_pause = "qrc:/Icon/for_file/pause/pause_orang.svg"
+                                   current_theme.bk_image   = "qrc:/Icon/for_page/bk_orange.jpg"
+                                }
+
+                           MouseArea
+                               {
+                               anchors.fill: parent
+                               onClicked:
+                                   {
+                                   rb_orange.th_orange()
+                                   my_app.slot_set_theme(5)
+                                   }
+                               }
+                           }
+
+                        Connections
+                            {
+                            target: my_app
+
+                            function onSig_set_th(arg_th)
+                                {
+                                switch (arg_th)
+                                    {
+                                    case 0: rb_dd.th_dd()
+                                        break
+                                    case 1: rb_red.th_red()
+                                        break
+                                    case 2: rb_green.th_green()
+                                        break
+                                    case 3: rb_blue.th_blue()
+                                        break
+                                    case 4: rb_himikat.th_himikat()
+                                        break
+                                    case 5: rb_orange.th_orange()
+                                        break
+                                    }
+                                }
+                            }
+
+                        }
+                }
 
 
 

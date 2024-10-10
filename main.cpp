@@ -47,10 +47,14 @@ int main(int argc, char *argv[])
     //LOGGING<<ANSI_COLOR_GREEN"Основной поток: "<<QThread::currentThread()<<ANSI_COLOR_RESET;
 
 
+
+    QObject::connect(&app, &QCoreApplication::aboutToQuit, [&myApp]()
+        {
+        myApp.stop_work();//Заканчиваем
+        });
+
     engine.load(url);       //Запускаем QML
-    myApp.start_work();     //Начинаем
     int ret = app.exec();
-    myApp.stop_work();      //Заканчиваем
     LOGGING<<"Работа завершена.";
     return ret;
 }

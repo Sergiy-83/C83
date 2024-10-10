@@ -4,6 +4,7 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls.Material 2.12
 import "../S83_controls"
 
+//Перемотка
 Rectangle
 {
     width:          100 // parent.width
@@ -11,11 +12,7 @@ Rectangle
     color:          "transparent"
     radius: 5
 
-    property int    def_margin: 4
     property alias  slider_value: slider_time.value
-
-    signal          moved_end();
-
     property int    time_current: 0
     property int    time_duration: 0
 
@@ -66,98 +63,55 @@ Rectangle
 
 
 
-
-
-
-    S83_Slider_01
+    S83_slider_and_parametrs
         {
-        id:     slider_time
-        width:  parent.width
-        height: 40
+        id:                     slider_time
+        from:                   0
+        to:                     100
 
-        from:   0
-        value:  1
-        to:     100
+        property bool   flag_propusk:   false
+        property int    tmp_sec:        0
 
-        color_slider: current_theme.color_ctrl_main_color
-        y: 6
+        parametr_name:          "Время:"
+        parametr_name_2:        "Позиция:"
+        parametr_value:         "-"
+        parametr_value_2:       "-"
+        parametr_value_suffix:  ""
+        parametr_value_suffix_2:" %"
 
-        property real tmp_sec: 0
-        property bool flag_propusk: false
 
-        onPressedChanged:
-            {
-            if (pressed === false) //Отпустили
-                {
-                my_app.slot_seek_sec(Math.floor(tmp_sec))
-                console.log("Позиционирование: " + Math.floor(tmp_sec) + " sec, [" + Math.floor(value) + " %]")//moved_end()
-                text_time_value.color = current_theme.color_ctrl_parametr_value
-                }
-            else //Нажали
-                {
-                text_time_value.color = current_theme.color_ctrl_parametr_value_warning
-                flag_propusk = true
-                onMoved()
-                }
-            }
+        anchors.left:           parent.left
+        anchors.right:          parent.right
 
-        onMoved:
+
+        function event_moved()
             {
             tmp_sec = value * time_duration / 100;
-            text_time_value.text = convert_time(Math.floor(tmp_sec));
-            text_time_value.text += " / "
-            text_time_value.text += convert_time(time_duration);
+            parametr_value = convert_time(Math.floor(tmp_sec));
+            parametr_value += " / "
+            parametr_value += convert_time(time_duration);
+
+            slider_time.set_value_bottom( Math.floor(value) )
+            }
+
+        function event_moved_end()
+            {
+            my_app.slot_seek_sec(Math.floor(tmp_sec))
+            console.log("Позиционирование: " + Math.floor(tmp_sec) + " sec, [" + Math.floor(value) + " %]")//moved_end()
+            flag_propusk = true
+            //pc_time.value_warning = false
+
+           // else //Нажали
+             //   {
+              //  pc_time.value_warning = true
+               //
+               // onMoved()
+               // }
             }
         }
 
-    property    int text_time_ypos:     -2
-    property    int text_time_pos_ypos: 26
-    property    int text_string_size:   18
-
-    Text
-        {
-        id: text_time
-        x:5
-        y:      text_time_ypos
-        text:   "Время"
-        color:  current_theme.color_ctrl_parametr_name
-        font.pixelSize: text_string_size
-        }
-    Text
-        {
-        id:     text_time_value
-        y:      text_time_ypos
-        text:   "0/0"
-        color:  current_theme.color_ctrl_parametr_value
-        font.pixelSize: text_string_size
-        anchors.right: parent.right
-        anchors.rightMargin: 7
-        }
 
 
-
-    Text
-        {
-        id:     text_time_pos
-        x:      5
-        y:      text_time_pos_ypos
-        text:   "Позиция"
-        color:  current_theme.color_ctrl_parametr_name
-
-        font.pixelSize: text_string_size
-        }
-
-    Text
-        {
-        id:     text_time_pos_value
-        y:      text_time_pos_ypos
-        text:   "100 %"
-        color:  current_theme.color_ctrl_parametr_value
-
-        font.pixelSize:         text_string_size
-        anchors.right:          parent.right
-        anchors.rightMargin:    7
-        }
 
     Connections
         {
@@ -166,15 +120,15 @@ Rectangle
             function onSig_disconnected()
                 {
                 var defice = "-"
-                text_time_pos_value.text = defice
-                text_time_value.text = defice
+                slider_time.parametr_value    = defice
+                slider_time.parametr_value_2  = defice
                 slider_time.value = 0
                 }
 
+            //Пришло время
             function onSig_time_current(arg_time)
                 {
                 timer_no_rcv_command.restart_timer();
-
                 time_current = arg_time
 
                 if (slider_time.flag_propusk)
@@ -183,27 +137,28 @@ Rectangle
                     return
                     }
 
+                //Не нажато
                 if (!slider_time.pressed)
                     {
-                    text_time_value.text =  convert_time(arg_time)
-                    text_time_value.text += " / "
-                    text_time_value.text += convert_time(time_duration)
+                    slider_time.parametr_value  = convert_time(arg_time)
+                    slider_time.parametr_value += " / "
+                    slider_time.parametr_value += convert_time(time_duration)
 
                     if (time_duration < 1 )
                         {
+                        slider_time.parametr_value_2 = 0
                         slider_time.value = 0
                         }
                     else
                         {
-                        slider_time.value = arg_time * 100 /  time_duration
-
+                        var percent = arg_time * 100 /  time_duration
+                        slider_time.value = percent
+                        slider_time.set_value_bottom(Math.floor(percent))
                         }
-
-                    text_time_pos_value.text = Math.floor(slider_time.value)
-                    text_time_pos_value.text += " %"
                     }
                 }
 
+            //Пришла длительность
             function onSig_time_duration(arg_time)
                 {
                 time_duration = arg_time

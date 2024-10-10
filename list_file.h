@@ -13,7 +13,7 @@ public:
     void reset_model(void);
     void clear_list(void); //Очистить список
 
-    void test_fun(int arg_index);
+    //void test_fun(int arg_index);
     int                     rowCount(const QModelIndex& parent = {}) const override;
     QVariant                data(const QModelIndex& index = {}, int role = Qt::DisplayRole) const override;
     QHash<int, QByteArray>  roleNames() const override;

@@ -40,7 +40,7 @@ ListView
         function onSig_select_aout(arg_name)
             {
             selected_name = arg_name
-            console.log("in: Выбрать аудиовыход: " + arg_name)
+            //console.log("in: Выбрать аудиовыход: " + arg_name)
             }
 
         }

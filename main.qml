@@ -31,7 +31,7 @@ Window {
    // minimumHeight:  140
    // minimumWidth:   140//480
     minimumWidth:   300
-    minimumHeight:  500
+    minimumHeight:  300
 
 
     color:      "black"
@@ -43,7 +43,7 @@ Window {
     property int    disconect_count:    0           //Умышленно разорвано раз
     property int    client_count:       0           //Клиентов подключено
     property alias  current_theme:      curr_thm
-    property string version_name:       "2.34"      //Выставить такую же в манифесте
+    property string version_name:       "2.35"      //Выставить такую же в манифесте
     property bool   orientation:        false
 
     onWidthChanged:     orientation = width > height
@@ -65,9 +65,9 @@ Window {
         }
 
     S83_tools
-    {
+        {
         id:tools
-    }
+        }
 
     //Страницы
     //0
@@ -386,7 +386,10 @@ Connections
             }
        }
 
-
+Component.onCompleted:
+    {
+        my_app.slot_start()
+    }
 
 }
 

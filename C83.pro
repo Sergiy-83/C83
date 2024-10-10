@@ -63,10 +63,10 @@ win32: LIBS += -lWs2_32
 contains(ANDROID_TARGET_ARCH,armeabi-v7a)
     {
     ANDROID_PACKAGE_SOURCE_DIR = \
-        $$PWD/android
+        $$PWD/android_armeabi_v7a
     }
 contains(ANDROID_TARGET_ARCH,arm64-v8a)
         {
         ANDROID_PACKAGE_SOURCE_DIR = \
-            $$PWD/android
+            $$PWD/android_arm64_v8a
         }

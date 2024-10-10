@@ -17,12 +17,8 @@ Item
         anchors.left:   parent.left
         anchors.right:  parent.right
         anchors.top:    parent.top
-
         text_label:     "Баланс:"
-        color_label:    "white"
-
         text_value:     "-"
-        color_value:    "yellow"
         }
 
     property int    balance_pos_y: 15
@@ -298,12 +294,9 @@ Item
         anchors.right:  parent.right
         anchors.bottom: sl_range.top
         anchors.bottomMargin: -28
-
         text_label:     "Пределы усиления:"
-        color_label:    "white"
-
         text_value:     "-"
-        color_value:    "yellow"
+        warning_metod: 1
         }
 
 
@@ -345,12 +338,12 @@ Item
             if (first.pressed === false)
                 {
                 send_admin_volume()
-                par_range_1.color_value = current_theme.color_ctrl_parametr_value
+                par_range_1.value_warning = false
                 }
             else
                 {
                 sl_range.first.onMoved()
-                par_range_1.color_value = current_theme.color_ctrl_parametr_value_warning
+                par_range_1.value_warning = true
                 }
             }
 
@@ -359,12 +352,12 @@ Item
             if (second.pressed === false)
                 {
                 send_admin_volume()
-                par_range_1.color_value = current_theme.color_ctrl_parametr_value
+                par_range_1.value_warning = false
                 }
             else
                 {
                 sl_range.second.onMoved()
-                par_range_1.color_value = current_theme.color_ctrl_parametr_value_warning
+                par_range_1.value_warning = true
                 }
             }
         }
@@ -390,12 +383,8 @@ Item
         anchors.right:  parent.right
         anchors.top:    par_range_2.bottom
         anchors.topMargin: -8
-
         text_label:     "Шаг усиления:"
-        color_label:    "white"
-
         text_value:     "-"
-        color_value:    "yellow"
         }
 
     S83_parametr_classic
@@ -405,12 +394,8 @@ Item
         anchors.right:  parent.right
         anchors.top:    par_step.bottom
         anchors.topMargin: -8
-
         text_label:     "Усиление:"
-        color_label:    "white"
-
         text_value:     "-"
-        color_value:    "yellow"
         }
 
     S83_parametr_classic
@@ -420,13 +405,7 @@ Item
         anchors.right:  parent.right
         anchors.top:    par_vol_db.bottom
         anchors.topMargin: -8
-
         text_label:     "Регулятор громкости:"
-        color_label:    "white"
-
         text_value:     "-"
-        color_value:    "yellow"
         }
-
-
 }

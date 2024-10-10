@@ -20,19 +20,20 @@ Rectangle
     property int text_y_correction:             -2
 
 
+
     function get_icon(icon,flags)
         {
         timer_r.running = false
 //        if (flags & 0x20) return "qrc:/Icon/for_file/check.svg";
         switch(icon)
             {
-            case 0:     return "qrc:/Icon/for_file/back.ico";
+            case 0:     return "qrc:/Icon/for_file/file_back.svg";
             case 1:     return "qrc:/Icon/for_file/folder.ico";
             case 2:     return "qrc:/Icon/for_file/spk.ico";
             case 3:     timer_r.running = true
-                        return "qrc:/Icon/for_file/play.svg";
-            case 4:     return "qrc:/Icon/for_file/pause.svg";
-            case 5:     return "qrc:/Icon/for_file/poff.ico";
+                        return current_theme.icon_play;
+            case 4:     return current_theme.icon_pause;
+            case 5:     return "qrc:/Icon/for_file/poff.svg";
             default:    return "qrc:/Icon/for_file/def.ico";
             }
         }
@@ -136,29 +137,115 @@ Rectangle
             }
         }
 
-        //Имя файла
+    Rectangle
+        {
+        id:     rect_bk_text
+        width:  parent.width
+        height: 50
+        color:  "transparent" //"#202020"
+        clip:   true  // Обрезаем текст, который выходит за пределы
+
+        anchors.right:                  nE ? text_ext.left : text_ext.right //Если расширение пустое то выравниваем по правому краю расширения
+        anchors.left:                   icon_file.right
+        anchors.leftMargin:             def_margin
+        anchors.rightMargin:            5
+        anchors.verticalCenter:         parent.verticalCenter
+       // anchors.verticalCenterOffset:   text_y_correction
+
+
+        //Имя файла сокращенное точками
         Text
             {
-            text:                           nF
-            width:                          100
+            id:     fname_elide
+            text:   nF
+            color:  nCl
+            elide:  Text.ElideRight  //Сокращение точками
 
-            anchors.right:                  nE ? text_ext.left : text_ext.right //Если расширение пустое то выравниваем по правому краю расширения
-            anchors.left:                   icon_file.right
-            anchors.leftMargin:             def_margin
-            anchors.rightMargin:            5
+            anchors.right:                  parent.right
+            anchors.left:                   parent.left
             anchors.verticalCenter:         parent.verticalCenter
             anchors.verticalCenterOffset:   text_y_correction
 
-            elide:                          Text.ElideRight  //Сокращение точками
-            //clip: true
-
-
-            Layout.fillWidth:               true
-            //font.bold: true
-            color:                          nCl
             font.pixelSize:                 text_list_item_string_size
+            visible: !timer_stop.ani_running
             }
 
+        Timer
+            {
+            property bool ani_running: false
+
+            id:       timer_stop
+            interval: 1000
+            repeat:   false
+            running:  false
+
+            onTriggered:
+                {
+                movingText.x = 0
+                ani_running  = false
+                //console.log("Таймер сработал")
+                }
+            }
+
+        //Имя файла - двиг. текст
+        Text
+            {
+            id:     movingText
+            text:   nF
+            color:  nCl
+            anchors.verticalCenter:         parent.verticalCenter
+            anchors.verticalCenterOffset:   text_y_correction
+            clip:   true
+            Layout.fillWidth:               true
+            //font.bold: true
+            font.pixelSize:                 text_list_item_string_size
+            visible:                        timer_stop.ani_running
+
+            // Анимация перемещения текста
+            NumberAnimation on x
+                {
+                id:             na_move_text
+                from:           0 // Начальная позиция 0
+                to:             -1 * Math.abs(movingText.width - rect_bk_text.width) - 10   // Конечная позиция (за пределами слева)
+                duration:       calc_duration(movingText.width - rect_bk_text.width)        // Длительность анимации
+                //loops:          Animation.Infinite  // Бесконечный цикл
+                //easing.type:    Easing.InOutQuad
+                running:   listViewFile.current_index === index && movingText.width > rect_bk_text.width
+
+                function calc_duration(arg_value)
+                    {
+                    var arg_mod = arg_value * 40
+                    if ( arg_mod < 500 ) arg_mod = 500
+                    //console.log("Длительность анимации: "+ arg_mod +" index: "+index)
+                    return arg_mod
+                    }
+
+
+                onStarted:
+                    {
+                    timer_stop.stop()
+                    timer_stop.ani_running = true
+                    //console.log("Старт анимация")
+                    }
+
+                onStopped:
+                    {
+                    if (listViewFile.current_index === index)
+                        timer_stop.start()
+                    else
+                        {
+                        timer_stop.ani_running  = false
+                        movingText.x = 0
+                        }
+                    //var metrics = TextMetrics.measure(movingText.text, movingText.font);
+                    //console.log("Стоп анимация :" + movingText.x)
+                    }
+                }
+
+
+
+            }
+        }
         //Расширение
         Text
             {
@@ -209,7 +296,7 @@ Rectangle
 
             onClicked:
                 {
-                //console.log("out: Выделить (index): "+ index)
+                console.log("out: Выделить (index): "+ index)
                 my_app.slot_mark(index)
                 }
 

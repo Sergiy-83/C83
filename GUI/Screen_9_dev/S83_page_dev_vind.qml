@@ -20,9 +20,9 @@ ColumnLayout
 
 
         if (vind_id === vind_ids.vi_74HC595V1 || vind_id === vind_ids.vi_32F030V1)
-            sl_vol_brig.visible = true
+            sl_vind_brig.visible = true
         else
-            sl_vol_brig.visible = false
+            sl_vind_brig.visible = false
         }
 
     S83_parametr_classic
@@ -42,15 +42,15 @@ ColumnLayout
 
     S83_slider_and_parametrs
         {
-        id:                     sl_vol_brig
+        id:                     sl_vind_brig
 
         parametr_name:          "Яркость"
         parametr_value_suffix:  " %"
         parametr_name_2:        "0 %"
         parametr_value_2:       "100 %"
-
-        parametr_name_color_2:  "gray"
-        parametr_value_color_2: "gray"
+        disable_bottom_warning: true
+        parametr_name_2_color:  "gray"
+        parametr_value_2_color: "gray"
 
         Layout.topMargin:       4
         Layout.rightMargin:     5
@@ -61,11 +61,16 @@ ColumnLayout
         from:                   0
         to:                     100
 
-        onSlider_moved:
+        function event_moved()
+            {
+            set_value_top( Math.floor(value) )
+            }
+
+        function event_moved_5()
             {
             my_app.slot_brig_ind_vreg(tools.round(value,1))
             }
-        onSlider_moved_finish:
+        function event_moved_end()
             {
             my_app.slot_brig_ind_vreg(tools.round(value,1))
             }
@@ -83,7 +88,9 @@ ColumnLayout
 
         function onSig_brig_ind_vreg(arg_value)
             {
-            sl_vol_brig.set_value(arg_value)
+            sl_vind_brig.set_value_top(arg_value)
+             if (!sl_vind_brig.pressed) //Не нажато
+                 sl_vind_brig.value = arg_value
             }
         }
 }

@@ -77,7 +77,7 @@ Page
         //Кнопка выхода
         S83_Button
             {
-            btn_color:          "chocolate"
+            btn_color:          current_theme.color_ctrl_main_color
             anchors.centerIn:   parent
             width:              200
             height:             50

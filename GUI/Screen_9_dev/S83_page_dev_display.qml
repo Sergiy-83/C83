@@ -84,7 +84,9 @@ ColumnLayout
 
         function onSig_brig_lcd(arg_value)
             {
-            sl_lcd_brig.set_value ( arg_value )
+            sl_lcd_brig.set_value_top ( arg_value )
+            if (!sl_lcd_brig.pressed) //Не нажато
+                 sl_lcd_brig.value = arg_value
             }
         }
 
@@ -100,7 +102,7 @@ ColumnLayout
         {
         id:                     sl_lcd_brig
 
-
+        disable_bottom_warning: true
         parametr_name:          "Яркость"
         parametr_value_suffix:  " %"
 
@@ -113,19 +115,24 @@ ColumnLayout
         parametr_name_2:        "0 %"
         parametr_value_2:       "100 %"
 
-        parametr_name_color_2:  "gray"
-        parametr_value_color_2: "gray"
+        parametr_name_2_color:  "gray"
+        parametr_value_2_color: "gray"
 
         from:                   0
         to:                     100
 
 
-        onSlider_moved:
+        function event_moved()
+            {
+            sl_lcd_brig.set_value_top( Math.floor(value) )
+            }
+
+        function event_moved_5()
             {
             my_app.slot_brig_lcd(tools.round(value,1))
             }
 
-        onSlider_moved_finish:
+        function event_moved_end()
             {
             my_app.slot_brig_lcd(tools.round(value,1))
             }

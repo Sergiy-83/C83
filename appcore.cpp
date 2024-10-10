@@ -19,6 +19,10 @@ appcore::appcore()
     client.set_decoder((decoder*)this);
     cmd_parts = "";
 
+    ip_pop[0].init();
+    ip_pop[1].init();
+    ip_pop[2].init();
+
     m_temp_file_list        = NULL;
     m_temp_adev_list        = NULL;
     m_temp_alsa_vregch_list = NULL;
@@ -439,6 +443,8 @@ int appcore::command_execute(void)
                                         break;
     case CMD_INFO_SPACE:                emit sig_hdd_info(ARG_1_AS_PCHAR,ARG_2_AS_PCHAR);
                                         break;
+    case CMD_INFO_2:                    assign_node_name(ARG_1_AS_PCHAR); //Назначить имя для текущего IP
+                                        break;
     case CMD_AC83_UPDATE:               emit sig_update(ARG_1_AS_INT);
                                         break;
     default:                            //LOGGING<<ANSI_COLOR_RED<<"Неизвестный номер комманды №"<<cmd<<ANSI_COLOR_RESET;
@@ -447,7 +453,22 @@ int appcore::command_execute(void)
   return return_value;
 }
 
+void appcore::assign_node_name(QString arg_name)
+    {
+    QString current_ip = client.get_ipaddress();
+    if (client.get_client_state() == client_states::CS_CONNECTED)
+        {
+        if (ip_pop[0].ip_string == current_ip)
+            ip_pop[0].ip_node_name = arg_name;
 
+        if (ip_pop[1].ip_string == current_ip)
+            ip_pop[1].ip_node_name = arg_name;
+
+        if (ip_pop[2].ip_string == current_ip)
+            ip_pop[2].ip_node_name = arg_name;
+        }
+    apply_pop_ip(); //На экран
+    }
 
 void appcore::command_send_to_server(int arg_cmd, QString arg_qstr)
       {
@@ -508,22 +529,53 @@ void appcore::stop_work(void)
     client.stop_work();
     write_settings_to_file();
     }
+
 void appcore::read_settings_from_file()
     {
     QSettings settings( "c83_settings.conf", QSettings::IniFormat );
     settings.beginGroup( "IP_address" );
 
     ip_from_file = settings.value( "IP", "192.168.0.84" ).toString();
+
+    ip_pop[0].ip_string     = settings.value( "IP_POP_1", "192.168.0.83" ).toString();
+    ip_pop[1].ip_string     = settings.value( "IP_POP_2", "-" ).toString();
+    ip_pop[2].ip_string     = settings.value( "IP_POP_3", "-" ).toString();
+
+    ip_pop[0].connect_time  = settings.value( "IP_POP_1_TIME", "0" ).toLongLong();
+    ip_pop[1].connect_time  = settings.value( "IP_POP_2_TIME", "0" ).toLongLong();
+    ip_pop[2].connect_time  = settings.value( "IP_POP_3_TIME", "0" ).toLongLong();
+
+    ip_pop[0].ip_node_name  = settings.value( "IP_NNAME_1", " " ).toString();
+    ip_pop[1].ip_node_name  = settings.value( "IP_NNAME_2", " " ).toString();
+    ip_pop[2].ip_node_name  = settings.value( "IP_NNAME_3", " " ).toString();
+
+    current_th  = settings.value( "C83_TH", "0" ).toInt();
+    emit sig_set_th(current_th);//Тема
+    apply_pop_ip(); //На экран
+
     if(ip_from_file.size() != 0)
          LOGGING<<"Целевой адрес сервера: "<<ip_from_file;
     settings.endGroup();
     }
+
 void appcore::write_settings_to_file()
     {
     LOGGING<<"Запись настроек в файл [c83_settings.conf]";
     QSettings settings( "c83_settings.conf", QSettings::IniFormat );
+
     settings.beginGroup( "IP_address" );
-    settings.setValue( "IP", client.get_ipaddress() );
+        settings.setValue( "IP", client.get_ipaddress() );
+        settings.setValue( "IP_POP_1",      ip_pop[0].ip_string );
+        settings.setValue( "IP_POP_2",      ip_pop[1].ip_string );
+        settings.setValue( "IP_POP_3",      ip_pop[2].ip_string );
+        settings.setValue( "IP_POP_1_TIME", ip_pop[0].connect_time );
+        settings.setValue( "IP_POP_2_TIME", ip_pop[1].connect_time );
+        settings.setValue( "IP_POP_3_TIME", ip_pop[2].connect_time );
+        settings.setValue( "IP_NNAME_1", ip_pop[0].ip_node_name );
+        settings.setValue( "IP_NNAME_2", ip_pop[1].ip_node_name );
+        settings.setValue( "IP_NNAME_3", ip_pop[2].ip_node_name );
+        settings.setValue( "C83_TH", current_th );
+
     settings.endGroup();
     }
 
@@ -677,25 +729,90 @@ void appcore::slot_restore_pos_in_play_file(bool arg_value)
     }
 
 void appcore::send_string(char *arg_str)
-  {
-  client.send_raw_data(arg_str,strlen(arg_str));
-  }
+    {
+    client.send_raw_data(arg_str,strlen(arg_str));
+    }
+
+void appcore::apply_pop_ip (void)
+    {
+    emit sig_pop_ip(ip_pop[0].ip_string, 0, ip_pop[0].ip_state, ip_pop[0].ip_node_name);
+    emit sig_pop_ip(ip_pop[1].ip_string, 1, ip_pop[1].ip_state, ip_pop[1].ip_node_name);
+    emit sig_pop_ip(ip_pop[2].ip_string, 2, ip_pop[2].ip_state, ip_pop[2].ip_node_name);
+    }
+
+void appcore::event_connected (QString arg_ip)
+    {
+    int i;
+    emit sig_status_label(QString("Соединен c ") + arg_ip,QColorConstants::Green);
+    emit sig_connected(arg_ip);
+    command_send_to_server((int)CMD_MAIN::CMD_GET_STATE,TAG_EMPTY_ARG);             //Запросить все данные
+
+    currentDateTime = QDateTime::currentDateTime();
 
 
+    for(i=0;i<3;i++)
+        {
+        ip_pop[i].ip_state = false;
+        }
+
+    //Поиск - может есть в списке
+    for(i=0;i<3;i++)
+        {
+        if ( ip_pop[i].ip_string == arg_ip) //Уже есть в списке
+            {
+            ip_pop[i].ip_state      = true;
+            ip_pop[i].connect_time  = currentDateTime.toSecsSinceEpoch(); //Обновляем время
+            ip_pop[i].ip_node_name  = " ";
+            apply_pop_ip();
+            return;
+            }
+        }
+    //Поиск свободной ячейки
+    for(i=0;i<3;i++)
+        {
+        if ( ip_pop[i].ip_string == "-")    //Свободная ячейка
+            {
+            ip_pop[i].ip_string     = arg_ip;
+            ip_pop[i].ip_state      = true;
+            ip_pop[i].ip_node_name  = " ";
+            ip_pop[i].connect_time  = currentDateTime.toSecsSinceEpoch(); //Обновляем время
+            apply_pop_ip();
+            return;
+            }
+        }
+
+    //Все заняты - заменяем на самую старую
+    int i_target=0;
+    if ( ip_pop[0].connect_time > ip_pop[1].connect_time )
+        {
+        i_target = 1;
+        }
+
+    if ( ip_pop[i_target].connect_time > ip_pop[2].connect_time )
+        {
+        i_target = 2;
+        }
+
+    ip_pop[i_target].ip_string     = arg_ip;
+    ip_pop[i_target].ip_state      = true;
+    ip_pop[i_target].ip_node_name  = " ";
+    ip_pop[i_target].connect_time  = currentDateTime.toSecsSinceEpoch(); //Обновляем время
+    apply_pop_ip();
+    }
 
 //Событие - tcp сокет изменил состояние
+//Эта функция вызывается из другого потока
 void appcore::on_client_change_state(void *arg_state)
   {
   client_tcp* tcp_client = (client_tcp*)arg_state;
+  QString current_ip = tcp_client->get_ipaddress();
   switch (tcp_client->get_client_state())
     {
-    case client_states::CS_CONNECTED:   emit sig_status_label(QString("Соединен c ") + tcp_client->get_ipaddress(),QColorConstants::Green);
-                                        command_send_to_server((int)CMD_MAIN::CMD_GET_STATE,TAG_EMPTY_ARG); //Запросить все данные
-                                        emit sig_connected();
+    case client_states::CS_CONNECTED:   event_connected (current_ip);
                                         break;
     case client_states::CS_CONNECTINGS: emit sig_status_label(QString("Соединение c ") + tcp_client->get_ipaddress(),QColorConstants::Yellow);
                                         emit sig_disconnected();
-                                        emit sig_connecting_start();
+                                        emit sig_connecting_start(current_ip);
                                         break;
     case client_states::CS_DISCONECTED: event_disconected(); break;
     }
@@ -709,6 +826,13 @@ void appcore::event_disconected(void)
     reset_parser();
     emit sig_status_label("Соединение не установлено!",QColorConstants::Red);
     emit sig_disconnected();
+
+    int i;
+    for(i=0;i<3;i++)
+        {
+        ip_pop[i].ip_state = false;
+        }
+    apply_pop_ip();
     }
 
 void appcore::reset_parser(void)
@@ -716,7 +840,10 @@ void appcore::reset_parser(void)
     cmd_parts.clear();
     }
 
-
+void appcore::slot_start(void)
+    {
+    start_work();     //Начинаем
+    }
 
 //Был изменен адрес
 void appcore::slot_ip_address_change(QString arg_ip)
@@ -778,6 +905,12 @@ void appcore::slot_update(int arg_mode)
     cmd.args_txt[1] = "upd";
     cmd.args_txt[2] = std::to_string(arg_mode);
     command_send_to_server(&cmd);
+    }
+
+void appcore::slot_set_theme (int arg_th)
+    {
+    current_th = arg_th;
+    //LOGGING<<"Установить тему: "<<arg_th;
     }
 
 void appcore::slot_select_sw_item(int index)
@@ -888,21 +1021,23 @@ void appcore::slot_new_file_list(QList<Item_list_file> *arg_new_list,int arg_cur
 
 void appcore::slot_new_vregch_list(QList<Item_list_alsa_vregch> *arg_new_list, int arg_cursor_pos)
     {
-    LOGGING<<"Прием списка каналов регулировки громкости ALSA закончен.";
-   // LOGGING<<"-< "<<QThread::currentThread();
+    (void)arg_cursor_pos;
+    //LOGGING<<"Прием списка каналов регулировки громкости ALSA закончен.";
+    // LOGGING<<"-< "<<QThread::currentThread();
     m_list_alsa_vregch->update_list(arg_new_list);  //Применить новый список
     }
 
 void appcore::slot_new_sw_list(QList<Item_list_alsa_vregch> *arg_new_list, int arg_selected)
     {
-    LOGGING<<"Прием списка SW элементов закончен.";
+    (void)arg_selected;
+    //LOGGING<<"Прием списка SW элементов закончен.";
     //LOGGING<<"-< "<<QThread::currentThread();
     m_list_sw->update_list(arg_new_list);  //Применить новый список
     }
 
 void appcore::slot_new_aout_list(QList<Item_list_adev> *arg_new_list)
     {
-    LOGGING<<"Прием списка аудиовыходов закончен.";
+    //LOGGING<<"Прием списка аудиовыходов закончен.";
     m_list_aout->update_list(arg_new_list);  //Применить новый список
     }
 

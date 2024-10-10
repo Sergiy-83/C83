@@ -36,8 +36,6 @@ Rectangle
         anchors.left:           parent.left
         anchors.leftMargin:     5
         source:                 "qrc:/Icon/for_app/warning.svg";
-
-
         }
 
     Text
@@ -56,12 +54,7 @@ Rectangle
         anchors.verticalCenter: parent.verticalCenter
 
         wrapMode:               "WordWrap"
-        color:                  "white"
+        color:                  Qt.lighter("white", 0.75)
         font.pixelSize:         18
-
-
-
-
-
         }
 }

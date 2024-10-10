@@ -92,7 +92,7 @@ Rectangle
 
                 if (checked)
                     {
-                    console.log("event: Изменился cheked делегата. Индекс - " + index)
+                    //console.log("event: Изменился cheked делегата. Индекс - " + index)
                     list_acard.currentIndex = index
                     }
                 }

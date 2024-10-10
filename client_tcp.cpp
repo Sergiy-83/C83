@@ -114,8 +114,9 @@ void client_tcp::stop_work()
     {
     LOGGING<<"Подготовка к завершению работы. Останов потока подключений и чтения данных";
 
-    m_flag_thr_on = false;      //Завершить поток при первом удобном случае
     set_mode_no_connect();      //Режим - не соединять
+    m_flag_thr_on = false;      //Завершить поток при первом удобном случае
+
     disconnect();               //Разъеденить
 
 
@@ -178,10 +179,14 @@ void client_tcp::run()
               LOGGING<<ANSI_COLOR_RED<<"Ошибка подключения к "<< m_socket.m_ipaddres.c_str() <<": "<< m_socket.get_str_error() << ANSI_COLOR_RESET;
               if (m_decoder) m_decoder->on_client_change_state(this); //Уведомление что состояние изменилось
               //Ждем пока сообщение об ошибке наблюдает пользователь 2s
-              if (!m_flag_thr_on) break; usleep(500000);
-              if (!m_flag_thr_on) break; usleep(500000);
-              if (!m_flag_thr_on) break; usleep(500000);
-              if (!m_flag_thr_on) break; usleep(500000);
+              if (!m_flag_thr_on) break;
+              usleep(500000);
+              if (!m_flag_thr_on) break;
+              usleep(500000);
+              if (!m_flag_thr_on) break;
+              usleep(500000);
+              if (!m_flag_thr_on) break;
+              usleep(500000);
               continue;
               }
           else

@@ -30,10 +30,10 @@ S83_parametr_group
             change_padding: 5
 
             text_label:     "Регулятор громкости:"
-            color_label:    "white"
+
 
             text_value:     "-"
-            color_value:    "yellow"
+
             }
 
         S83_parametr_classic
@@ -46,10 +46,10 @@ S83_parametr_group
             change_padding: 5
 
             text_label:     "Индикатор громкости:"
-            color_label:    "white"
+
 
             text_value:     "-"
-            color_value:    "yellow"
+
             }
 
         S83_parametr_classic
@@ -62,10 +62,10 @@ S83_parametr_group
             change_padding: 5
 
             text_label:     "Клавиатура:"
-            color_label:    "white"
+
 
             text_value:     "-"
-            color_value:    "yellow"
+
             }
 
         S83_parametr_classic
@@ -78,10 +78,10 @@ S83_parametr_group
             change_padding: 5
 
             text_label:     "Дисплей:"
-            color_label:    "white"
+
 
             text_value:     "-"
-            color_value:    "yellow"
+
 
             }
 
@@ -95,10 +95,10 @@ S83_parametr_group
             change_padding: 5
 
             text_label:     "Модуль ЦАП:"
-            color_label:    "white"
+
 
             text_value:     "-"
-            color_value:    "yellow"
+
             }
 
         S83_parametr_classic
@@ -111,10 +111,10 @@ S83_parametr_group
             change_padding: 5
 
             text_label:     "Коммутатор:"
-            color_label:    "white"
+
 
             text_value:     "-"
-            color_value:    "yellow"
+
             }
 
         Connections
@@ -138,9 +138,9 @@ S83_parametr_group
                 {
                 par_vreg.text_value = arg_vreg_name
                 if (arg_vreg_id === vreg_ids.vr_SOFTWARE)
-                    par_vreg.color_value = current_theme.color_ctrl_parametr_value_selected
+                    par_vreg.value_warning = true
                 else
-                    par_vreg.color_value = current_theme.color_ctrl_parametr_value
+                    par_vreg.value_warning = false
                 }
 
             //Индикатор громкости

@@ -12,15 +12,15 @@ S83_page_opt
 
     content_component:
     ColumnLayout
-            {
-            anchors.left:   parent.left
-            anchors.right:  parent.right
-            anchors.top:    parent.top
+        {
+        anchors.left:   parent.left
+        anchors.right:  parent.right
+        anchors.top:    parent.top
 
             //height:         275 //Проверить прокруткой страницы
-          //  height:         365 //Проверить прокруткой страницы
-            clip:           true
-            spacing:        0
+            //height:         365 //Проверить прокруткой страницы
+        clip:           true
+        spacing:        0
 
         S83_parametr_group
             {
@@ -29,9 +29,18 @@ S83_page_opt
             Layout.alignment: Qt.AlignBottom
             Layout.fillWidth: true
 
-            content_component:   S83_page_lan_content_ip  { }
+            content_component:   S83_page_lan_content_ip  {  }
             }
 
+        S83_parametr_group
+            {
+            name_group:    "Популярные IP"
+
+            Layout.alignment: Qt.AlignBottom
+            Layout.fillWidth: true
+
+            content_component: S83_page_lan_popip {  }
+            }
 
         S83_parametr_group
             {
@@ -42,6 +51,7 @@ S83_page_opt
 
             content_component:  S83_page_lan_content_trafik { }
             }
+
 
 /*
 

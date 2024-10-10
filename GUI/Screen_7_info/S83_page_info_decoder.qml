@@ -29,10 +29,10 @@ S83_parametr_group
 
             change_padding: 5
             text_label:     "Частота дискретизации:"
-            color_label:    "white"
+
 
             text_value:     "-"
-            color_value:    "yellow"
+
         }
         S83_parametr_classic
         {
@@ -44,10 +44,10 @@ S83_parametr_group
             change_padding: 5
 
             text_label:     "Формат сэмпла:"
-            color_label:    "white"
+
 
             text_value:     "-"
-            color_value:    "yellow"
+
 
         }
         S83_parametr_classic
@@ -60,10 +60,10 @@ S83_parametr_group
             change_padding: 5
 
             text_label:     "Битрейт:"
-            color_label:    "white"
+
 
             text_value:     "-"
-            color_value:    "yellow"
+
 
         }
         S83_parametr_classic
@@ -76,10 +76,10 @@ S83_parametr_group
             change_padding: 5
 
             text_label:     "Каналов:"
-            color_label:    "white"
+
 
             text_value:     "-"
-            color_value:    "yellow"
+
 
         }
 
@@ -93,10 +93,10 @@ S83_parametr_group
             change_padding: 5
 
             text_label:     "Кодек:"
-            color_label:    "white"
+
 
             text_value:     "-"
-            color_value:    "yellow"
+
             }
 
         S83_parametr_classic
@@ -109,10 +109,10 @@ S83_parametr_group
             change_padding: 5
 
             text_label:     "Оптимизация SIMD:"
-            color_label:    "white"
+
 
             text_value:     "-"
-            color_value:    "yellow"
+
             }
 
         Connections
@@ -163,7 +163,7 @@ S83_parametr_group
             //Декодер битрейт
             function onSig_dec_bitrate(arg_value)
                 {
-                console.log("in: Декодер - битрейт: " + arg_value + " КБит/сек")
+                //console.log("in: Декодер - битрейт: " + arg_value + " КБит/сек")
                 if (arg_value)
                     {
                     par_dec_bitrate.text_value = arg_value
@@ -177,13 +177,13 @@ S83_parametr_group
             //Декодер кодек
             function onSig_dec_codec(arg_value)
                 {
-                console.log("in: Декодер - кодек: " + arg_value)
+                //console.log("in: Декодер - кодек: " + arg_value)
                 par_dec_codec.text_value = arg_value
                 }
             //Декодер оптимизация декодирования
             function onSig_dec_simd(arg_value)
                 {
-                console.log("in: Декодер - SIMD: " + arg_value)
+                //console.log("in: Декодер - SIMD: " + arg_value)
                 par_dec_simd.text_value = arg_value
                 }
 

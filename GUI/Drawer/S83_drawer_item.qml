@@ -33,10 +33,10 @@ Rectangle
 
     Image
         {
-        id: image_item
-        width:  24
-        height: 24
-        visible:  true
+        id:         image_item
+        width:      24
+        height:     24
+        visible:    true
 
         anchors.verticalCenter: parent.verticalCenter
         anchors.left:           parent.left

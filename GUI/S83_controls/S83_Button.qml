@@ -90,7 +90,7 @@ T.Button {
     //    color: !control.enabled ? control.Material.buttonDisabledColor :
     //            control.highlighted ? (control.checked ? control.Material.highlightedCheckedButtonColor :
     //            control.Material.highlightedButtonColor) : control.Material.buttonColor
-        color: !control.enabled ? btn_color_diasabled : btn_color
+        color: !control.enabled ? btn_color_diasabled : control.pressed ? Qt.lighter(btn_color, 0.75) : btn_color
 
 
         PaddedRectangle
@@ -104,7 +104,8 @@ T.Button {
             topPadding: -2
             clip:       true
             visible:    false// control.checkable && (!control.highlighted || control.flat)
-            color:      control.checked && control.enabled ? control.Material.accentColor : control.Material.secondaryTextColor
+            color:      Qt.lighter(btn_color, 0.5)
+                //control.checked && control.enabled ? control.Material.accentColor : control.Material.secondaryTextColor
             }
 
         // The layer is disabled when the button color is transparent so you can do

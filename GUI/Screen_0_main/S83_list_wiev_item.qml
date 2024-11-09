@@ -168,6 +168,18 @@ Rectangle
 
             font.pixelSize:                 text_list_item_string_size
             visible: !timer_stop.ani_running
+
+            //Анимация Появления
+
+            NumberAnimation
+                {
+                id:         na_fname_elide
+                target:     fname_elide
+                property:   "opacity"
+                from:       0
+                to:         1
+                duration:   300 // длительность анимации в миллисекундах
+                }
             }
 
         Timer
@@ -183,6 +195,7 @@ Rectangle
                 {
                 movingText.x = 0
                 ani_running  = false
+                na_fname_elide.start()
                 //console.log("Таймер сработал")
                 }
             }

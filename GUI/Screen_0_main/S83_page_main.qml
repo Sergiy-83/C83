@@ -2,6 +2,8 @@ import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Layouts 1.15
 import QtQuick.Controls.Material 2.12
+import QtQuick.Controls 2.15
+
 import "../S83_controls"
 import "../Screen_1_main_option"
 import "../Drawer"
@@ -99,9 +101,6 @@ Page
             anchors.bottom:         parent.bottom
             anchors.rightMargin:    2
 
-
-
-
             // Анимация Появления
             Behavior on visible
                 {
@@ -122,6 +121,17 @@ Page
                 onClicked:      my_app.slot_open_bk_list()
                 }
             }
+        /*
+        DropShadow {
+               anchors.fill: butterfly
+               horizontalOffset: 3
+               verticalOffset: 3
+               radius: 8.0
+               samples: 17
+               color: "#80000000"
+               source: butterfly
+           }
+        */
         }
 
 

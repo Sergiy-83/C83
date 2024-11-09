@@ -183,11 +183,7 @@
         <file>android_arm64_v8a/res/values/splashscreentheme.xml</file>
         <file>android_arm64_v8a/res/values-land/splashscreentheme.xml</file>
         <file>android_arm64_v8a/res/values-port/splashscreentheme.xml</file>
-        <file>android_arm64_v8a/AndroidManifest.rar</file>
         <file>android_arm64_v8a/AndroidManifest.xml</file>
-        <file>android_arm64_v8a/AndroidManifest_2024.09.17.150022.rar</file>
-        <file>android_arm64_v8a/AndroidManifest_2024.09.18.151449.rar</file>
-        <file>android_arm64_v8a/AndroidManifest_for_api23.rar</file>
         <file>android_arm64_v8a/build.gradle</file>
         <file>android_arm64_v8a/gradle.properties</file>
         <file>android_arm64_v8a/gradlew</file>
@@ -225,11 +221,7 @@
         <file>android_armeabi_v7a/res/values/splashscreentheme.xml</file>
         <file>android_armeabi_v7a/res/values-land/splashscreentheme.xml</file>
         <file>android_armeabi_v7a/res/values-port/splashscreentheme.xml</file>
-        <file>android_armeabi_v7a/AndroidManifest.rar</file>
         <file>android_armeabi_v7a/AndroidManifest.xml</file>
-        <file>android_armeabi_v7a/AndroidManifest_2024.09.17.150022.rar</file>
-        <file>android_armeabi_v7a/AndroidManifest_2024.09.18.151449.rar</file>
-        <file>android_armeabi_v7a/AndroidManifest_for_api23.rar</file>
         <file>android_armeabi_v7a/build.gradle</file>
         <file>android_armeabi_v7a/gradle.properties</file>
         <file>android_armeabi_v7a/gradlew</file>

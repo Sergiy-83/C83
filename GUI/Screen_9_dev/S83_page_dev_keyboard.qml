@@ -14,7 +14,7 @@ ColumnLayout
         {
         id:                 pc_kb
         Layout.fillWidth:   true
-        text_label:         "Текущая клавиатура"
+        text_label:         "Текущая клавиатура:"
         text_value:         "."
         }
 

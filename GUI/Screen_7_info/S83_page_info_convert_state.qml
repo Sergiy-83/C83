@@ -13,92 +13,56 @@ S83_parametr_group
     content_component:
     ColumnLayout
         {
-       // anchors.left:   parent.left
-       // anchors.right:  parent.right
-       // anchors.top:    parent.top
         spacing:        0
 
         S83_parametr_classic
-        {
-            id:             par_bp
-
-            Layout.alignment: Qt.AlignBottom
-            Layout.fillWidth: true
-
-            change_padding: 5
-            text_label:     "Преобразование потока:"
-            color_label:    "white"
-
-            text_value:     "-"
-
-        }
-
-        S83_parametr_classic
             {
-            id:             par_swr1_state
-
-            Layout.alignment: Qt.AlignBottom
-            Layout.fillWidth: true
-
-            change_padding: 5
-
-            text_label:     "Фильтр \"SWR 1\":"
-            color_label:    "white"
-
-            text_value:     "-"
-
-            }
-
-
-
-        S83_parametr_classic
-            {
-            id:             par_eq_state
-
-            Layout.alignment: Qt.AlignBottom
-            Layout.fillWidth: true
-
-            change_padding: 5
-
-            text_label:     "Фильтр \"SWEQ\":"
-            color_label:    "white"
-
-            text_value:     "-"
-
-
+            id:                 par_bp
+            Layout.alignment:   Qt.AlignBottom
+            Layout.fillWidth:   true
+            change_padding:     5
+            text_label:         "Преобразование потока:"
+            text_value:         "-"
             }
 
         S83_parametr_classic
             {
-            id:             par_svol_state
-
-            Layout.alignment: Qt.AlignBottom
-            Layout.fillWidth: true
-
+            id:                 par_swr1_state
+            Layout.alignment:   Qt.AlignBottom
+            Layout.fillWidth:   true
             change_padding: 5
-
-            text_label:     "Фильтр \"SWVOL\":"
-            color_label:    "white"
-
-            text_value:     "-"
-
-
+            text_label:         "Фильтр \"SwR 1\":"
+            text_value:         "-"
             }
 
         S83_parametr_classic
             {
-            id:             par_swr2_state
+            id:                 par_eq_state
+            Layout.alignment:   Qt.AlignBottom
+            Layout.fillWidth:   true
+            change_padding:     5
+            text_label:         "Фильтр \"SwEQ\":"
+            text_value:         "-"
+            }
 
-            Layout.alignment: Qt.AlignBottom
-            Layout.fillWidth: true
+        S83_parametr_classic
+            {
+            id:                 par_svol_state
+            Layout.alignment:   Qt.AlignBottom
+            Layout.fillWidth:   true
+            change_padding:     5
+            text_label:         "Фильтр \"SwVOL\":"
+            text_value:         "-"
+            }
 
-            change_padding: 5
-
-            text_label:     "Фильтр \"SWR 2\":"
-            color_label:    "white"
-
-            text_value:     "-"
-
+        S83_parametr_classic
+            {
+            id:                 par_swr2_state
+            Layout.alignment:   Qt.AlignBottom
+            Layout.fillWidth:   true
+            change_padding:     5
+            text_label:         "Фильтр \"SwR 2\":"
+            text_value:         "-"
             }
 
 

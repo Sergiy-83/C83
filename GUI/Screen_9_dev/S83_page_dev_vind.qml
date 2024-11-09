@@ -29,7 +29,7 @@ ColumnLayout
         {
         id:                 pc_vind
         Layout.fillWidth:   true
-        text_label:         "Индикатор громкости"
+        text_label:         "Индикатор громкости:"
         text_value:         "-"
         }
 

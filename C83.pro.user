@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 12.0.2, 2024-10-10T15:44:21. -->
+<!-- Written by QtCreator 12.0.2, 2024-11-06T15:23:36. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -8,7 +8,7 @@
  </data>
  <data>
   <variable>ProjectExplorer.Project.ActiveTarget</variable>
-  <value type="qlonglong">2</value>
+  <value type="qlonglong">0</value>
  </data>
  <data>
   <variable>ProjectExplorer.Project.EditorSettings</variable>
@@ -473,7 +473,7 @@
     <value type="int" key="PE.EnvironmentAspect.Base">0</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="bool" key="PE.EnvironmentAspect.PrintOnRun">false</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">C83</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.AndroidRunConfiguration:D:/Private/Sergiy-83/Projects/Software/Client_for_AC83/C83/C83.pro</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">D:/Private/Sergiy-83/Projects/Software/Client_for_AC83/C83/C83.pro</value>
     <value type="bool" key="ProjectExplorer.RunConfiguration.Customized">true</value>
@@ -674,6 +674,14 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.AndroidDeployConfiguration2</value>
    </valuemap>
    <value type="qlonglong" key="ProjectExplorer.Target.DeployConfigurationCount">1</value>
+   <valuemap type="QVariantMap" key="ProjectExplorer.Target.PluginSettings">
+    <valuelist type="QVariantList" key="AndroidDeviceAbis">
+     <value type="QString">armeabi-v7a</value>
+     <value type="QString">armeabi</value>
+    </valuelist>
+    <value type="QString" key="AndroidDeviceSerialNumber">0373206a7d32</value>
+    <value type="int" key="AndroidVersion.ApiLevel">28</value>
+   </valuemap>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.RunConfiguration.0">
     <value type="bool" key="Analyzer.Perf.Settings.UseGlobalSettings">true</value>
     <value type="bool" key="Analyzer.QmlProfiler.Settings.UseGlobalSettings">true</value>
@@ -689,7 +697,7 @@
     <value type="int" key="PE.EnvironmentAspect.Base">0</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="bool" key="PE.EnvironmentAspect.PrintOnRun">false</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">C83</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.AndroidRunConfiguration:D:/Private/Sergiy-83/Projects/Software/Client_for_AC83/C83/C83.pro</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">D:/Private/Sergiy-83/Projects/Software/Client_for_AC83/C83/C83.pro</value>
     <value type="bool" key="ProjectExplorer.RunConfiguration.Customized">true</value>

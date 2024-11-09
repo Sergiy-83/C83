@@ -62,6 +62,17 @@ ColumnLayout
                 disp_warning.visible            = false
                 break
 
+            case dp_ids.dp_DRM:
+                sl_lcd_brig.visible             = true
+
+                rb_color_par_name.visible       = true
+                rb_color_par_value.visible      = true
+                rb_color_par_value_w.visible    = true
+                rb_color_pr_bar.visible         = true
+                btns_colors.visible             = true
+
+                disp_warning.visible            = false
+                break
                 }
 
 
@@ -94,7 +105,7 @@ ColumnLayout
         {
         id:                 pc_disp
         Layout.fillWidth:   true
-        text_label:         "Текущий дисплей"
+        text_label:         "Текущий дисплей:"
         text_value:         "."
         }
 

@@ -27,11 +27,11 @@ Rectangle
         from:                   0
         to:                     100
 
-        parametr_name:          "Громкость"
+        parametr_name:          "Громкость:"
         parametr_value:         "-"
         parametr_value_suffix:  " %"
 
-        parametr_name_2:        "Усиление"
+        parametr_name_2:        "Усиление:"
         parametr_value_2:       "-"
 
         parametr_value_suffix_2:  " дБ"

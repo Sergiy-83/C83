@@ -43,7 +43,7 @@ Window {
     property int    disconect_count:    0           //Умышленно разорвано раз
     property int    client_count:       0           //Клиентов подключено
     property alias  current_theme:      curr_thm
-    property string version_name:       "2.35"      //Выставить такую же в манифесте
+    property string version_name:       "2.36"      //Выставить такую же в манифесте
     property bool   orientation:        false
 
     onWidthChanged:     orientation = width > height

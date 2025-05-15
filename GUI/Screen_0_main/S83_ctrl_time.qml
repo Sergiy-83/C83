@@ -72,8 +72,8 @@ Rectangle
         property bool   flag_propusk:   false
         property int    tmp_sec:        0
 
-        parametr_name:          "Время:"
-        parametr_name_2:        "Позиция:"
+        parametr_name:          "Позиция:"
+        parametr_name_2:        "Длительность:"
         parametr_value:         "-"
         parametr_value_2:       "-"
         parametr_value_suffix:  ""
@@ -88,10 +88,6 @@ Rectangle
             {
             tmp_sec = value * time_duration / 100;
             parametr_value = convert_time(Math.floor(tmp_sec));
-            parametr_value += " / "
-            parametr_value += convert_time(time_duration);
-
-            slider_time.set_value_bottom( Math.floor(value) )
             }
 
         function event_moved_end()
@@ -99,14 +95,6 @@ Rectangle
             my_app.slot_seek_sec(Math.floor(tmp_sec))
             console.log("Позиционирование: " + Math.floor(tmp_sec) + " sec, [" + Math.floor(value) + " %]")//moved_end()
             flag_propusk = true
-            //pc_time.value_warning = false
-
-           // else //Нажали
-             //   {
-              //  pc_time.value_warning = true
-               //
-               // onMoved()
-               // }
             }
         }
 
@@ -141,8 +129,8 @@ Rectangle
                 if (!slider_time.pressed)
                     {
                     slider_time.parametr_value  = convert_time(arg_time)
-                    slider_time.parametr_value += " / "
-                    slider_time.parametr_value += convert_time(time_duration)
+                    //slider_time.parametr_value += " / "
+                    //slider_time.parametr_value += convert_time(time_duration)
 
                     if (time_duration < 1 )
                         {
@@ -153,7 +141,9 @@ Rectangle
                         {
                         var percent = arg_time * 100 /  time_duration
                         slider_time.value = percent
-                        slider_time.set_value_bottom(Math.floor(percent))
+
+
+                        slider_time.parametr_value_2 = convert_time(time_duration)
                         }
                     }
                 }

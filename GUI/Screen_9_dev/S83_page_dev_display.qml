@@ -19,10 +19,11 @@ ColumnLayout
         {
         target: my_app
 
-        function onSig_disp_id(arg_id,arg_name)
+        function onSig_disp_id(arg_id,arg_name,arg_gui)
             {
             //console.log("Сработал сигнал onSig_disp_id на странице disp ")
             pc_disp.text_value  = arg_name
+            pc_gui.text_value  = arg_gui
 
             switch (arg_id)
                 {
@@ -78,6 +79,7 @@ ColumnLayout
 
             }
 
+        //Цвета некоторые на дисплее
         function onSig_color_disp_parametr(arg_id_parametr, arg_red, arg_green, arg_blue)
             {
             switch (arg_id_parametr)
@@ -93,6 +95,7 @@ ColumnLayout
                 }
             }
 
+        //Яркость
         function onSig_brig_lcd(arg_value)
             {
             sl_lcd_brig.set_value_top ( arg_value )
@@ -106,7 +109,15 @@ ColumnLayout
         id:                 pc_disp
         Layout.fillWidth:   true
         text_label:         "Текущий дисплей:"
-        text_value:         "."
+        text_value:         "-"
+        }
+
+    S83_parametr_classic
+        {
+        id:                 pc_gui
+        Layout.fillWidth:   true
+        text_label:         "Текущий GUI:"
+        text_value:         "-"
         }
 
     S83_slider_and_parametrs

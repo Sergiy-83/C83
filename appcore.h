@@ -136,6 +136,7 @@ public slots:
     void slot_select_sw_item(int index);
     void slot_update    (int arg_mode);
     void slot_set_theme (int arg_th);
+
 signals:
     void sig_status_label(QString arg_txt,QColor arg_color);
     void sig_connected(QString arg_ip);
@@ -213,7 +214,7 @@ signals:
     void sig_brig_ind_vreg  (int arg_value);
 
     void sig_vind_id        (int arg_id, QString arg_name);
-    void sig_disp_id        (int arg_id, QString arg_name);
+    void sig_disp_id        (int arg_id, QString arg_name, QString arg_gui);
     void sig_kb_id          (int arg_id, QString arg_name);
 
     void sig_bd_id          (int arg_id, QString arg_name, QString arg_port,int arg_port_status);

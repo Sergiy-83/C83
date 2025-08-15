@@ -20,6 +20,7 @@ ColumnLayout
         {
         if (bd_id !== bd_ids.bd_NO)
             {
+
             bd_warning.visible  = false
 
             pc_port.visible         = true
@@ -28,6 +29,13 @@ ColumnLayout
             rb_slow.visible         = true
             rb_sslow.visible        = true
             chb_short_delay.visible = true
+
+            if (bd_id === bd_ids.bd_AK4399 || bd_id === bd_ids.bd_AK4399)
+                {
+                rb_sharp.visible        = false
+                rb_slow.visible         = false
+                rb_sslow.visible        = false
+                }
             }
         else
             {
@@ -190,47 +198,46 @@ ColumnLayout
 
             if (arg_id)
             {
-            //slow
-            if (arg_3 === 1)
-                {
-                bit_slow = 1
-                rb_slow.checked = true
-                rb_sharp.checked = false
-                }
-            else
-                {
-                bit_slow = 0
-                rb_slow.checked = false
-                rb_sharp.checked = true
-                }
+                //slow
+                if (arg_3 === 1)
+                    {
+                    bit_slow = 1
+                    rb_slow.checked = true
+                    rb_sharp.checked = false
+                    }
+                else
+                    {
+                    bit_slow = 0
+                    rb_slow.checked = false
+                    rb_sharp.checked = true
+                    }
 
-            //super slow
-            if (arg_4 === 1)
-                {
-                bit_super_slow = 1
-                rb_sslow.checked = true
-                }
-            else
-                {
-                bit_super_slow = 0
-                rb_sslow.checked = false
-                }
+                //super slow
+                if (arg_4 === 1)
+                    {
+                    bit_super_slow = 1
+                    rb_sslow.checked = true
+                    }
+                else
+                    {
+                    bit_super_slow = 0
+                    rb_sslow.checked = false
+                    }
 
 
 
-            //short delay
-            if (arg_5 === 1)
-                {
-                bit_short_delay = 1
-                chb_short_delay.checked = true
-                }
-            else
-                {
-                bit_short_delay = 0
-                chb_short_delay.checked = false
-                }
-              }
+                //short delay
+                if (arg_5 === 1)
+                    {
+                    bit_short_delay = 1
+                    chb_short_delay.checked = true
+                    }
+                else
+                    {
+                    bit_short_delay = 0
+                    chb_short_delay.checked = false
+                    }
             }
-
         }
+    }
 }

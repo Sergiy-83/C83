@@ -551,7 +551,7 @@ S83_page_opt
                 property bool  flag_btn_block: false
 
                 content_component:
-                ColumnLayout
+                RowLayout
                         {
                         id:     cl_colors
                         spacing: 0
@@ -563,7 +563,7 @@ S83_page_opt
                         S83_RadioButton
                            {
                            id:                  rb_dd
-                           text:                "Камень счастья"
+                           text:                ""//"Камень счастья"
                            font.pixelSize:      18
                            color_disable:       current_theme.color_ctrl_disable
                            color_point:         current_theme.color_ctrl_main_color
@@ -594,7 +594,7 @@ S83_page_opt
                         S83_RadioButton
                            {
                            id:              rb_red
-                           text:            "Красный салон"
+                           text:            ""//"Красный салон"
                            font.pixelSize:  18
                            color_disable:   current_theme.color_ctrl_disable
                            color_point:     current_theme.color_ctrl_main_color
@@ -625,7 +625,7 @@ S83_page_opt
                         S83_RadioButton
                            {
                            id:              rb_green
-                           text:            "Зеленый"
+                           text:            ""//"Зеленый"
                            font.pixelSize:  18
                            color_disable:   current_theme.color_ctrl_disable
                            color_point:     current_theme.color_ctrl_main_color
@@ -655,7 +655,7 @@ S83_page_opt
                         S83_RadioButton
                            {
                            id:                  rb_blue
-                           text:                "Голубая бездна"
+                           text:                ""//"Голубая бездна"
                            font.pixelSize:      18
                            color_disable:       current_theme.color_ctrl_disable
                            color_point:         current_theme.color_ctrl_main_color
@@ -686,7 +686,7 @@ S83_page_opt
                         S83_RadioButton
                            {
                            id:                  rb_himikat
-                           text:                "Неизвестная субстанция"
+                           text:                ""//"Неизвестная субстанция"
                            font.pixelSize:      18
                            color_disable:       current_theme.color_ctrl_disable
                            color_point:         current_theme.color_ctrl_main_color
@@ -717,7 +717,7 @@ S83_page_opt
                         S83_RadioButton
                            {
                            id:                  rb_orange
-                           text:                "Хэллоуин"
+                           text:                ""//"Хэллоуин"
                            font.pixelSize:      18
                            color_disable:       current_theme.color_ctrl_disable
                            color_point:         current_theme.color_ctrl_main_color

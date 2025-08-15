@@ -177,7 +177,9 @@ enum CMD_DISPLAY
     CMD_DISP_ID = 500,      //ID дисплея
     CMD_BRIG_LCD,           //Яркость дисплея
     CMD_COLOR_DISP,         //Цвет параметра (номер цвета парметра в аргументах комманды)
-    CMD_COLOR_DISP_DEF      //Сбросить по умолчанию
+    CMD_COLOR_DISP_DEF,     //Сбросить по умолчанию
+    CMD_DISP_MSG,           //Отобразить сообщение на дисплее
+    CMD_DISP_CLTH
     };
 
 enum CMD_KB

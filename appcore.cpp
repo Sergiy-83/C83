@@ -410,7 +410,7 @@ int appcore::command_execute(void)
     case CMD_EQ_BAND:                   emit sig_eq_band(ARG_1_AS_INT,ARG_2_AS_INT,ARG_3_AS_INT);   break;
     case CMD_EQ_FLAG_PLAYER:            emit sig_eq_flag_player((bool)ARG_1_AS_LONG);               break;
 
-    case CMD_DISP_ID:                   emit sig_disp_id(ARG_1_AS_INT,ARG_2_AS_PCHAR);  break;
+    case CMD_DISP_ID:                   emit sig_disp_id(ARG_1_AS_INT,ARG_2_AS_PCHAR,ARG_3_AS_PCHAR);  break;
     case CMD_BRIG_LCD:                  emit sig_brig_lcd(ARG_1_AS_INT);                break;
 
     case CMD_VIND_ID:                   emit sig_vind_id(ARG_1_AS_INT,ARG_2_AS_PCHAR);  break;
@@ -910,7 +910,11 @@ void appcore::slot_update(int arg_mode)
 void appcore::slot_set_theme (int arg_th)
     {
     current_th = arg_th;
-    //LOGGING<<"Установить тему: "<<arg_th;
+    LOGGING<<"Установить тему: "<<arg_th;
+    cmd_format_t cmd;
+    cmd.args_txt[0] = std::to_string(CMD_DISP_CLTH);
+    cmd.args_txt[1] = std::to_string(arg_th);
+    command_send_to_server(&cmd);
     }
 
 void appcore::slot_select_sw_item(int index)
@@ -1131,14 +1135,14 @@ void appcore::slot_mark_all()
     }
 
 void appcore::slot_set_color_parametr_disp(int arg_id_color, QColor arg_color)
-{
-  cmd_format_t cmd;
-  cmd.args_txt[0] = std::to_string(CMD_COLOR_DISP);
-  cmd.args_txt[1] = std::to_string(arg_id_color);
-  cmd.args_txt[2] = std::to_string(0xFFFFFF & arg_color.rgba());
+    {
+    cmd_format_t cmd;
+    cmd.args_txt[0] = std::to_string(CMD_COLOR_DISP);
+    cmd.args_txt[1] = std::to_string(arg_id_color);
+    cmd.args_txt[2] = std::to_string(0xFFFFFF & arg_color.rgba());
 
-  command_send_to_server(&cmd);
-}
+    command_send_to_server(&cmd);
+    }
 
 void appcore::slot_reset_colors_parametr_disp()
     {

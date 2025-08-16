@@ -410,8 +410,8 @@ int appcore::command_execute(void)
     case CMD_EQ_BAND:                   emit sig_eq_band(ARG_1_AS_INT,ARG_2_AS_INT,ARG_3_AS_INT);   break;
     case CMD_EQ_FLAG_PLAYER:            emit sig_eq_flag_player((bool)ARG_1_AS_LONG);               break;
 
-    case CMD_DISP_ID:                   emit sig_disp_id(ARG_1_AS_INT,ARG_2_AS_PCHAR,ARG_3_AS_PCHAR);  break;
-    case CMD_BRIG_LCD:                  emit sig_brig_lcd(ARG_1_AS_INT);                break;
+    case CMD_DISP_INFO:                 emit sig_disp_id(ARG_1_AS_INT,ARG_2_AS_PCHAR,ARG_3_AS_PCHAR);  break;
+    case CMD_DISP_BRIG:                 emit sig_brig_lcd(ARG_1_AS_INT,ARG_2_AS_INT);                break;
 
     case CMD_VIND_ID:                   emit sig_vind_id(ARG_1_AS_INT,ARG_2_AS_PCHAR);  break;
     case CMD_BRIG_LEDS:                 emit sig_brig_ind_vreg(ARG_1_AS_INT);           break;
@@ -426,7 +426,7 @@ int appcore::command_execute(void)
                                         emit sig_color_file(ARG_1_AS_INT, tmp_r/255, tmp_g/255, tmp_b/255 );
                                         }
                                         break;
-    case CMD_COLOR_DISP:                {
+    case CMD_DISP_COLOR:                {
                                         uint tmp_color = ARG_2_AS_LONG;
                                         float tmp_r = tmp_color >> 16 ;
                                         float tmp_g = (tmp_color & 0xFFFF) >> 8;
@@ -1085,7 +1085,7 @@ void appcore::slot_eq(int arg_eq_cmd,int arg_eq_id)
 void appcore::slot_brig_lcd(int arg_value)
     {
     cmd_format_t cmd;
-    cmd.args_txt[0] = std::to_string(CMD_BRIG_LCD);
+    cmd.args_txt[0] = std::to_string(CMD_DISP_BRIG);
     cmd.args_txt[1] = std::to_string(arg_value);
 
     command_send_to_server(&cmd);
@@ -1137,7 +1137,7 @@ void appcore::slot_mark_all()
 void appcore::slot_set_color_parametr_disp(int arg_id_color, QColor arg_color)
     {
     cmd_format_t cmd;
-    cmd.args_txt[0] = std::to_string(CMD_COLOR_DISP);
+    cmd.args_txt[0] = std::to_string(CMD_DISP_COLOR);
     cmd.args_txt[1] = std::to_string(arg_id_color);
     cmd.args_txt[2] = std::to_string(0xFFFFFF & arg_color.rgba());
 
@@ -1147,7 +1147,7 @@ void appcore::slot_set_color_parametr_disp(int arg_id_color, QColor arg_color)
 void appcore::slot_reset_colors_parametr_disp()
     {
     cmd_format_t cmd;
-    cmd.args_txt[0] = std::to_string(CMD_COLOR_DISP_DEF);
+    cmd.args_txt[0] = std::to_string(CMD_DISP_COLOR_DEF);
     command_send_to_server(&cmd);
     }
 

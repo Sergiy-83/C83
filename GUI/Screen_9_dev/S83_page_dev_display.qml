@@ -23,7 +23,9 @@ ColumnLayout
             {
             //console.log("Сработал сигнал onSig_disp_id на странице disp ")
             pc_disp.text_value  = arg_name
-            pc_gui.text_value  = arg_gui
+            if (arg_gui)
+                pc_gui.text_value  = arg_gui
+            else pc_gui.text_value  = "-"
 
             switch (arg_id)
                 {
@@ -66,11 +68,11 @@ ColumnLayout
             case dp_ids.dp_DRM:
                 sl_lcd_brig.visible             = true
 
-                rb_color_par_name.visible       = true
-                rb_color_par_value.visible      = true
-                rb_color_par_value_w.visible    = true
-                rb_color_pr_bar.visible         = true
-                btns_colors.visible             = true
+                rb_color_par_name.visible       = false
+                rb_color_par_value.visible      = false
+                rb_color_par_value_w.visible    = false
+                rb_color_pr_bar.visible         = false
+                btns_colors.visible             = false
 
                 disp_warning.visible            = false
                 break
@@ -96,11 +98,19 @@ ColumnLayout
             }
 
         //Яркость
-        function onSig_brig_lcd(arg_value)
+        function onSig_brig_lcd(arg_value,arg_status)
             {
             sl_lcd_brig.set_value_top ( arg_value )
             if (!sl_lcd_brig.pressed) //Не нажато
                  sl_lcd_brig.value = arg_value
+
+            if(arg_status)
+                {
+                sl_lcd_brig.enabled = true
+                }
+            else
+                {sl_lcd_brig.enabled = false
+                }
             }
         }
 

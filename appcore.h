@@ -210,7 +210,7 @@ signals:
     void sig_change_freq    (int arg_value);
     void sig_change_fmt     (int arg_value);
 
-    void sig_brig_lcd       (int arg_value);
+    void sig_brig_lcd       (int arg_value,int arg_status);
     void sig_brig_ind_vreg  (int arg_value);
 
     void sig_vind_id        (int arg_id, QString arg_name);

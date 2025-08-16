@@ -174,12 +174,13 @@ enum CMD_VIND
 
 enum CMD_DISPLAY
     {
-    CMD_DISP_ID = 500,      //ID дисплея
-    CMD_BRIG_LCD,           //Яркость дисплея
-    CMD_COLOR_DISP,         //Цвет параметра (номер цвета парметра в аргументах комманды)
-    CMD_COLOR_DISP_DEF,     //Сбросить по умолчанию
+    CMD_DISP_INFO = 500,   //ID дисплея и о дисплее
+    CMD_DISP_BRIG,          //Яркость дисплея
+    CMD_DISP_COLOR,         //Цвет параметра (номер цвета парметра в аргументах комманды)
+    CMD_DISP_COLOR_DEF,     //Сбросить по умолчанию
     CMD_DISP_MSG,           //Отобразить сообщение на дисплее
-    CMD_DISP_CLTH
+    CMD_DISP_CLTH,          //Установить цветовую тему дисплея
+    CMD_DISP_LANG           //Язык интерфейса
     };
 
 enum CMD_KB

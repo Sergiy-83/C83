@@ -558,7 +558,59 @@ S83_page_opt
                         Layout.alignment: Qt.AlignHCenter|Qt.AlignTop
                         property int left_margins: 5
 
+                        function th_dd()
+                            {
+                            rb_dd.checked = true
+                            current_theme.color_ctrl_main_color = "#3c8080" //"#3d08fb"
+                            current_theme.icon_play  = "qrc:/Icon/for_file/play/play_gray.svg"
+                            current_theme.icon_pause = "qrc:/Icon/for_file/pause/pause_gray.svg"
+                            current_theme.bk_image   = "qrc:/Icon/for_page/bk_rain.jpg"
+                            }
 
+                        function th_red()
+                            {
+                            rb_red.checked = true
+                            current_theme.color_ctrl_main_color ="#cc0000"
+                            current_theme.icon_play  = "qrc:/Icon/for_file/play/play_red.svg"
+                            current_theme.icon_pause = "qrc:/Icon/for_file/pause/pause_red.svg"
+                            current_theme.bk_image   = "qrc:/Icon/for_page/bk_red.jpg"
+                            }
+
+                        function th_green()
+                            {
+                            rb_green.checked = true
+                            current_theme.color_ctrl_main_color ="#009933" //"#339999"
+                            current_theme.icon_play  = "qrc:/Icon/for_file/play/play_green.svg"
+                            current_theme.icon_pause = "qrc:/Icon/for_file/pause/pause_green.svg"
+                            current_theme.bk_image   = "qrc:/Icon/for_page/bk_green.jpg"
+                            }
+
+                        function th_himikat()
+                            {
+                            rb_himikat.checked = true
+                            current_theme.color_ctrl_main_color = "#666600"//"#3d08fb"
+                            current_theme.icon_play  = "qrc:/Icon/for_file/play/play_military.svg"
+                            current_theme.icon_pause = "qrc:/Icon/for_file/pause/pause_military.svg"
+                            current_theme.bk_image   = "qrc:/Icon/for_page/bk_h2o.jpg"
+                            }
+
+                        function th_blue ()
+                            {
+                            rb_blue.checked = true
+                            current_theme.color_ctrl_main_color = "#3366ff"//"#3d08fb"
+                            current_theme.icon_play  = "qrc:/Icon/for_file/play/play_blue.svg"
+                            current_theme.icon_pause = "qrc:/Icon/for_file/pause/pause_blue.svg"
+                            current_theme.bk_image   = "qrc:/Icon/for_page/bk_blue.jpg"
+                            }
+
+                        function th_orange()
+                             {
+                             rb_orange.checked = true
+                             current_theme.color_ctrl_main_color = "chocolate"
+                             current_theme.icon_play  = "qrc:/Icon/for_file/play/play_orang.svg"
+                             current_theme.icon_pause = "qrc:/Icon/for_file/pause/pause_orang.svg"
+                             current_theme.bk_image   = "qrc:/Icon/for_page/bk_orange.jpg"
+                             }
 
                         S83_RadioButton
                            {
@@ -571,21 +623,14 @@ S83_page_opt
                            horizontalPadding:   10
                            Layout.leftMargin:   left_margins
 
-                           function th_dd()
-                               {
-                               rb_dd.checked = true
-                               current_theme.color_ctrl_main_color = "#3c8080" //"#3d08fb"
-                               current_theme.icon_play  = "qrc:/Icon/for_file/play/play_gray.svg"
-                               current_theme.icon_pause = "qrc:/Icon/for_file/pause/pause_gray.svg"
-                               current_theme.bk_image   = "qrc:/Icon/for_page/bk_rain.jpg"
-                               }
+
 
                            MouseArea
                                {
                                anchors.fill: parent
                                onClicked:
                                    {
-                                   rb_dd.th_dd()
+                                   th_dd()
                                    my_app.slot_set_theme(0)
                                    }
                                }
@@ -602,21 +647,14 @@ S83_page_opt
                            horizontalPadding: 10
                            Layout.leftMargin: left_margins
 
-                           function th_red()
-                                {
-                                rb_red.checked = true
-                                current_theme.color_ctrl_main_color ="#cc0000"
-                                current_theme.icon_play  = "qrc:/Icon/for_file/play/play_red.svg"
-                                current_theme.icon_pause = "qrc:/Icon/for_file/pause/pause_red.svg"
-                                current_theme.bk_image   = "qrc:/Icon/for_page/bk_red.jpg"
-                                }
+
 
                            MouseArea
                                {
                                anchors.fill: parent
                                onClicked:
                                    {
-                                   rb_red.th_red()
+                                   th_red()
                                    my_app.slot_set_theme(1)
                                    }
                                }
@@ -633,20 +671,13 @@ S83_page_opt
                            horizontalPadding: 10
                            Layout.leftMargin: left_margins
 
-                           function th_green()
-                               {
-                               rb_green.checked = true
-                               current_theme.color_ctrl_main_color ="#009933" //"#339999"
-                               current_theme.icon_play  = "qrc:/Icon/for_file/play/play_green.svg"
-                               current_theme.icon_pause = "qrc:/Icon/for_file/pause/pause_green.svg"
-                               current_theme.bk_image   = "qrc:/Icon/for_page/bk_green.jpg"
-                               }
+
                            MouseArea
                                {
                                anchors.fill: parent
                                onClicked:
                                    {
-                                   rb_green.th_green()
+                                   th_green()
                                    my_app.slot_set_theme(2)
                                    }
                                }
@@ -655,7 +686,7 @@ S83_page_opt
                         S83_RadioButton
                            {
                            id:                  rb_blue
-                           text:                ""//"Голубая бездна"
+                           text:                ""//"Синяя"
                            font.pixelSize:      18
                            color_disable:       current_theme.color_ctrl_disable
                            color_point:         current_theme.color_ctrl_main_color
@@ -663,21 +694,14 @@ S83_page_opt
                            horizontalPadding:   10
                            Layout.leftMargin:   left_margins
 
-                           function th_blue ()
-                                {
-                                rb_blue.checked = true
-                                current_theme.color_ctrl_main_color = "#3366ff"//"#3d08fb"
-                                current_theme.icon_play  = "qrc:/Icon/for_file/play/play_blue.svg"
-                                current_theme.icon_pause = "qrc:/Icon/for_file/pause/pause_blue.svg"
-                                current_theme.bk_image   = "qrc:/Icon/for_page/bk_blue.jpg"
-                                }
+
 
                            MouseArea
                                {
                                anchors.fill: parent
                                onClicked:
                                    {
-                                   rb_blue.th_blue()
+                                   th_blue()
                                    my_app.slot_set_theme(3)
                                    }
                                }
@@ -694,21 +718,14 @@ S83_page_opt
                            horizontalPadding:   10
                            Layout.leftMargin:   left_margins
 
-                           function th_himikat()
-                                {
-                                rb_himikat.checked = true
-                                current_theme.color_ctrl_main_color = "#666600"//"#3d08fb"
-                                current_theme.icon_play  = "qrc:/Icon/for_file/play/play_military.svg"
-                                current_theme.icon_pause = "qrc:/Icon/for_file/pause/pause_military.svg"
-                                current_theme.bk_image   = "qrc:/Icon/for_page/bk_h2o.jpg"
-                                }
+
 
                            MouseArea
                                {
                                anchors.fill: parent
                                onClicked:
                                    {
-                                   parent.th_himikat()
+                                   th_himikat()
                                    my_app.slot_set_theme(4)
                                    }
                                }
@@ -725,21 +742,14 @@ S83_page_opt
                            horizontalPadding:   10
                            Layout.leftMargin:   left_margins
 
-                           function th_orange()
-                                {
-                                   rb_orange.checked = true
-                                   current_theme.color_ctrl_main_color = "chocolate"
-                                   current_theme.icon_play  = "qrc:/Icon/for_file/play/play_orang.svg"
-                                   current_theme.icon_pause = "qrc:/Icon/for_file/pause/pause_orang.svg"
-                                   current_theme.bk_image   = "qrc:/Icon/for_page/bk_orange.jpg"
-                                }
+
 
                            MouseArea
                                {
                                anchors.fill: parent
                                onClicked:
                                    {
-                                   rb_orange.th_orange()
+                                   th_orange()
                                    my_app.slot_set_theme(5)
                                    }
                                }
@@ -753,17 +763,17 @@ S83_page_opt
                                 {
                                 switch (arg_th)
                                     {
-                                    case 0: rb_dd.th_dd()
+                                    case 0: th_dd()
                                         break
-                                    case 1: rb_red.th_red()
+                                    case 1: th_red()
                                         break
-                                    case 2: rb_green.th_green()
+                                    case 2: th_green()
                                         break
-                                    case 3: rb_blue.th_blue()
+                                    case 3: th_blue()
                                         break
-                                    case 4: rb_himikat.th_himikat()
+                                    case 4: th_himikat()
                                         break
-                                    case 5: rb_orange.th_orange()
+                                    case 5: th_orange()
                                         break
                                     }
                                 }

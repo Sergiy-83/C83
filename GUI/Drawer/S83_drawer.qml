@@ -156,7 +156,7 @@ S83_Drawer
                 {
                 id:         item_s83
                 item_text:  "Дополнительно"
-                item_icon:  "qrc:/Icon/for_drawer/cpp.svg";
+                item_icon:  "qrc:/Icon/for_drawer/dr_batanik.svg";
                 onItemClicked:
                     {
                     stack_view.push(page_s83)

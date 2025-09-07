@@ -558,10 +558,17 @@ S83_page_opt
                         Layout.alignment: Qt.AlignHCenter|Qt.AlignTop
                         property int left_margins: 5
 
+                        property string theme_color_turquoise:  "#3c8080" //"#3d08fb"
+                        property string theme_color_red:        "#cc0000"
+                        property string theme_color_green:      "#009933"
+                        property string theme_color_military:   "#707000"
+                        property string theme_color_blue:       "#3366ff"//"#3d08fb"
+                        property string theme_color_orange:     "chocolate"
+
                         function th_dd()
                             {
                             rb_dd.checked = true
-                            current_theme.color_ctrl_main_color = "#3c8080" //"#3d08fb"
+                            current_theme.color_ctrl_main_color = theme_color_turquoise
                             current_theme.icon_play  = "qrc:/Icon/for_file/play/play_gray.svg"
                             current_theme.icon_pause = "qrc:/Icon/for_file/pause/pause_gray.svg"
                             current_theme.bk_image   = "qrc:/Icon/for_page/bk_rain.jpg"
@@ -570,7 +577,7 @@ S83_page_opt
                         function th_red()
                             {
                             rb_red.checked = true
-                            current_theme.color_ctrl_main_color ="#cc0000"
+                            current_theme.color_ctrl_main_color = theme_color_red
                             current_theme.icon_play  = "qrc:/Icon/for_file/play/play_red.svg"
                             current_theme.icon_pause = "qrc:/Icon/for_file/pause/pause_red.svg"
                             current_theme.bk_image   = "qrc:/Icon/for_page/bk_red.jpg"
@@ -579,7 +586,7 @@ S83_page_opt
                         function th_green()
                             {
                             rb_green.checked = true
-                            current_theme.color_ctrl_main_color ="#009933" //"#339999"
+                            current_theme.color_ctrl_main_color = theme_color_green
                             current_theme.icon_play  = "qrc:/Icon/for_file/play/play_green.svg"
                             current_theme.icon_pause = "qrc:/Icon/for_file/pause/pause_green.svg"
                             current_theme.bk_image   = "qrc:/Icon/for_page/bk_green.jpg"
@@ -588,7 +595,7 @@ S83_page_opt
                         function th_himikat()
                             {
                             rb_himikat.checked = true
-                            current_theme.color_ctrl_main_color = "#666600"//"#3d08fb"
+                            current_theme.color_ctrl_main_color = theme_color_military
                             current_theme.icon_play  = "qrc:/Icon/for_file/play/play_military.svg"
                             current_theme.icon_pause = "qrc:/Icon/for_file/pause/pause_military.svg"
                             current_theme.bk_image   = "qrc:/Icon/for_page/bk_h2o.jpg"
@@ -597,7 +604,7 @@ S83_page_opt
                         function th_blue ()
                             {
                             rb_blue.checked = true
-                            current_theme.color_ctrl_main_color = "#3366ff"//"#3d08fb"
+                            current_theme.color_ctrl_main_color = theme_color_blue
                             current_theme.icon_play  = "qrc:/Icon/for_file/play/play_blue.svg"
                             current_theme.icon_pause = "qrc:/Icon/for_file/pause/pause_blue.svg"
                             current_theme.bk_image   = "qrc:/Icon/for_page/bk_blue.jpg"
@@ -606,7 +613,7 @@ S83_page_opt
                         function th_orange()
                              {
                              rb_orange.checked = true
-                             current_theme.color_ctrl_main_color = "chocolate"
+                             current_theme.color_ctrl_main_color = theme_color_orange
                              current_theme.icon_play  = "qrc:/Icon/for_file/play/play_orang.svg"
                              current_theme.icon_pause = "qrc:/Icon/for_file/pause/pause_orang.svg"
                              current_theme.bk_image   = "qrc:/Icon/for_page/bk_orange.jpg"
@@ -615,10 +622,13 @@ S83_page_opt
                         S83_RadioButton
                            {
                            id:                  rb_dd
-                           text:                ""//"Камень счастья"
+                           text:                ""
                            font.pixelSize:      18
+
                            color_disable:       current_theme.color_ctrl_disable
                            color_point:         current_theme.color_ctrl_main_color
+                           color_enable:        theme_color_turquoise
+
                            verticalPadding:     8
                            horizontalPadding:   10
                            Layout.leftMargin:   left_margins
@@ -639,10 +649,13 @@ S83_page_opt
                         S83_RadioButton
                            {
                            id:              rb_red
-                           text:            ""//"Красный салон"
+                           text:            ""
                            font.pixelSize:  18
+
                            color_disable:   current_theme.color_ctrl_disable
                            color_point:     current_theme.color_ctrl_main_color
+                           color_enable:    theme_color_red
+
                            verticalPadding: 8
                            horizontalPadding: 10
                            Layout.leftMargin: left_margins
@@ -665,11 +678,14 @@ S83_page_opt
                            id:              rb_green
                            text:            ""//"Зеленый"
                            font.pixelSize:  18
+
                            color_disable:   current_theme.color_ctrl_disable
                            color_point:     current_theme.color_ctrl_main_color
-                           verticalPadding: 8
-                           horizontalPadding: 10
-                           Layout.leftMargin: left_margins
+                           color_enable:    theme_color_green
+
+                           verticalPadding:     8
+                           horizontalPadding:   10
+                           Layout.leftMargin:   left_margins
 
 
                            MouseArea
@@ -688,8 +704,11 @@ S83_page_opt
                            id:                  rb_blue
                            text:                ""//"Синяя"
                            font.pixelSize:      18
+
                            color_disable:       current_theme.color_ctrl_disable
                            color_point:         current_theme.color_ctrl_main_color
+                           color_enable:        theme_color_blue
+
                            verticalPadding:     8
                            horizontalPadding:   10
                            Layout.leftMargin:   left_margins
@@ -712,8 +731,11 @@ S83_page_opt
                            id:                  rb_himikat
                            text:                ""//"Неизвестная субстанция"
                            font.pixelSize:      18
+
                            color_disable:       current_theme.color_ctrl_disable
                            color_point:         current_theme.color_ctrl_main_color
+                           color_enable:        theme_color_military
+
                            verticalPadding:     8
                            horizontalPadding:   10
                            Layout.leftMargin:   left_margins
@@ -736,8 +758,11 @@ S83_page_opt
                            id:                  rb_orange
                            text:                ""//"Хэллоуин"
                            font.pixelSize:      18
+
                            color_disable:       current_theme.color_ctrl_disable
                            color_point:         current_theme.color_ctrl_main_color
+                           color_enable:        theme_color_orange
+
                            verticalPadding:     8
                            horizontalPadding:   10
                            Layout.leftMargin:   left_margins

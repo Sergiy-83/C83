@@ -108,7 +108,6 @@
         <file>GUI/S83_dialogs/S83_dialog_colors.qml</file>
         <file>GUI/Enums/S83_afile_ids.qml</file>
         <file>GUI/Screen_10_for_s83/S83_page_for_s83.qml</file>
-        <file>Icon/for_drawer/cpp.svg</file>
         <file>GUI/Enums/S83_disp_ids.qml</file>
         <file>Icon/for_drawer/devices.svg</file>
         <file>GUI/Enums/S83_disp_colors_ids.qml</file>
@@ -230,5 +229,6 @@
         <file>Icon/for_buttons/cursor_left.svg</file>
         <file>Icon/for_buttons/cursor_rigth.svg</file>
         <file>Icon/for_file/poff.svg</file>
+        <file>Icon/for_drawer/dr_batanik.svg</file>
     </qresource>
 </RCC>

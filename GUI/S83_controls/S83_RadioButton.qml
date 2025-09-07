@@ -44,6 +44,7 @@ T.RadioButton {
     property string color:          "white"
     property string color_disable:  "gray"
     property string color_point:    current_theme.color_ctrl_main_color
+    property string color_enable:   "white"
     property bool value_warning: false
 
     implicitWidth:  Math.max(implicitBackgroundWidth + leftInset + rightInset, implicitContentWidth + leftPadding + rightPadding)
@@ -61,6 +62,7 @@ T.RadioButton {
         y: control.topPadding + (control.availableHeight - height) / 2
         color_disable:  control.color_disable
         color_point:    control.color_point
+        color_enable:   control.color_enable
         control:        control
         }
 

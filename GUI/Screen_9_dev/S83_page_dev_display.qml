@@ -104,7 +104,7 @@ ColumnLayout
             if (!sl_lcd_brig.pressed) //Не нажато
                  sl_lcd_brig.value = arg_value
 
-            if(arg_status)
+            if(!arg_status) //Инверсно
                 {
                 sl_lcd_brig.enabled = true
                 }
@@ -129,6 +129,42 @@ ColumnLayout
         text_label:         "Текущий GUI:"
         text_value:         "-"
         }
+
+    S83_parametr_classic
+        {
+        id:                 pc_lang
+        Layout.fillWidth:   true
+        text_label:         "Язык GUI:"
+        text_value:         ""
+
+    RowLayout
+        {
+            anchors.right: parent.right
+            S83_RadioButton
+                {
+                    id:             rb_ru
+                    text:           "RU"
+                    font.pixelSize: 18
+                    MouseArea
+                        {
+                        anchors.fill: parent
+                        onClicked: { my_app.slot_set_gui_lang(0) }
+                        }
+                }
+
+            S83_RadioButton
+                {
+                    id:             rb_en
+                    text:           "EN"
+                    font.pixelSize: 18
+                    MouseArea
+                        {
+                        anchors.fill: parent
+                        onClicked: { my_app.slot_set_gui_lang(1) }
+                        }
+                }
+        }
+    }
 
     S83_slider_and_parametrs
         {
@@ -168,9 +204,8 @@ ColumnLayout
             {
             my_app.slot_brig_lcd(tools.round(value,1))
             }
-
-
         }
+
 
     S83_warning
         {

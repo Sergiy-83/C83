@@ -16,7 +16,6 @@
         <file>GUI/Screen_1_main_option/S83_page_options_main.qml</file>
         <file>GUI/S83_controls/S83_Slider_01.qml</file>
         <file>GUI/S83_controls/S83_SliderHandle_01.qml</file>
-        <file>Icon/for_drawer/colors.ico</file>
         <file>GUI/S83_controls/S83_page_opt.qml</file>
         <file>GUI/Screen_0_main/S83_page_main.qml</file>
         <file>GUI/Screen_2_volumes/S83_page_volumes.qml</file>
@@ -35,24 +34,24 @@
         <file>Icon/for_buttons/pre.svg</file>
         <file>Icon/for_buttons/stop.svg</file>
         <file>GUI/S83_controls/S83_Drawer.qml</file>
-        <file>Icon/for_drawer/main_options.svg</file>
+        <file>Icon/for_drawer/dr_main_options.svg</file>
         <file>GUI/S83_controls/S83_ScrollBar.qml</file>
         <file>GUI/S83_controls/S83_RegExpValidator.qml</file>
         <file>GUI/S83_controls/S83_TextField.qml</file>
         <file>GUI/S83_controls/S83_VerticalScrollBar.qml</file>
         <file>GUI/S83_controls/S83_parametr_classic.qml</file>
         <file>GUI/S83_controls/S83_parametr_group.qml</file>
-        <file>Icon/for_drawer/lan.svg</file>
+        <file>Icon/for_drawer/dr_lan.svg</file>
         <file>GUI/Screen_5_lan/S83_page_lan_content_ip.qml</file>
         <file>GUI/Screen_5_lan/S83_page_lan_content_trafik.qml</file>
         <file>GUI/Screen_5_lan/S83_page_lan_content_fordev.qml</file>
         <file>GUI/S83_controls/S83_theme.qml</file>
         <file>GUI/Screen_8_poff/S83_page_poff.qml</file>
-        <file>Icon/for_drawer/poweroff.svg</file>
+        <file>Icon/for_drawer/dr_poweroff.svg</file>
         <file>Icon/for_app/din.ico</file>
         <file>Icon/for_file_list/bk_list_no_play.svg</file>
         <file>Icon/for_file_list/bk_list_play.svg</file>
-        <file>Icon/for_drawer/speaker.svg</file>
+        <file>Icon/for_drawer/dr_speaker.svg</file>
         <file>GUI/S83_controls/S83_RangeSlider.qml</file>
         <file>GUI/S83_controls/S83_tools.qml</file>
         <file>GUI/Screen_4_acard/S83_page_acard.qml</file>
@@ -64,7 +63,7 @@
         <file>GUI/S83_controls/S83_Dialog.qml</file>
         <file>GUI/S83_controls/S83_DialogButtonBox.qml</file>
         <file>GUI/Screen_7_info/S83_page_info.qml</file>
-        <file>Icon/for_drawer/info.svg</file>
+        <file>Icon/for_drawer/dr_info.svg</file>
         <file>GUI/Screen_7_info/S83_page_info_about_content.qml</file>
         <file>GUI/Screen_7_info/S83_page_info_about2_content.qml</file>
         <file>GUI/Context_menu/S83_ctx_menu.qml</file>
@@ -91,7 +90,7 @@
         <file>GUI/Screen_2_volumes/S83_list_alsa_ch_item.qml</file>
         <file>GUI/Screen_3_eq/S83_page_eq.qml</file>
         <file>GUI/Screen_3_eq/S83_page_eq_band_control.qml</file>
-        <file>Icon/for_drawer/eq.svg</file>
+        <file>Icon/for_drawer/dr_eq.svg</file>
         <file>GUI/S83_controls/S83_slider_and_parametrs.qml</file>
         <file>GUI/Screen_9_dev/S83_page_dev.qml</file>
         <file>GUI/S83_controls/S83_warning.qml</file>
@@ -109,11 +108,9 @@
         <file>GUI/Enums/S83_afile_ids.qml</file>
         <file>GUI/Screen_10_for_s83/S83_page_for_s83.qml</file>
         <file>GUI/Enums/S83_disp_ids.qml</file>
-        <file>Icon/for_drawer/devices.svg</file>
+        <file>Icon/for_drawer/dr_devices.svg</file>
         <file>GUI/Enums/S83_disp_colors_ids.qml</file>
         <file>GUI/Screen_0_main/S83_ctrl_sec_buttons_layout.qml</file>
-        <file>Icon/for_drawer/speaker_vol_down.svg</file>
-        <file>Icon/for_drawer/speaker_vol_up.svg</file>
         <file>GUI/S83_controls/S83_block_screen.qml</file>
         <file>Icon/for_page/no_server_data.svg</file>
         <file>Icon/for_page/disconnect.svg</file>
@@ -230,5 +227,9 @@
         <file>Icon/for_buttons/cursor_rigth.svg</file>
         <file>Icon/for_file/poff.svg</file>
         <file>Icon/for_drawer/dr_batanik.svg</file>
+        <file>Icon/for_drawer/dr_chip.svg</file>
+        <file>Icon/for_drawer/dr_colors.svg</file>
+        <file>Icon/for_buttons/bt_spk_vol_down.svg</file>
+        <file>Icon/for_buttons/bt_spk_vol_up.svg</file>
     </qresource>
 </RCC>

@@ -919,6 +919,14 @@ void appcore::slot_set_theme (int arg_th)
     command_send_to_server(&cmd);
     }
 
+void appcore::slot_set_gui_lang(int arg_lang)
+    {
+    cmd_format_t cmd;
+    cmd.args_txt[0] = std::to_string(CMD_DISP_LANG);
+    cmd.args_txt[1] = std::to_string(arg_lang);
+    command_send_to_server(&cmd);
+    }
+
 void appcore::slot_select_sw_item(int index)
     {
     cmd_format_t cmd;

@@ -54,7 +54,7 @@ S83_Drawer
                 id:         item_osn_opt
                 width:      parent.width
                 item_text:  "Основные опции"
-                item_icon:  "qrc:/Icon/for_drawer/main_options.svg";
+                item_icon:  "qrc:/Icon/for_drawer/dr_main_options.svg";
                 onItemClicked:
                     {
                     stack_view.push(page_option_main)
@@ -67,7 +67,7 @@ S83_Drawer
                 id:         item_volumes
                 visible:    true
                 item_text:  "Громкости"
-                item_icon:  "qrc:/Icon/for_drawer/speaker.svg";
+                item_icon:  "qrc:/Icon/for_drawer/dr_speaker.svg";
                 onItemClicked:
                     {
                     stack_view.push(page_volumes)
@@ -80,7 +80,7 @@ S83_Drawer
                 id:             item_eq
                 visible:        true
                 item_text:      "Эквалайзер"
-                item_icon:      "qrc:/Icon/for_drawer/eq.svg";
+                item_icon:      "qrc:/Icon/for_drawer/dr_eq.svg";
                 onItemClicked:
                     {
                     stack_view.push(page_eq)
@@ -93,14 +93,12 @@ S83_Drawer
                 id:         item_acard
                 visible:    true
                 item_text:  "Аудиокарта"
-                item_icon:  "qrc:/Icon/for_aout_list/chip.svg"
+                item_icon:   "qrc:/Icon/for_drawer/dr_chip.svg"
                 onItemClicked:
                     {
                     stack_view.push(page_acard)
                     }
                 }
-
-
 
             //Другие устройства
             S83_drawer_item
@@ -109,7 +107,7 @@ S83_Drawer
                 visible:   true
                 item_text: "Другие устройства"
 
-                item_icon: "qrc:/Icon/for_drawer/devices.svg";
+                item_icon: "qrc:/Icon/for_drawer/dr_devices.svg";
                 onItemClicked:
                     {
                     stack_view.push(page_dev)
@@ -121,7 +119,7 @@ S83_Drawer
                 {
                 id:        item_lan
                 item_text: "Сеть"
-                item_icon: "qrc:/Icon/for_drawer/lan.svg";
+                item_icon: "qrc:/Icon/for_drawer/dr_lan.svg";
                 onItemClicked:
                     {
                     stack_view.push(page_lan)
@@ -133,7 +131,7 @@ S83_Drawer
                 id:        item_colors
                 visible:   true
                 item_text: "Цвета"
-                item_icon: "qrc:/Icon/for_drawer/colors.ico";
+                item_icon: "qrc:/Icon/for_drawer/dr_colors.svg";
                 onItemClicked:
                     {
                     stack_view.push(page_colors)
@@ -145,7 +143,7 @@ S83_Drawer
                 id:        item_info
                 visible:   true
                 item_text: "Информация"
-                item_icon: "qrc:/Icon/for_drawer/info.svg";
+                item_icon: "qrc:/Icon/for_drawer/dr_info.svg";
                 onItemClicked:
                     {
                     stack_view.push(page_info)
@@ -167,7 +165,7 @@ S83_Drawer
                 {
                 id:         item_poff
                 item_text:  "Завершение работы"
-                item_icon:  "qrc:/Icon/for_drawer/poweroff.svg";
+                item_icon:  "qrc:/Icon/for_drawer/dr_poweroff.svg";
                 onItemClicked:
                     {
                     dialog_off.visible = true

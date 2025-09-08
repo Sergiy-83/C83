@@ -38,7 +38,7 @@ ColumnLayout
                 my_app.slot_send_vol_up()
                 }
             icon.color:     "transparent"
-            icon.source:    "qrc:/Icon/for_drawer/speaker_vol_up.svg";
+            icon.source:    "qrc:/Icon/for_buttons/bt_spk_vol_up.svg";
 
 
             }
@@ -72,7 +72,7 @@ ColumnLayout
                 }
 
             icon.color: "transparent"
-            icon.source: "qrc:/Icon/for_drawer/speaker_vol_down.svg";
+            icon.source: "qrc:/Icon/for_buttons/bt_spk_vol_down.svg";
             }
 
 

@@ -136,6 +136,7 @@ public slots:
     void slot_select_sw_item(int index);
     void slot_update    (int arg_mode);
     void slot_set_theme (int arg_th);
+    void slot_set_gui_lang(int arg_lang);
 
 signals:
     void sig_status_label(QString arg_txt,QColor arg_color);

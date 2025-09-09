@@ -142,6 +142,7 @@ signals:
     void sig_status_label(QString arg_txt,QColor arg_color);
     void sig_connected(QString arg_ip);
     void sig_set_th(int arg_th);
+    void sig_set_lng(int arg_lng,int arg_status);
     void sig_pop_ip(QString arg_txt, int arg_num_ip, int arg_ip_state,QString arg_nname );
     void sig_connecting_start(QString arg_ip);
     void sig_disconnected();

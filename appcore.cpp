@@ -434,8 +434,8 @@ int appcore::command_execute(void)
                                         emit sig_color_disp_parametr(ARG_1_AS_INT, tmp_r/255, tmp_g/255, tmp_b/255 );
                                         }
                                         break;
-    case CMD_DISP_CLTH:                 emit sig_set_th(ARG_1_AS_INT);
-                                        break;
+    case CMD_DISP_CLTH:                 emit sig_set_th(ARG_1_AS_INT);  break;
+    case CMD_DISP_LANG:                 emit sig_set_lng(ARG_1_AS_INT,ARG_2_AS_INT); break;
     case CMD_INFO_MS:                   emit sig_client_count(ARG_1_AS_INT);    break;
     case CMD_OPT_NEATLY_VOL:            emit sig_neatly_vol(ARG_1_AS_INT);      break;
     case CMD_BD_ID:                     emit sig_bd_id(ARG_1_AS_INT,ARG_2_AS_PCHAR,ARG_3_AS_PCHAR,ARG_4_AS_INT);

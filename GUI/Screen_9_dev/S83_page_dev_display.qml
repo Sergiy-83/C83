@@ -21,11 +21,10 @@ ColumnLayout
 
         function onSig_disp_id(arg_id,arg_name,arg_gui)
             {
-            //console.log("Сработал сигнал onSig_disp_id на странице disp ")
             pc_disp.text_value  = arg_name
-            if (arg_gui)
-                pc_gui.text_value  = arg_gui
-            else pc_gui.text_value  = "-"
+
+            if (arg_gui)    pc_gui.text_value  = arg_gui
+            else            pc_gui.text_value  = "-"
 
             switch (arg_id)
                 {
@@ -112,6 +111,25 @@ ColumnLayout
                 {sl_lcd_brig.enabled = false
                 }
             }
+        //язык
+        function onSig_set_lng(arg_lng, arg_status)
+            {
+            if (arg_status) pc_lang.enabled = true
+            else            pc_lang.enabled = false
+
+            if (arg_lng === 0)
+                {
+                rb_ru.checked = true
+                }
+            if (arg_lng === 1)
+                {
+                rb_en.checked = true
+                }
+            }
+        function onSig_disconnected()
+            {
+            pc_lang.enabled = false
+            }
         }
 
     S83_parametr_classic
@@ -136,34 +154,35 @@ ColumnLayout
         Layout.fillWidth:   true
         text_label:         "Язык GUI:"
         text_value:         ""
+        enabled:            false
 
-    RowLayout
-        {
-            anchors.right: parent.right
-            S83_RadioButton
-                {
-                    id:             rb_ru
-                    text:           "RU"
-                    font.pixelSize: 18
-                    MouseArea
-                        {
-                        anchors.fill: parent
-                        onClicked: { my_app.slot_set_gui_lang(0) }
-                        }
-                }
+        RowLayout
+            {
+                anchors.right: parent.right
+                S83_RadioButton
+                    {
+                        id:             rb_ru
+                        text:           "RU"
+                        font.pixelSize: 18
+                        MouseArea
+                            {
+                            anchors.fill: parent
+                            onClicked: { my_app.slot_set_gui_lang(0) }
+                            }
+                    }
 
-            S83_RadioButton
-                {
-                    id:             rb_en
-                    text:           "EN"
-                    font.pixelSize: 18
-                    MouseArea
-                        {
-                        anchors.fill: parent
-                        onClicked: { my_app.slot_set_gui_lang(1) }
-                        }
-                }
-        }
+                S83_RadioButton
+                    {
+                        id:             rb_en
+                        text:           "EN"
+                        font.pixelSize: 18
+                        MouseArea
+                            {
+                            anchors.fill: parent
+                            onClicked: { my_app.slot_set_gui_lang(1) }
+                            }
+                    }
+            }//lay
     }
 
     S83_slider_and_parametrs

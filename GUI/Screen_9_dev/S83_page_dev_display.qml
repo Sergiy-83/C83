@@ -158,7 +158,9 @@ ColumnLayout
 
         RowLayout
             {
-                anchors.right: parent.right
+                anchors.right:      parent.right
+                anchors.rightMargin: 3
+
                 S83_RadioButton
                     {
                         id:             rb_ru

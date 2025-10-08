@@ -103,7 +103,7 @@ ColumnLayout
             if (!sl_lcd_brig.pressed) //Не нажато
                  sl_lcd_brig.value = arg_value
 
-            if(!arg_status) //Инверсно
+            if(arg_status)
                 {
                 sl_lcd_brig.enabled = true
                 }

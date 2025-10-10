@@ -26,55 +26,35 @@ ColumnLayout
             if (arg_gui)    pc_gui.text_value  = arg_gui
             else            pc_gui.text_value  = "-"
 
+            rb_color_par_name.visible       = false
+            rb_color_par_value.visible      = false
+            rb_color_par_value_w.visible    = false
+            rb_color_pr_bar.visible         = false
+            btns_colors.visible             = false
+
+            disp_warning.visible            = false
+            sl_lcd_brig.visible             = true
+
             switch (arg_id)
                 {
-            case dp_ids.dp_NO:
-                sl_lcd_brig.visible             = false
+                case dp_ids.dp_NO:
+                    sl_lcd_brig.visible             = false
+                    disp_warning.visible            = true
+                    break
 
-                rb_color_par_name.visible       = false
-                rb_color_par_value.visible      = false
-                rb_color_par_value_w.visible    = false
-                rb_color_pr_bar.visible         = false
-                btns_colors.visible             = false
+                case  dp_ids.dp_SPI:
+                    break
 
-                disp_warning.visible            = true
-                break
+                case dp_ids.dp_USB:
+                    rb_color_par_name.visible       = true
+                    rb_color_par_value.visible      = true
+                    rb_color_par_value_w.visible    = true
+                    rb_color_pr_bar.visible         = true
+                    btns_colors.visible             = true
+                    break
 
-            case  dp_ids.dp_GPIORPI:
-                sl_lcd_brig.visible             = false
-
-                rb_color_par_name.visible       = false
-                rb_color_par_value.visible      = false
-                rb_color_par_value_w.visible    = false
-                rb_color_pr_bar.visible         = false
-                btns_colors.visible             = false
-
-                disp_warning.visible            = true
-                break
-
-            case dp_ids.dp_USB:
-                sl_lcd_brig.visible             = true
-
-                rb_color_par_name.visible       = true
-                rb_color_par_value.visible      = true
-                rb_color_par_value_w.visible    = true
-                rb_color_pr_bar.visible         = true
-                btns_colors.visible             = true
-
-                disp_warning.visible            = false
-                break
-
-            case dp_ids.dp_DRM:
-                sl_lcd_brig.visible             = true
-
-                rb_color_par_name.visible       = false
-                rb_color_par_value.visible      = false
-                rb_color_par_value_w.visible    = false
-                rb_color_pr_bar.visible         = false
-                btns_colors.visible             = false
-
-                disp_warning.visible            = false
-                break
+                case dp_ids.dp_DRM:
+                    break
                 }
 
 
@@ -103,6 +83,7 @@ ColumnLayout
             if (!sl_lcd_brig.pressed) //Не нажато
                  sl_lcd_brig.value = arg_value
 
+            //Поддержка изменения яркости
             if(arg_status)
                 {
                 sl_lcd_brig.enabled = true

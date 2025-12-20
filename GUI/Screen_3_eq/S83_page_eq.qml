@@ -62,7 +62,7 @@ S83_page_opt
 
                                 anchors.centerIn: parent
                                 z: -1
-                                source: "qrc:/Icon/for_drawer/eq.svg";
+                                source: "qrc:/Icon/for_drawer/dr_eq.svg";
                                 }
                              }
 

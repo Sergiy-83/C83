@@ -1024,6 +1024,14 @@ void appcore::slot_mark_all_clear()
     {
     command_send_to_server((int)CMD_MENU_CTX::CMD_MARK_CLEAN, TAG_EMPTY_ARG );
     }
+//Нравится
+void appcore::slot_like(int arg_mode)
+    {
+    if (arg_mode)
+        command_send_to_server((int)CMD_MENU_CTX::CMD_LIKE, "1" );
+    else
+        command_send_to_server((int)CMD_MENU_CTX::CMD_LIKE, "0" );
+    }
 //
 void appcore::slot_new_file_list(QList<Item_list_file> *arg_new_list,int arg_cursor_pos)
     {

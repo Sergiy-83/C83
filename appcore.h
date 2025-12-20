@@ -111,6 +111,7 @@ public slots:
     void slot_mark(unsigned int arg_mark);
     void slot_mark_all(void);
     void slot_mark_all_clear(void);
+    void slot_like(int arg_mode);
 
     void slot_new_pls(QString arg_name);
     void slot_rename(QString arg_name);

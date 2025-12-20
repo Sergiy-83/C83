@@ -231,5 +231,7 @@
         <file>Icon/for_drawer/dr_colors.svg</file>
         <file>Icon/for_buttons/bt_spk_vol_down.svg</file>
         <file>Icon/for_buttons/bt_spk_vol_up.svg</file>
+        <file>Icon/for_ctx_menu/16.like.svg</file>
+        <file>Icon/for_ctx_menu/16.like_remove.svg</file>
     </qresource>
 </RCC>

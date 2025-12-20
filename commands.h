@@ -133,10 +133,11 @@ enum CMD_MENU_CTX
     CMD_ADD_TO_PLS_TARGET,  //добавить в целевой
     CMD_ADD_TO_PLS_BK,      //Добавить в фоновый
     CMD_ADD_POFF,           //Добавить завершение работы
-    CMD_DELETE_FROM_LIST,
-    CMD_DELETE_TO_CART,	//Удалить в корзину
-    CMD_RENAME,
-    CMD_CLOSE_CTX_MENU      //Закрыть контекстное меню
+    CMD_DELETE_FROM_LIST,   //Удалить из списка
+    CMD_DELETE_TO_CART,     //Удалить файлы в корзину
+    CMD_RENAME,             //Переименовать
+    CMD_CLOSE_CTX_MENU,     //Закрыть контекстное меню
+    CMD_LIKE                //Нравится
     };
 
 //

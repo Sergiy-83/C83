@@ -242,6 +242,30 @@ S83_Dialog
                                     ctx_dialog.visible = false
                                     }
                 }
+        S83_ctx_menu_item
+                {
+                id:                 mi_like
+                item_text:          "Нравится"
+                item_icon:          "qrc:/Icon/for_ctx_menu/16.like.svg"
+                Layout.alignment:   Qt.AlignBottom
+                Layout.fillWidth:   true
+                onItemClicked:      {
+                                    my_app.slot_like(0)
+                                    ctx_dialog.visible = false
+                                    }
+                }
+        S83_ctx_menu_item
+                {
+                id:                 mi_like_remove
+                item_text:          "Больше не нравится"
+                item_icon:          "qrc:/Icon/for_ctx_menu/16.like_remove.svg"
+                Layout.alignment:   Qt.AlignBottom
+                Layout.fillWidth:   true
+                onItemClicked:      {
+                                    my_app.slot_like(1)
+                                    ctx_dialog.visible = false
+                                    }
+                }
         }
     }
 
@@ -269,7 +293,7 @@ S83_Dialog
                     width: 50
                     Layout.fillWidth: true //Чтоб размер растягивался
                     }
-                }
+            }
 
     onAccepted:
         {
@@ -331,6 +355,12 @@ S83_Dialog
 
                 if (arg_value & 0x4000) {mi_clean_all_mark.visible = true; item_num++}      //Снять все выделения
                 else                    mi_clean_all_mark.visible = false
+
+                if (arg_value & 0x8000) {mi_like.visible = true; item_num++}                //Нравится
+                else                    mi_like.visible = false;
+
+                if (arg_value & 0x10000) {mi_like_remove.visible = true; item_num++}        //Больше не нравится
+                else                    mi_like_remove.visible = false;
 
                 dialog_rename.text_edit = arg_fname //Если будем переименовывать
                 ctx_menu.visible = true //Отобразить

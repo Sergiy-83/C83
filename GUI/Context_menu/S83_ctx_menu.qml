@@ -266,6 +266,30 @@ S83_Dialog
                                     ctx_dialog.visible = false
                                     }
                 }
+        S83_ctx_menu_item
+                {
+                id:                 mi_open_album
+                item_text:          "Перейти к альбому"
+                item_icon:          "qrc:/Icon/for_ctx_menu/03.open.svg"
+                Layout.alignment:   Qt.AlignBottom
+                Layout.fillWidth:   true
+                onItemClicked:      {
+                                    my_app.slot_open_album()
+                                    ctx_dialog.visible = false
+                                    }
+                }
+        S83_ctx_menu_item
+                {
+                id:                 mi_open_artist
+                item_text:          "Перейти к исполнителю"
+                item_icon:          "qrc:/Icon/for_ctx_menu/03.open.svg"
+                Layout.alignment:   Qt.AlignBottom
+                Layout.fillWidth:   true
+                onItemClicked:      {
+                                    my_app.slot_open_artist()
+                                    ctx_dialog.visible = false
+                                    }
+                }
         }
     }
 
@@ -361,6 +385,12 @@ S83_Dialog
 
                 if (arg_value & 0x10000) {mi_like_remove.visible = true; item_num++}        //Больше не нравится
                 else                    mi_like_remove.visible = false;
+
+                if (arg_value & 0x20000) {mi_open_album.visible = true; item_num++}        //Открыть альбом
+                else                    mi_open_album.visible = false;
+
+                if (arg_value & 0x40000) {mi_open_artist.visible = true; item_num++}        //Открыть исполнителя
+                else                    mi_open_artist.visible = false;
 
                 dialog_rename.text_edit = arg_fname //Если будем переименовывать
                 ctx_menu.visible = true //Отобразить

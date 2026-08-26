@@ -581,6 +581,17 @@ void appcore::write_settings_to_file()
     settings.endGroup();
     }
 
+//Открыть альбом
+void appcore::slot_open_album(void)
+    {
+    command_send_to_server((int)CMD_MAIN::CMD_OPEN_ONLY, "1" );
+    }
+
+//Открыть артиста
+void appcore::slot_open_artist(void)
+    {
+        command_send_to_server((int)CMD_MAIN::CMD_OPEN_ONLY, "2" );
+    }
 //Открыть
 void appcore::slot_open(void)
     {

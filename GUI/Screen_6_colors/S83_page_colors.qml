@@ -561,16 +561,16 @@ S83_page_opt
                         property string theme_color_turquoise:  "#3c8080" //"#3d08fb"
                         property string theme_color_red:        "#cc0000"
                         property string theme_color_green:      "#009933"
-                        property string theme_color_military:   "#707000"
+                        property string theme_color_gray:       "#707070"
                         property string theme_color_blue:       "#3366ff"//"#3d08fb"
                         property string theme_color_orange:     "chocolate"
 
-                        function th_dd()
+                        function th_turquoise()
                             {
                             rb_dd.checked = true
                             current_theme.color_ctrl_main_color = theme_color_turquoise
-                            current_theme.icon_play  = "qrc:/Icon/for_file/play/play_gray.svg"
-                            current_theme.icon_pause = "qrc:/Icon/for_file/pause/pause_gray.svg"
+                            current_theme.icon_play  = "qrc:/Icon/for_file/play/play_01_turquoise.svg"
+                            current_theme.icon_pause = "qrc:/Icon/for_file/pause/pause_01_turquoise.svg"
                             current_theme.bk_image   = "qrc:/Icon/for_page/bk_rain.jpg"
                             }
 
@@ -578,8 +578,8 @@ S83_page_opt
                             {
                             rb_red.checked = true
                             current_theme.color_ctrl_main_color = theme_color_red
-                            current_theme.icon_play  = "qrc:/Icon/for_file/play/play_red.svg"
-                            current_theme.icon_pause = "qrc:/Icon/for_file/pause/pause_red.svg"
+                            current_theme.icon_play  = "qrc:/Icon/for_file/play/play_02_red.svg"
+                            current_theme.icon_pause = "qrc:/Icon/for_file/pause/pause_02_red.svg"
                             current_theme.bk_image   = "qrc:/Icon/for_page/bk_red.jpg"
                             }
 
@@ -587,17 +587,17 @@ S83_page_opt
                             {
                             rb_green.checked = true
                             current_theme.color_ctrl_main_color = theme_color_green
-                            current_theme.icon_play  = "qrc:/Icon/for_file/play/play_green.svg"
-                            current_theme.icon_pause = "qrc:/Icon/for_file/pause/pause_green.svg"
+                            current_theme.icon_play  = "qrc:/Icon/for_file/play/play_03_green.svg"
+                            current_theme.icon_pause = "qrc:/Icon/for_file/pause/pause_03_green.svg"
                             current_theme.bk_image   = "qrc:/Icon/for_page/bk_green.jpg"
                             }
 
                         function th_himikat()
                             {
                             rb_himikat.checked = true
-                            current_theme.color_ctrl_main_color = theme_color_military
-                            current_theme.icon_play  = "qrc:/Icon/for_file/play/play_military.svg"
-                            current_theme.icon_pause = "qrc:/Icon/for_file/pause/pause_military.svg"
+                            current_theme.color_ctrl_main_color = theme_color_gray
+                            current_theme.icon_play  = "qrc:/Icon/for_file/play/play_05_gray.svg"
+                            current_theme.icon_pause = "qrc:/Icon/for_file/pause/pause_05_gray.svg"
                             current_theme.bk_image   = "qrc:/Icon/for_page/bk_h2o.jpg"
                             }
 
@@ -605,8 +605,8 @@ S83_page_opt
                             {
                             rb_blue.checked = true
                             current_theme.color_ctrl_main_color = theme_color_blue
-                            current_theme.icon_play  = "qrc:/Icon/for_file/play/play_blue.svg"
-                            current_theme.icon_pause = "qrc:/Icon/for_file/pause/pause_blue.svg"
+                            current_theme.icon_play  = "qrc:/Icon/for_file/play/play_04_blue.svg"
+                            current_theme.icon_pause = "qrc:/Icon/for_file/pause/pause_04_blue.svg"
                             current_theme.bk_image   = "qrc:/Icon/for_page/bk_blue.jpg"
                             }
 
@@ -614,8 +614,8 @@ S83_page_opt
                              {
                              rb_orange.checked = true
                              current_theme.color_ctrl_main_color = theme_color_orange
-                             current_theme.icon_play  = "qrc:/Icon/for_file/play/play_orang.svg"
-                             current_theme.icon_pause = "qrc:/Icon/for_file/pause/pause_orang.svg"
+                             current_theme.icon_play  = "qrc:/Icon/for_file/play/play_06_orang.svg"
+                             current_theme.icon_pause = "qrc:/Icon/for_file/pause/pause_06_orang.svg"
                              current_theme.bk_image   = "qrc:/Icon/for_page/bk_orange.jpg"
                              }
 
@@ -640,7 +640,7 @@ S83_page_opt
                                anchors.fill: parent
                                onClicked:
                                    {
-                                   th_dd()
+                                   th_turquoise()
                                    my_app.slot_set_theme(0)
                                    }
                                }
@@ -734,7 +734,7 @@ S83_page_opt
 
                            color_disable:       current_theme.color_ctrl_disable
                            color_point:         current_theme.color_ctrl_main_color
-                           color_enable:        theme_color_military
+                           color_enable:        theme_color_gray
 
                            verticalPadding:     8
                            horizontalPadding:   10
@@ -788,7 +788,7 @@ S83_page_opt
                                 {
                                 switch (arg_th)
                                     {
-                                    case 0: th_dd()
+                                    case 0: th_turquoise()
                                         break
                                     case 1: th_red()
                                         break

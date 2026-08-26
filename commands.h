@@ -60,7 +60,7 @@ enum CMD_OPT
     CMD_OPT_RESTORE_VOLUME,         //Восстановить громкость после включения
     CMD_OPT_RESTORE_PLAY_FILE,      //Восстанавливать воспроизведение последнего фала
     CMD_OPT_RESTORE_POS_IN_FILE,    //Восстанавливать воспроизведение последнего фала с места останова
-    CMD_OPT_NEATLY_VOL,             //Опция Осторожно с громкостью
+    CMD_OPT_NEATLY_VOL,             //Опция - осторожно с громкостью
     CMD_OPT_02,
     CMD_OPT_03,
     CMD_OPT_04,

@@ -10,7 +10,6 @@
         <file>GUI/Screen_0_main/S83_TopBar.qml</file>
         <file>GUI/Screen_0_main/S83_ctrl_time.qml</file>
         <file>Icon/for_file/folder.ico</file>
-        <file>Icon/for_file/back.ico</file>
         <file>Icon/for_file/spk.ico</file>
         <file>Icon/for_file/def.ico</file>
         <file>GUI/Screen_1_main_option/S83_page_options_main.qml</file>
@@ -127,18 +126,18 @@
         <file>GUI/S83_controls/S83_popip_item.qml</file>
         <file>Icon/for_page/ip_connect.svg</file>
         <file>Icon/for_page/ip_gray.svg</file>
-        <file>Icon/for_file/play/play_blue.svg</file>
-        <file>Icon/for_file/play/play_gray.svg</file>
-        <file>Icon/for_file/play/play_green.svg</file>
-        <file>Icon/for_file/play/play_military.svg</file>
-        <file>Icon/for_file/play/play_orang.svg</file>
-        <file>Icon/for_file/play/play_red.svg</file>
-        <file>Icon/for_file/pause/pause_blue.svg</file>
-        <file>Icon/for_file/pause/pause_gray.svg</file>
-        <file>Icon/for_file/pause/pause_green.svg</file>
-        <file>Icon/for_file/pause/pause_military.svg</file>
-        <file>Icon/for_file/pause/pause_orang.svg</file>
-        <file>Icon/for_file/pause/pause_red.svg</file>
+        <file>Icon/for_file/play/play_04_blue.svg</file>
+        <file>Icon/for_file/play/play_01_turquoise.svg</file>
+        <file>Icon/for_file/play/play_03_green.svg</file>
+        <file>Icon/for_file/play/play_05_gray.svg</file>
+        <file>Icon/for_file/play/play_06_orang.svg</file>
+        <file>Icon/for_file/play/play_02_red.svg</file>
+        <file>Icon/for_file/pause/pause_04_blue.svg</file>
+        <file>Icon/for_file/pause/pause_01_turquoise.svg</file>
+        <file>Icon/for_file/pause/pause_03_green.svg</file>
+        <file>Icon/for_file/pause/pause_05_gray.svg</file>
+        <file>Icon/for_file/pause/pause_06_orang.svg</file>
+        <file>Icon/for_file/pause/pause_02_red.svg</file>
         <file>Icon/for_page/bk_orange.jpg</file>
         <file>Icon/for_page/bk_blue.jpg</file>
         <file>Icon/for_page/bk_red.jpg</file>
